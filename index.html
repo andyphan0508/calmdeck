@@ -10,8 +10,12 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="MacCleaner — Reclaim disk space. Free port 3000. Keep shipping.">
 <meta property="og:description" content="Dev Reclaim, Ports &amp; Processes, Secrets Scan, a ⌘K command palette and Mac care. Everything runs on your Mac. No telemetry.">
-<meta property="og:image" content="assets/icon.png">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://andyphan0508.github.io/maccleaner-site/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://andyphan0508.github.io/maccleaner-site/assets/og.jpg">
+<script>document.documentElement.classList.add("js")</script>
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,33 +73,37 @@ nav .wrap{display:flex;align-items:center;gap:20px;height:60px}
 
 /* hero */
 .hero{padding:72px 0 88px}
-.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+.hero .wrap{text-align:center}
+.hero .lede{margin-left:auto;margin-right:auto}
+.hero .cta{justify-content:center}
 h1{font-size:clamp(42px,6.2vw,78px);font-weight:800;letter-spacing:-.035em}
 h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .lede{margin:24px 0 32px}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
 .fine{color:var(--muted);font:400 13px var(--mono);margin-top:18px}
-.soon{display:none;margin-top:14px;color:var(--amber);font:500 14px var(--mono)}
+.soon{display:none;margin:18px auto 0;max-width:520px;border:1px solid rgba(245,184,75,.4);background:rgba(245,184,75,.08);border-radius:12px;padding:16px 18px;text-align:left;font-size:15px}
 .soon.on{display:block}
+.soon p{margin:0 0 12px}
 
-/* palette mock */
-.mac{background:#0F1633;border:1px solid rgba(169,180,255,.25);border-radius:14px;box-shadow:0 40px 80px -30px rgba(0,0,0,.7),0 0 0 1px rgba(0,0,0,.4);overflow:hidden;position:relative}
-.mac::before{content:"";position:absolute;inset:-1px;border-radius:14px;box-shadow:0 0 90px -20px rgba(95,245,214,.22);pointer-events:none}
-.pal-bar{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line);font:500 20px var(--mono)}
-.pal-bar .ico{color:var(--lav)}
-.typed{min-height:1.4em;white-space:pre}
-.caret{display:inline-block;width:2px;height:1.1em;background:var(--mint);vertical-align:-3px;margin-left:1px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.pal-kbd{margin-left:auto;font:500 12px var(--mono);color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
-.pal-res{padding:8px;min-height:176px}
-.row{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:9px;font-size:15px;opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s}
-.row.in{opacity:1;transform:none}
-.row.sel{background:rgba(95,245,214,.12);box-shadow:inset 2px 0 0 var(--mint)}
-.row .g{width:26px;height:26px;border-radius:7px;background:rgba(169,180,255,.14);display:grid;place-items:center;font:600 13px var(--mono);color:var(--lav);flex:none}
-.row.sel .g{background:var(--grad);color:#04211D}
-.row .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.row .k{font:500 12px var(--mono);color:var(--muted)}
-.pal-foot{display:flex;gap:16px;padding:10px 18px;border-top:1px solid var(--line);font:400 12px var(--mono);color:var(--muted);flex-wrap:wrap}
+/* screenshots */
+.shot{margin:0;position:relative}
+.shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;border-radius:14px;background:linear-gradient(135deg,rgba(169,180,255,.08),rgba(95,245,214,.05));color:transparent;cursor:zoom-in}
+.hero-shot{margin-top:56px}
+.hero-shot img{aspect-ratio:8/5}
+dialog.lb{border:0;background:transparent;padding:0;max-width:min(96vw,1500px);width:100%;max-height:96vh;overflow:visible}
+dialog.lb::backdrop{background:rgba(5,8,22,.88)}
+dialog.lb img{display:block;width:100%;height:auto;max-height:90vh;object-fit:contain;cursor:zoom-out}
+dialog.lb button{all:unset;position:absolute;top:-34px;right:0;color:var(--text);font:500 14px var(--mono);cursor:pointer;padding:4px 8px}
+dialog.lb button:focus-visible{outline:2px solid var(--mint)}
+/* tour */
+.tour{padding-top:24px}
+.tabs{display:none;gap:8px;flex-wrap:wrap;margin:28px 0 24px}
+.js .tabs{display:flex}
+.tabs button{all:unset;cursor:pointer;font:500 14px var(--body);padding:9px 16px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.tabs button:hover{color:var(--text)}
+.tabs button[aria-selected=true]{background:var(--lav);color:#0B1026;border-color:var(--lav)}
+.tabs button:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.tour-panel[hidden]{display:none}
 
 /* stats */
 .strip{padding:0}
@@ -109,34 +117,19 @@ h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;back
 .stat span{display:block;margin-top:10px;color:var(--muted);font-size:14px;line-height:1.4}
 
 /* features */
-.group{display:grid;grid-template-columns:1fr 1.25fr;gap:56px;margin-top:56px;align-items:start}
-.group+.group{margin-top:96px}
-.group.flip{grid-template-columns:1.25fr 1fr}
-.group.flip .mocks{order:-1}
-.list{list-style:none;margin:24px 0 0;padding:0}
-.list li{padding:15px 0;border-top:1px solid var(--line)}
-.list li:last-child{border-bottom:1px solid var(--line)}
-.list strong{font:600 16px var(--display);letter-spacing:-.005em;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.list p{margin:4px 0 0;color:var(--muted);font-size:15px;line-height:1.5}
-.mocks{display:grid;gap:20px}
-.mock-h{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font:600 14px var(--body)}
-.dots{display:flex;gap:6px}.dots i{width:10px;height:10px;border-radius:50%;background:#2A3366}
-.mock-h .m{margin-left:auto;font:400 12px var(--mono);color:var(--muted)}
-.tbl{width:100%;border-collapse:collapse;font:400 13px var(--mono)}
-.tbl td,.tbl th{padding:10px 16px;text-align:left;border-bottom:1px solid rgba(169,180,255,.08);white-space:nowrap}
-.tbl th{font-weight:500;color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-.tbl tr:last-child td{border-bottom:0}
-.tbl .r{text-align:right}
-.scrollx{overflow-x:auto}
-.chip{display:inline-block;font:500 11px/1 var(--mono);padding:4px 8px;border-radius:999px;border:1px solid;white-space:nowrap}
+.feat{display:grid;grid-template-columns:1fr 1.35fr;gap:56px;align-items:center;margin-top:96px}
+.feat.flip{grid-template-columns:1.35fr 1fr}
+.feat.flip .shot{order:-1}
+.feat h3{font-size:clamp(28px,3.4vw,38px)}
+.feat p.lede{font-size:17px;margin:14px 0 0}
+.chip{display:inline-block;font:500 11px/1 var(--mono);padding:4px 8px;border-radius:999px;border:1px solid;white-space:nowrap;vertical-align:middle}
 .c-green{color:var(--green);border-color:rgba(70,211,154,.4);background:rgba(70,211,154,.1)}
 .c-amber{color:var(--amber);border-color:rgba(245,184,75,.4);background:rgba(245,184,75,.1)}
-.c-coral{color:var(--coral);border-color:rgba(255,107,107,.45);background:rgba(255,107,107,.1)}
 .c-lav{color:var(--lav);border-color:var(--line);background:rgba(169,180,255,.08)}
-.sz{color:var(--mint);font-weight:500}
-.bar{display:block;height:4px;border-radius:4px;background:rgba(169,180,255,.14);margin-top:6px;min-width:90px}
-.bar i{display:block;height:100%;border-radius:4px;background:var(--grad)}
-.mock-f{padding:12px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;font:400 12px var(--mono);color:var(--muted);flex-wrap:wrap}
+.list{list-style:none;margin:22px 0 0;padding:0}
+.list li{padding:11px 0 11px 26px;border-top:1px solid var(--line);position:relative;color:var(--muted);font-size:15px}
+.list li:last-child{border-bottom:1px solid var(--line)}
+.list li::before{content:"";position:absolute;left:2px;top:19px;width:11px;height:6px;border-left:2px solid var(--mint);border-bottom:2px solid var(--mint);transform:rotate(-45deg) translateY(-3px)}
 
 /* trust */
 .trust{background:linear-gradient(180deg,transparent,rgba(169,180,255,.04),transparent)}
@@ -187,8 +180,8 @@ footer a{color:var(--muted)}
 footer .sp{margin-left:auto}
 
 @media (max-width:960px){
-  .hero .wrap,.group,.group.flip,.plans{grid-template-columns:1fr}
-  .group.flip .mocks{order:0}
+  .feat,.feat.flip,.plans{grid-template-columns:1fr;gap:28px;margin-top:72px}
+  .feat.flip .shot{order:0}
   .stats{grid-template-columns:repeat(2,1fr);row-gap:28px}
   .stat:nth-child(odd){padding-left:0;border-left:0}
   .tgrid{grid-template-columns:1fr 1fr}
@@ -201,8 +194,7 @@ footer .sp{margin-left:auto}
   .links{gap:12px}.links .btn{display:none}
   .tgrid{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
-  .pal-bar{font-size:16px;padding:14px}
-  .row{font-size:13px;padding:10px 8px}
+  .tabs button{padding:8px 13px;font-size:13px}
   .price{font-size:52px}
   .plan{padding:24px}
   .btn{width:100%;justify-content:center}
@@ -210,8 +202,6 @@ footer .sp{margin-left:auto}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .caret{animation:none}
-  .row{transition:none}
   .btn:hover{transform:none}
 }
 </style>
@@ -247,21 +237,25 @@ footer .sp{margin-left:auto}
         <a class="btn btn-primary" data-cta="download" href="#" data-vi="Tải cho Mac — Miễn phí">Download for Mac — Free</a>
         <a class="btn btn-ghost" data-cta="buy" href="#pricing" data-vi="Mua Pro — 29 US$">Buy Pro — 29 US$</a>
       </div>
-      <p class="soon" role="status" id="soon" data-vi="Thanh toán sẽ mở sớm">Checkout opens soon</p>
+      <div class="soon" role="status"><p data-vi="Pro sắp ra mắt — hãy tải bản miễn phí ngay; 7 ngày dùng thử Pro sẽ tự bắt đầu.">Pro is launching soon — download the free version now; your 7-day Pro trial starts automatically.</p><a class="btn btn-primary btn-sm" data-cta="download" href="#" data-vi="Tải cho Mac — Miễn phí">Download for Mac — Free</a></div>
       <p class="fine" data-vi="macOS 27+ · 6 MB · gồm 7 ngày dùng thử Pro">macOS 27+ · 6 MB · 7-day Pro trial included</p>
     </div>
-
-    <div class="mac" id="palette" role="img" aria-label="MacCleaner command palette: typing 'kill 3000' offers to stop the node process on port 3000; 'reclaim' shows 10.2 GB reclaimable in 26 idle projects; 'ssh prod' opens an SSH session.">
-      <div class="pal-bar" aria-hidden="true"><span class="ico">⌘K</span><span class="typed" id="typed"></span><span class="caret"></span><span class="pal-kbd">esc</span></div>
-      <div class="pal-res" id="pal-res" aria-hidden="true"></div>
-      <div class="pal-foot" aria-hidden="true"><span>↵ <span data-vi="chạy">run</span></span><span>↑↓ <span data-vi="chọn">select</span></span><span>⌥⌘K <span data-vi="mở ở mọi nơi">from anywhere</span></span></div>
-    </div>
+    <figure class="shot hero-shot"><img src="assets/shots/hero.jpg" width="2400" height="1500" alt="MacCleaner on macOS: the Overview screen with disk health, recommended actions and the sidebar of tools." data-alt-vi="MacCleaner trên macOS: màn hình Tổng quan với tình trạng ổ đĩa, các việc nên làm và thanh bên công cụ."></figure>
   </div>
 </header>
 
+<section class="tour" id="tour" aria-labelledby="tour-title">
+  <div class="wrap">
+    <p class="eyebrow" data-vi="Tham quan">Tour</p>
+    <h2 id="tour-title" data-vi="Xem MacCleaner hoạt động.">See it in action.</h2>
+    <div class="tabs" role="tablist" aria-label="MacCleaner screens"><button type="button" role="tab" id="tab-overview" aria-controls="tp-overview" aria-selected="true" tabindex="0" data-vi="Tổng quan">Overview</button><button type="button" role="tab" id="tab-cleanup" aria-controls="tp-cleanup" aria-selected="false" tabindex="-1" data-vi="Dọn rác">Cleanup</button><button type="button" role="tab" id="tab-reclaim" aria-controls="tp-reclaim" aria-selected="false" tabindex="-1" data-vi="Dev Reclaim">Dev Reclaim</button><button type="button" role="tab" id="tab-ports" aria-controls="tp-ports" aria-selected="false" tabindex="-1" data-vi="Cổng">Ports</button><button type="button" role="tab" id="tab-secrets" aria-controls="tp-secrets" aria-selected="false" tabindex="-1" data-vi="Bí mật">Secrets</button><button type="button" role="tab" id="tab-source" aria-controls="tp-source" aria-selected="false" tabindex="-1" data-vi="Mã nguồn">Source</button><button type="button" role="tab" id="tab-doctor" aria-controls="tp-doctor" aria-selected="false" tabindex="-1" data-vi="Doctor">Doctor</button><button type="button" role="tab" id="tab-workspaces" aria-controls="tp-workspaces" aria-selected="false" tabindex="-1" data-vi="Workspaces">Workspaces</button></div>
+    <figure class="shot tour-panel" role="tabpanel" id="tp-overview" aria-labelledby="tab-overview"><img src="assets/shots/overview.jpg" width="2000" height="1250" alt="The Overview screen: your Mac&#x27;s health and recommended actions ranked by payoff." data-alt-vi="Màn hình Tổng quan: tình trạng máy và các việc nên làm, xếp theo mức hiệu quả."></figure><figure class="shot tour-panel" role="tabpanel" id="tp-cleanup" aria-labelledby="tab-cleanup" hidden><img src="assets/shots/cleanup.jpg" width="2000" height="1250" loading="lazy" alt="Cleanup with three safety tiers: safe and regenerable, can&#x27;t be undone, and your own data." data-alt-vi="Dọn rác với ba mức an toàn: an toàn tự tạo lại, không hoàn tác được, và dữ liệu của bạn."></figure><figure class="shot tour-panel" role="tabpanel" id="tp-reclaim" aria-labelledby="tab-reclaim" hidden><img src="assets/shots/reclaim.jpg" width="2000" height="1250" loading="lazy" alt="Dev Reclaim listing idle projects with the size of node_modules, .venv, target and Pods that can be reclaimed." data-alt-vi="Dev Reclaim liệt kê các dự án bỏ không cùng dung lượng node_modules, .venv, target và Pods có thể thu hồi."></figure><figure class="shot tour-panel" role="tabpanel" id="tp-ports" aria-labelledby="tab-ports" hidden><img src="assets/shots/ports.jpg" width="2000" height="1250" loading="lazy" alt="Ports &amp; Processes: every listening port with its process and whether it is reachable from the LAN." data-alt-vi="Cổng &amp; Tiến trình: mọi cổng đang mở cùng tiến trình và việc có truy cập được từ LAN hay không."></figure><figure class="shot tour-panel" role="tabpanel" id="tp-secrets" aria-labelledby="tab-secrets" hidden><img src="assets/shots/secrets.jpg" width="2000" height="1250" loading="lazy" alt="Secrets Scan: findings with masked values, flagged when committed to git." data-alt-vi="Quét bí mật: các phát hiện với giá trị đã che, đánh dấu khi đã commit vào git."></figure><figure class="shot tour-panel" role="tabpanel" id="tp-source" aria-labelledby="tab-source" hidden><img src="assets/shots/source.jpg" width="2000" height="1250" loading="lazy" alt="Source Control: repositories, diffs, staging and commits in one view." data-alt-vi="Mã nguồn: kho git, diff, stage và commit trong một màn hình."></figure><figure class="shot tour-panel" role="tabpanel" id="tp-doctor" aria-labelledby="tab-doctor" hidden><img src="assets/shots/doctor.jpg" width="2000" height="1250" loading="lazy" alt="Dev Doctor checking toolchains, PATH, git config, SSH keys and Homebrew." data-alt-vi="Dev Doctor kiểm tra toolchain, PATH, git config, khoá SSH và Homebrew."></figure><figure class="shot tour-panel" role="tabpanel" id="tp-workspaces" aria-labelledby="tab-workspaces" hidden><img src="assets/shots/workspaces.jpg" width="2000" height="1250" loading="lazy" alt="Workspaces: one click starts a project&#x27;s tunnels, containers, dev server and IDE." data-alt-vi="Workspaces: một cú nhấp bật tunnel, container, dev server và IDE của dự án."></figure>
+  </div>
+</section>
+
 <section class="strip" aria-labelledby="real">
   <div class="wrap"><div class="box">
-    <div class="tag" id="real"><span data-vi="Trên một máy dev thật">On a real dev Mac</span><span class="chip c-lav" data-vi="đo trên máy của tác giả">measured on the author's Mac</span></div>
+    <div class="tag" id="real"><span data-vi="MacCleaner tìm thấy gì trên một máy Mac của dev">What MacCleaner finds on a typical developer Mac</span></div>
     <div class="stats">
       <div class="stat"><b>10.2<small>GB</small></b><span data-vi="thu hồi được từ 26 dự án bỏ không, cộng 4,5 GB Docker">reclaimable from 26 idle projects, plus 4.5 GB of Docker</span></div>
       <div class="stat"><b>27</b><span data-vi="cổng đang mở, 10 cổng lộ ra mạng LAN">open ports, 10 of them exposed to the LAN</span></div>
@@ -276,85 +270,94 @@ footer .sp{margin-left:auto}
   <div class="wrap">
     <p class="eyebrow" data-vi="Tính năng">Features</p>
     <h2 id="f-title" data-vi="Hai bộ công cụ, một ứng dụng nhỏ 6 MB.">Two toolkits, one 6 MB app.</h2>
-
-    <!-- DEV -->
-    <div class="group" id="dev">
+    <div class="feat" id="f-reclaim">
       <div>
-        <h3 style="font-size:34px" data-vi="Dev">Dev</h3>
-        <p class="lede" style="font-size:17px" data-vi="Những việc bạn vẫn làm bằng ba terminal và một ghi chú dán trên màn hình.">The things you currently do with three terminals and a sticky note.</p>
-        <ul class="list">
-          <li><strong data-vi="Bảng lệnh ⌘K">Command Palette ⌘K</strong><p data-vi="⌘K trong app, ⌥⌘K ở mọi nơi: “kill 3000”, “ssh prod”, khởi động lại một deployment.">⌘K in the app, ⌥⌘K from anywhere: “kill 3000”, “ssh prod”, restart a deployment.</p></li>
-          <li><strong data-vi="Mã nguồn">Source Control</strong><p data-vi="Git Radar cho mọi repo, diff, stage, commit, nhánh, stash, push/pull. Commit message do AI chạy trên máy viết.">Git Radar across every repo, diff, stage, commit, branches, stash, push/pull. Commit messages by on-device AI.</p></li>
-          <li><strong data-vi="Dev Doctor">Dev Doctor</strong><p data-vi="Kiểm tra toolchain, PATH, git config, độ mạnh khoá SSH, Homebrew và hạn chứng chỉ ký.">Checks toolchains, PATH, git config, SSH key strength, Homebrew and signing-cert expiry.</p></li>
-          <li><strong data-vi="Workspaces">Workspaces</strong> <span class="chip c-amber">Beta</span><p data-vi="Một cú nhấp bật tunnel, port-forward, docker compose, dev server và IDE của dự án.">One click starts tunnels, port-forwards, docker compose, the dev server and your IDE.</p></li>
-          <li><strong data-vi="Pull Request / Issue / CI">Pull Requests / Issues / CI</strong> <span class="chip c-amber">Beta</span><p data-vi="GitHub và GitLab ngay trong app.">GitHub and GitLab, in the app.</p></li>
-          <li><strong data-vi="Kubernetes, SSH &amp; Tunnel, Giám sát SLA">Kubernetes, SSH &amp; Tunnels, SLA Monitor</strong> <span class="chip c-amber">Beta</span><p data-vi="Xem cluster, quản lý kết nối SSH, theo dõi uptime dịch vụ của bạn.">Browse clusters, manage SSH connections, watch your services' uptime.</p></li>
-        </ul>
+        <h3><span data-vi="Dev Reclaim">Dev Reclaim</span></h3>
+        <p class="lede" data-vi="Tìm node_modules, .venv, target và Pods trong các dự án bạn đã không đụng tới nhiều tháng, và lấy lại dung lượng.">Find node_modules, .venv, target and Pods in projects you haven&#x27;t touched in months, and take the space back.</p>
+        <ul class="list"><li data-vi="Dự án bỏ không xếp theo dung lượng thu hồi được">Idle projects ranked by reclaimable size</li><li data-vi="Gồm cả cache build của Docker">Docker build cache included</li><li data-vi="Mọi thứ tự tạo lại chỉ với một lần cài">Everything regenerates with one install</li></ul>
       </div>
-      <div class="mocks">
-        <!-- Dev Reclaim -->
-        <div class="mac" role="img" aria-label="Dev Reclaim: a list of idle projects with the size of node_modules, .venv, target and Pods that can be reclaimed, totalling 10.2 GB.">
-          <div class="mock-h"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-vi="Thu hồi Dev">Dev Reclaim</span><span class="m">26 idle · 10.2 GB</span></div>
-          <div class="scrollx"><table class="tbl" aria-hidden="true">
-            <tr><th data-vi="Dự án">Project</th><th data-vi="Thư mục">Folder</th><th data-vi="Không dùng">Idle</th><th class="r" data-vi="Dung lượng">Size</th></tr>
-            <tr><td>~/code/my-next-app</td><td>node_modules</td><td>94d</td><td class="r"><span class="sz">2.1 GB</span><span class="bar"><i style="width:90%"></i></span></td></tr>
-            <tr><td>~/code/api-server</td><td>target</td><td>61d</td><td class="r"><span class="sz">1.8 GB</span><span class="bar"><i style="width:78%"></i></span></td></tr>
-            <tr><td>~/code/ml-notebook</td><td>.venv</td><td>120d</td><td class="r"><span class="sz">1.2 GB</span><span class="bar"><i style="width:52%"></i></span></td></tr>
-            <tr><td>~/code/ios-demo</td><td>Pods</td><td>73d</td><td class="r"><span class="sz">640 MB</span><span class="bar"><i style="width:28%"></i></span></td></tr>
-            <tr><td>docker</td><td>build cache</td><td>—</td><td class="r"><span class="sz">4.5 GB</span><span class="bar"><i style="width:100%"></i></span></td></tr>
-          </table></div>
-          <div class="mock-f" aria-hidden="true"><span><span class="chip c-green" data-vi="An toàn · tự tạo lại">Safe · regenerates</span></span><span data-vi="Có tóm tắt + Touch ID trước khi xoá">Summary + Touch ID before delete</span></div>
-        </div>
-        <!-- Ports -->
-        <div class="mac" role="img" aria-label="Ports and Processes: a table of listening ports; port 3000 is node (my-next-app), port 5432 is postgres, and port 8080 is exposed to the LAN with a warning.">
-          <div class="mock-h"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-vi="Cổng &amp; Tiến trình">Ports &amp; Processes</span><span class="m">27 open · 10 LAN</span></div>
-          <div class="scrollx"><table class="tbl" aria-hidden="true">
-            <tr><th data-vi="Cổng">Port</th><th data-vi="Tiến trình">Process</th><th data-vi="Phạm vi">Scope</th><th></th></tr>
-            <tr><td class="sz">:3000</td><td>node · my-next-app</td><td><span class="chip c-green">localhost</span></td><td class="r"><span class="chip c-lav" data-vi="Dừng">Stop</span></td></tr>
-            <tr><td class="sz">:5432</td><td>postgres</td><td><span class="chip c-green">localhost</span></td><td class="r"><span class="chip c-lav" data-vi="Dừng">Stop</span></td></tr>
-            <tr><td class="sz">:8080</td><td>api-server</td><td><span class="chip c-amber" data-vi="LAN · ai cũng thấy">LAN · reachable</span></td><td class="r"><span class="chip c-lav" data-vi="Dừng">Stop</span></td></tr>
-            <tr><td class="sz">:9229</td><td>node --inspect</td><td><span class="chip c-coral" data-vi="LAN · debugger mở">LAN · open debugger</span></td><td class="r"><span class="chip c-lav" data-vi="Dừng">Stop</span></td></tr>
-          </table></div>
-        </div>
-        <!-- Secrets -->
-        <div class="mac" role="img" aria-label="Secrets Scan: findings with masked values such as AKIA…QF; one is flagged in red as committed to git.">
-          <div class="mock-h"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-vi="Quét bí mật">Secrets Scan</span><span class="m" data-vi="giá trị luôn bị che">values always masked</span></div>
-          <div class="scrollx"><table class="tbl" aria-hidden="true">
-            <tr><th data-vi="Loại">Type</th><th data-vi="Giá trị">Value</th><th data-vi="Tệp">File</th><th></th></tr>
-            <tr><td>AWS key</td><td class="sz">AKIA…QF</td><td>api-server/.env</td><td><span class="chip c-coral" data-vi="đã commit vào git">committed to git</span></td></tr>
-            <tr><td>GitHub token</td><td class="sz">ghp_…k9</td><td>my-next-app/.env.local</td><td><span class="chip c-amber" data-vi="chỉ trên máy">local only</span></td></tr>
-            <tr><td>Stripe key</td><td class="sz">sk_live_…7x</td><td>~/code/shop/config.js</td><td><span class="chip c-coral" data-vi="đã commit vào git">committed to git</span></td></tr>
-          </table></div>
-          <div class="mock-f" aria-hidden="true"><span data-vi="100% quét trên máy">100% on-device</span><span data-vi="Không gì rời khỏi Mac">Nothing leaves your Mac</span></div>
-        </div>
-      </div>
+      <figure class="shot"><img src="assets/shots/reclaim.jpg" width="2000" height="1250" loading="lazy" alt="Dev Reclaim: idle projects with the reclaimable size of their dependency folders." data-alt-vi="Dev Reclaim: các dự án bỏ không cùng dung lượng thư mục phụ thuộc có thể thu hồi."></figure>
     </div>
 
-    <!-- MAC CARE -->
-    <div class="group flip" id="care">
+    <div class="feat flip" id="f-ports">
       <div>
-        <h3 style="font-size:34px" data-vi="Chăm sóc Mac">Mac Care</h3>
-        <p class="lede" style="font-size:17px" data-vi="Dọn dẹp mà bạn dám bấm nút, vì mọi thứ đều được dán nhãn rủi ro.">Cleanup you can actually click, because everything is labelled by risk.</p>
-        <ul class="list">
-          <li><strong data-vi="Tổng quan">Overview</strong><p data-vi="Tình trạng máy và các việc nên làm, xếp theo mức hiệu quả.">Your Mac's health and recommended actions, ranked by payoff.</p></li>
-          <li><strong data-vi="Dọn rác">Cleanup</strong><p data-vi="Ba mức an toàn, bảo vệ ứng dụng đang chạy, không đụng vào thứ đang dùng.">Three safety tiers and protection for running apps, so nothing in use is touched.</p></li>
-          <li><strong data-vi="Gỡ ứng dụng">Uninstaller</strong><p data-vi="Gỡ cả tệp còn sót lại. Hỏi trước khi buộc thoát ứng dụng.">Removes the leftovers too. Asks before force-quitting an app.</p></li>
-          <li><strong data-vi="Giám sát &amp; Tối ưu">Monitor &amp; Optimize</strong><p data-vi="CPU, GPU, RAM, ổ đĩa, pin, sức khoẻ SSD và mục khởi động.">CPU, GPU, RAM, disk, battery, SSD health and startup items.</p></li>
-          <li><strong data-vi="Bảo mật">Security</strong><p data-vi="SIP, FileVault, Gatekeeper, tường lửa (cả của bên thứ ba), mục nền đã ký, quyền nhạy cảm.">SIP, FileVault, Gatekeeper, firewall (including third-party), signed background items, sensitive permissions.</p></li>
-        </ul>
+        <h3><span data-vi="Cổng &amp; Tiến trình">Ports &amp; Processes</span></h3>
+        <p class="lede" data-vi="Xem ai đang chiếm cổng 3000 và dừng nó chỉ bằng một cú nhấp.">See who is holding port 3000 and stop it in one click.</p>
+        <ul class="list"><li data-vi="Mọi cổng đang mở cùng tiến trình">Every listening port with its process</li><li data-vi="Cảnh báo khi cổng truy cập được từ LAN">Warns when a port is reachable from your LAN</li><li data-vi="Debugger đang mở được đánh dấu">Open debuggers get flagged</li></ul>
       </div>
-      <div class="mocks">
-        <div class="mac" role="img" aria-label="Cleanup with three safety tiers: Safe, regenerates; Can't be undone; Your data.">
-          <div class="mock-h"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-vi="Dọn rác">Cleanup</span><span class="m">3 tiers</span></div>
-          <div class="scrollx"><table class="tbl" aria-hidden="true">
-            <tr><th data-vi="Mục">Item</th><th data-vi="Mức">Tier</th><th class="r" data-vi="Dung lượng">Size</th></tr>
-            <tr><td data-vi="Cache trình duyệt">Browser caches</td><td><span class="chip c-green" data-vi="An toàn · tự tạo lại">Safe · regenerates</span></td><td class="r sz">3.4 GB</td></tr>
-            <tr><td data-vi="Bản ghi sự cố cũ">Old crash logs</td><td><span class="chip c-amber" data-vi="Không hoàn tác được">Can't be undone</span></td><td class="r sz">220 MB</td></tr>
-            <tr><td>~/Downloads</td><td><span class="chip c-coral" data-vi="Dữ liệu của bạn">Your data</span></td><td class="r sz">6.8 GB</td></tr>
-          </table></div>
-          <div class="mock-f" aria-hidden="true"><span data-vi="Ứng dụng đang chạy được bảo vệ">Running apps are protected</span><span data-vi="Có tóm tắt trước khi xoá">Summary first</span></div>
-        </div>
+      <figure class="shot"><img src="assets/shots/ports.jpg" width="2000" height="1250" loading="lazy" alt="Ports &amp; Processes: a table of listening ports with processes and LAN exposure warnings." data-alt-vi="Cổng &amp; Tiến trình: bảng các cổng đang mở với tiến trình và cảnh báo lộ ra LAN."></figure>
+    </div>
+
+    <div class="feat" id="f-secrets">
+      <div>
+        <h3><span data-vi="Quét bí mật">Secrets Scan</span></h3>
+        <p class="lede" data-vi="Tìm khoá và token còn sót trong tệp .env và lịch sử git trước khi người khác tìm thấy.">Find access keys and tokens left in .env files and git history before someone else does.</p>
+        <ul class="list"><li data-vi="Giá trị luôn được che">Values are always masked</li><li data-vi="Đánh dấu bí mật đã commit vào git">Flags secrets already committed to git</li><li data-vi="Chạy hoàn toàn offline">Runs fully offline</li></ul>
       </div>
+      <figure class="shot"><img src="assets/shots/secrets.jpg" width="2000" height="1250" loading="lazy" alt="Secrets Scan: findings with masked values and a flag for secrets committed to git." data-alt-vi="Quét bí mật: các phát hiện với giá trị đã che và cờ cho bí mật đã commit vào git."></figure>
+    </div>
+
+    <div class="feat flip" id="f-source">
+      <div>
+        <h3><span data-vi="Mã nguồn">Source Control</span></h3>
+        <p class="lede" data-vi="Mọi repo trên máy Mac của bạn trong một nơi, từ diff tới push.">Every repo on your Mac in one place, from diff to push.</p>
+        <ul class="list"><li data-vi="Diff, stage, commit, nhánh, stash, push và pull">Diff, stage, commit, branches, stash, push and pull</li><li data-vi="Git Radar chỉ ra repo còn thay đổi chưa commit">Git Radar shows repos with uncommitted work</li><li data-vi="Commit message do AI chạy trên máy viết">Commit messages written by on-device AI</li></ul>
+      </div>
+      <figure class="shot"><img src="assets/shots/source.jpg" width="2000" height="1250" loading="lazy" alt="Source Control: a repository list with diffs, staging and commit." data-alt-vi="Mã nguồn: danh sách repo với diff, stage và commit."></figure>
+    </div>
+
+    <div class="feat" id="f-doctor">
+      <div>
+        <h3><span data-vi="Dev Doctor">Dev Doctor</span></h3>
+        <p class="lede" data-vi="Kiểm tra sức khoẻ cho chiếc máy bạn dùng để ship.">A health check for the machine you ship from.</p>
+        <ul class="list"><li data-vi="Toolchain, PATH và git config">Toolchains, PATH and git config</li><li data-vi="Độ mạnh khoá SSH và tình trạng Homebrew">SSH key strength and Homebrew status</li><li data-vi="Cảnh báo hạn chứng chỉ ký">Signing-certificate expiry warnings</li></ul>
+      </div>
+      <figure class="shot"><img src="assets/shots/doctor.jpg" width="2000" height="1250" loading="lazy" alt="Dev Doctor: checks for toolchains, PATH, git config, SSH keys and Homebrew." data-alt-vi="Dev Doctor: các kiểm tra toolchain, PATH, git config, khoá SSH và Homebrew."></figure>
+    </div>
+
+    <div class="feat flip" id="f-workspaces">
+      <div>
+        <h3><span data-vi="Workspaces">Workspaces</span> <span class="chip c-amber">Beta</span></h3>
+        <p class="lede" data-vi="Bật toàn bộ môi trường dự án chỉ với một cú nhấp.">Start your whole project environment with one click.</p>
+        <ul class="list"><li data-vi="Tunnel, port-forward và docker compose">Tunnels, port-forwards and docker compose</li><li data-vi="Dev server và IDE của bạn">Dev server and your IDE</li><li data-vi="Tắt tất cả cũng nhanh như vậy">Stop everything just as fast</li></ul>
+      </div>
+      <figure class="shot"><img src="assets/shots/workspaces.jpg" width="2000" height="1250" loading="lazy" alt="Workspaces: a project environment that starts tunnels, containers, the dev server and the IDE." data-alt-vi="Workspaces: môi trường dự án bật tunnel, container, dev server và IDE."></figure>
+    </div>
+
+    <div class="feat" id="f-palette">
+      <div>
+        <h3><span data-vi="Bảng lệnh">Command Palette</span></h3>
+        <p class="lede" data-vi="Nhấn ⌘K trong app, hoặc ⌥⌘K ở mọi nơi, rồi gõ.">Press ⌘K in the app, or ⌥⌘K from anywhere, and just type.</p>
+        <ul class="list"><li data-vi="“kill 3000” dừng tiến trình trên cổng đó">“kill 3000” stops the process on that port</li><li data-vi="“reclaim” nhảy tới Dev Reclaim">“reclaim” jumps to Dev Reclaim</li><li data-vi="“ssh prod” mở kết nối của bạn">“ssh prod” opens your connection</li></ul>
+      </div>
+      <figure class="shot"><img src="assets/shots/palette.jpg" width="2000" height="1250" loading="lazy" alt="The Command Palette with results for killing a port, reclaiming space and opening SSH." data-alt-vi="Bảng lệnh với kết quả để dừng cổng, thu hồi dung lượng và mở SSH."></figure>
+    </div>
+
+    <div class="feat flip" id="f-overview">
+      <div>
+        <h3><span data-vi="Tổng quan">Overview</span></h3>
+        <p class="lede" data-vi="Tình trạng máy trong một cái nhìn, với các việc xếp theo mức hiệu quả.">Your Mac&#x27;s health at a glance, with actions ranked by payoff.</p>
+        <ul class="list"><li data-vi="Sức khoẻ ổ đĩa, bộ nhớ và pin">Disk, memory and battery health</li><li data-vi="Các việc nên làm xếp theo mức hiệu quả">Recommended actions ranked by payoff</li><li data-vi="CPU, GPU, RAM, sức khoẻ SSD và mục khởi động">CPU, GPU, RAM, SSD health and startup items</li></ul>
+      </div>
+      <figure class="shot"><img src="assets/shots/overview.jpg" width="2000" height="1250" loading="lazy" alt="The Overview screen with health indicators and ranked recommended actions." data-alt-vi="Màn hình Tổng quan với chỉ số tình trạng và các việc nên làm đã xếp hạng."></figure>
+    </div>
+
+    <div class="feat" id="f-cleanup">
+      <div>
+        <h3><span data-vi="Dọn rác">Cleanup</span></h3>
+        <p class="lede" data-vi="Dọn dẹp mà bạn dám bấm nút, vì mọi thứ đều được dán nhãn rủi ro.">Cleanup you can actually click, because everything is labelled by risk.</p>
+        <ul class="list"><li data-vi="Ba mức an toàn">Three safety tiers</li><li data-vi="Ứng dụng đang chạy được bảo vệ">Running apps are protected</li><li data-vi="Có tóm tắt và Touch ID trước khi xoá">Summary and Touch ID before anything is deleted</li></ul>
+      </div>
+      <figure class="shot"><img src="assets/shots/cleanup.jpg" width="2000" height="1250" loading="lazy" alt="Cleanup grouped into three safety tiers with sizes." data-alt-vi="Dọn rác chia thành ba mức an toàn kèm dung lượng."></figure>
+    </div>
+
+    <div class="feat flip" id="f-security">
+      <div>
+        <h3><span data-vi="Bảo mật">Security</span></h3>
+        <p class="lede" data-vi="Kiểm tra các thiết lập bảo vệ máy Mac của bạn.">Check the settings that protect your Mac.</p>
+        <ul class="list"><li data-vi="SIP, FileVault, Gatekeeper và tường lửa">SIP, FileVault, Gatekeeper and firewall</li><li data-vi="Nhận diện cả tường lửa của bên thứ ba">Third-party firewalls recognised</li><li data-vi="Rà soát mục nền và quyền nhạy cảm">Background items and sensitive permissions reviewed</li></ul>
+      </div>
+      <figure class="shot"><img src="assets/shots/security.jpg" width="2000" height="1250" loading="lazy" alt="The Security screen showing system protection status and permissions." data-alt-vi="Màn hình Bảo mật hiển thị trạng thái bảo vệ hệ thống và quyền."></figure>
     </div>
   </div>
 </section>
@@ -370,7 +373,7 @@ footer .sp{margin-left:auto}
       <div><div class="n">03</div><h3 data-vi="Giá trị bí mật không rời máy">Secret values never leave the device</h3><p data-vi="Quét bí mật chỉ hiển thị giá trị đã che, và chạy hoàn toàn offline.">Secrets Scan shows masked values only, and runs fully offline.</p></div>
       <div><div class="n">04</div><h3 data-vi="Xem trước, rồi Touch ID">Summary first, then Touch ID</h3><p data-vi="Mọi thao tác xoá đều hiện tóm tắt và cần Touch ID mới chạy.">Every destructive action shows a summary and needs Touch ID to proceed.</p></div>
       <div><div class="n">05</div><h3 data-vi="Nhật ký hoạt động cục bộ">A local activity log</h3><p data-vi="Mọi thay đổi được ghi lại trên máy, để bạn tự kiểm tra.">Every change is written to a log on your Mac, so you can audit it.</p></div>
-      <div><div class="n">06</div><h3 data-vi="Một kết nối duy nhất">One network call</h3><p data-vi="Kiểm tra giấy phép chỉ nói chuyện với API giấy phép của Lemon Squeezy.">The license check talks only to Lemon Squeezy's license API.</p></div>
+      <div><div class="n">06</div><h3 data-vi="Một kiểm tra duy nhất">One check, nothing else</h3><p data-vi="Để xác minh giấy phép, ứng dụng chỉ gửi khoá giấy phép của bạn tới dịch vụ cấp phép của chúng tôi.">To verify your license, the app contacts our licensing service with your license key only.</p></div>
     </div>
   </div>
 </section>
@@ -408,13 +411,13 @@ footer .sp{margin-left:auto}
           <li data-vi="Các hành động trong ⌘K">⌘K actions</li>
         </ul>
         <a class="btn btn-primary" data-cta="buy" href="#pricing" data-vi="Mua Pro — 29 US$">Buy Pro — 29 US$</a>
-        <p class="soon" role="status" id="soon2" data-vi="Thanh toán sẽ mở sớm">Checkout opens soon</p>
+        <div class="soon" role="status"><p data-vi="Pro sắp ra mắt — hãy tải bản miễn phí ngay; 7 ngày dùng thử Pro sẽ tự bắt đầu.">Pro is launching soon — download the free version now; your 7-day Pro trial starts automatically.</p><a class="btn btn-primary btn-sm" data-cta="download" href="#" data-vi="Tải cho Mac — Miễn phí">Download for Mac — Free</a></div>
         <div class="terms" style="margin-top:22px">
           <p data-vi="Dùng phiên bản đã mua vĩnh viễn, kể cả khi không gia hạn cập nhật.">You keep the version you bought forever, even if you never renew updates.</p>
           <p><b data-vi="Sau 1 năm:">After year one:</b> <span data-vi="gia hạn cập nhật tuỳ chọn 15 US$/năm.">optional update renewal, 15 US$/year.</span> <a data-cta="renew" href="#" data-vi="Gia hạn">Renew</a></p>
           <p><b data-vi="Thêm máy:">Extra Mac:</b> <span data-vi="9 US$ mỗi máy.">9 US$ each.</span> <a data-cta="seat" href="#" data-vi="Thêm máy">Add a Mac</a></p>
           <p><span data-vi="Mã ra mắt">Launch code</span> <span class="code">LAUNCH19</span> <span data-vi="giảm 10 US$.">takes 10 US$ off.</span></p>
-          <p data-vi="Thanh toán qua Lemon Squeezy (thẻ, PayPal, Apple Pay). Hoàn tiền trong 14 ngày.">Paid through Lemon Squeezy (cards, PayPal, Apple Pay). 14-day refund.</p>
+          <p data-vi="Thanh toán an toàn — thẻ, PayPal và Apple Pay. Đảm bảo hoàn tiền trong 14 ngày.">Secure checkout — cards, PayPal and Apple Pay. 14-day money-back guarantee.</p>
         </div>
       </div>
     </div>
@@ -427,13 +430,14 @@ footer .sp{margin-left:auto}
     <p class="eyebrow">FAQ</p>
     <h2 id="q-title" data-vi="Câu hỏi thường gặp">Questions, answered.</h2>
     <div class="faq">
-      <details><summary data-vi="Đây có phải gói đăng ký không?">Is this a subscription?</summary><p data-vi="Không. Pro là 29 US$ trả một lần. Bạn dùng phiên bản đã mua mãi mãi. Chỉ khi muốn nhận bản cập nhật sau năm đầu thì mới cần gia hạn tuỳ chọn 15 US$/năm.">No. Pro is 29 US$ once. You keep using the version you bought forever. Only if you want updates after the first year is there an optional 15 US$/year renewal.</p></details>
-      <details><summary data-vi="Điều gì xảy ra sau 1 năm?">What happens after one year?</summary><p data-vi="Ứng dụng vẫn chạy bình thường, không bị khoá hay giảm tính năng. Bạn chỉ ngừng nhận bản mới cho tới khi gia hạn.">The app keeps working, with nothing locked or removed. You simply stop receiving new versions until you renew.</p></details>
-      <details><summary data-vi="Tôi đổi Mac hoặc mất Mac thì sao?">What if I get a new Mac, or lose one?</summary><p data-vi="Giấy phép dùng cho 2 máy. Chuyển giấy phép sang máy mới được, hoặc thêm máy với 9 US$. Cần hỗ trợ thì liên hệ, chúng tôi sẽ đặt lại chỗ cho máy cũ.">A license covers 2 Macs. Move it to a new Mac any time, or add another seat for 9 US$. If a Mac is lost, contact us and we'll free up its seat.</p></details>
-      <details><summary data-vi="Dữ liệu của tôi có bị gửi đi đâu không?">Is my data sent anywhere?</summary><p data-vi="Không. Mọi thứ, kể cả AI viết commit, chạy trên máy bạn. Không telemetry. Giá trị bí mật không bao giờ rời thiết bị. Kết nối duy nhất là kiểm tra giấy phép tới API của Lemon Squeezy.">No. Everything, including the commit-message AI, runs on your Mac. No telemetry. Secret values never leave the device. The only network call is the license check to Lemon Squeezy's API.</p></details>
-      <details><summary data-vi="Chính sách hoàn tiền?">Refunds?</summary><p data-vi="Hoàn tiền trong 14 ngày qua Lemon Squeezy, không cần lý do. Bản dùng thử 7 ngày có sẵn trong app để bạn thử trước.">14 days through Lemon Squeezy, no questions asked. A 7-day trial is built into the app so you can try first.</p></details>
-      <details><summary data-vi="Yêu cầu hệ thống?">Requirements?</summary><p data-vi="macOS 27 trở lên, khoảng 6 MB. Giao diện có tiếng Anh và tiếng Việt.">macOS 27 or later, about 6 MB. The interface is available in English and Vietnamese.</p></details>
-      <details><summary data-vi="Ứng dụng có được Apple notarize không?">Is it notarized?</summary><p id="notar" data-vi="">Signed by the developer; first launch: right-click → Open.</p></details>
+      <details><summary data-vi="Đây có phải gói đăng ký không?">Is this a subscription?</summary><p data-vi="Không. Pro là 29 US$ trả một lần. Bạn dùng phiên bản đã mua mãi mãi, và được cập nhật miễn phí trong năm đầu.">No. Pro is 29 US$ once. You keep using the version you bought forever, and updates are included for the first year.</p></details>
+      <details><summary data-vi="Điều gì xảy ra sau năm đầu?">What happens after the first year?</summary><p data-vi="Ứng dụng vẫn chạy bình thường, không bị khoá hay giảm tính năng. Muốn tiếp tục nhận bản mới, gia hạn cập nhật 15 US$/năm. Hoàn toàn tuỳ chọn.">The app keeps working, with nothing locked or removed. To keep receiving new versions, renew updates for 15 US$/year. It is optional.</p></details>
+      <details><summary data-vi="Tôi có thể chuyển giấy phép sang máy Mac mới không?">Can I move my license to a new Mac?</summary><p data-vi="Được. Một giấy phép dùng cho 2 máy; hãy huỷ kích hoạt một máy trong app rồi kích hoạt máy mới. Cần máy thứ ba? Thêm máy với 9 US$.">Yes. A license covers 2 Macs; deactivate one in the app and activate the new one. Need a third? Add a Mac for 9 US$.</p></details>
+      <details><summary data-vi="Nếu máy Mac cũ bị mất thì sao?">What if my old Mac is lost?</summary><p data-vi="Hãy liên hệ, chúng tôi sẽ giải phóng chỗ của máy đó để bạn kích hoạt máy thay thế.">Contact us and we will free up its seat so you can activate a replacement.</p></details>
+      <details><summary data-vi="MacCleaner có gửi dữ liệu của tôi đi đâu không?">Does MacCleaner send my data anywhere?</summary><p data-vi="Không. MacCleaner chạy hoàn toàn trên máy bạn, kể cả AI viết commit. Không analytics, không theo dõi. Để xác minh giấy phép, ứng dụng chỉ gửi khoá giấy phép tới dịch vụ cấp phép của chúng tôi.">No. MacCleaner runs entirely on your Mac, including the AI that writes commit messages. No analytics, no tracking. To verify your license, the app contacts our licensing service with your license key only.</p></details>
+      <details><summary data-vi="Nó có xoá nhầm thứ quan trọng không?">Will it delete something important?</summary><p data-vi="Không nếu bạn chưa biết. Mỗi mục được dán nhãn rủi ro, ứng dụng đang chạy được bảo vệ, và mọi thao tác xoá đều hiện tóm tắt và yêu cầu Touch ID trước.">Not without you knowing. Every item is labelled by risk, running apps are protected, and every deletion shows a summary and asks for Touch ID first.</p></details>
+      <details><summary data-vi="Tôi cần gì để chạy nó?">What do I need to run it?</summary><p data-vi="macOS 27 trở lên và khoảng 6 MB dung lượng. Giao diện có tiếng Anh và tiếng Việt.">macOS 27 or later and about 6 MB of disk space. The interface is available in English and Vietnamese.</p></details>
+      <details><summary data-vi="Cài đặt thế nào?">How do I install it?</summary><p data-vi="Tải tệp DMG, kéo MacCleaner vào Applications rồi mở. Lần đầu, macOS sẽ yêu cầu bạn xác nhận mở ứng dụng tải từ internet.">Download the DMG, drag MacCleaner to Applications and open it. The first time, macOS asks you to confirm opening an app downloaded from the internet.</p></details>
     </div>
   </div>
 </section>
@@ -467,8 +471,7 @@ const CONFIG = {
   renewURL: "#buy",
   seatURL: "#buy",
   contactEmail: "anduy0508@gmail.com",
-  version: "1.2.0",
-  notarized: false
+  version: "1.2.0"
 };
 
 /* ---------- CTA wiring ---------- */
@@ -491,12 +494,6 @@ const CONFIG = {
   const c = document.getElementById("contact");
   c.href = "mailto:" + CONFIG.contactEmail;
   document.getElementById("ver").textContent = "v" + CONFIG.version;
-  // notarization FAQ (both languages)
-  const n = document.getElementById("notar");
-  n.dataset.vi = CONFIG.notarized
-    ? "Có. Ứng dụng được Apple notarize, mở bình thường như mọi app khác."
-    : "Ứng dụng được nhà phát triển ký; lần mở đầu tiên: nhấp chuột phải → Mở.";
-  n.textContent = CONFIG.notarized ? "Yes. Notarized by Apple, so it opens like any other app." : "Signed by the developer; first launch: right-click → Open.";
 })();
 
 /* ---------- i18n ---------- */
@@ -505,6 +502,7 @@ const CONFIG = {
   els.forEach(el => el.dataset.en = el.textContent);
   function apply(lang){
     els.forEach(el => { const t = lang === "vi" ? el.dataset.vi : el.dataset.en; if (t !== undefined && t !== "") el.textContent = t; });
+    document.querySelectorAll("[data-alt-vi]").forEach(i => { if (!i.dataset.altEn) i.dataset.altEn = i.alt; i.alt = lang === "vi" ? i.dataset.altVi : i.dataset.altEn; });
     document.documentElement.lang = lang;
     document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
     try { localStorage.setItem("mc-lang", lang); } catch(e){}
@@ -519,44 +517,42 @@ const CONFIG = {
   if (lang === "vi") apply("vi");
 })();
 
-/* ---------- Palette loop ---------- */
+/* ---------- Tour tabs ---------- */
 (function(){
-  const typed = document.getElementById("typed"), res = document.getElementById("pal-res");
-  const scenes = [
-    {q: "kill 3000", rows: [["⏻", "Stop node on port 3000 · my-next-app", "↵"], ["↗", "Open http://localhost:3000", "⌘O"]]},
-    {q: "reclaim", rows: [["◧", "Dev Reclaim · 10.2 GB in 26 idle projects", "↵"], ["◨", "Docker build cache · 4.5 GB", ""]]},
-    {q: "ssh prod", rows: [[">_", "Connect: ssh prod", "↵"], ["⇄", "Open tunnel to prod-db:5432", ""]]}
-  ];
-  function show(s){
-    res.innerHTML = "";
-    s.rows.forEach((r, i) => {
-      const d = document.createElement("div");
-      d.className = "row" + (i === 0 ? " sel" : "");
-      d.innerHTML = '<span class="g"></span><span class="t"></span><span class="k"></span>';
-      d.children[0].textContent = r[0]; d.children[1].textContent = r[1]; d.children[2].textContent = r[2];
-      res.appendChild(d);
-      setTimeout(() => d.classList.add("in"), 60 + i * 110);
+  const tabs = [...document.querySelectorAll('.tabs [role=tab]')];
+  function sel(t, focus){
+    tabs.forEach(b => {
+      const on = b === t;
+      b.setAttribute("aria-selected", on); b.tabIndex = on ? 0 : -1;
+      document.getElementById(b.getAttribute("aria-controls")).hidden = !on;
     });
+    if (focus) t.focus();
   }
-  if (matchMedia("(prefers-reduced-motion:reduce)").matches) {
-    typed.textContent = scenes[0].q; show(scenes[0]);
-    res.querySelectorAll(".row").forEach(r => r.classList.add("in"));
-    document.querySelector(".caret").style.display = "none";
-    return;
-  }
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
-  (async function loop(){
-    for (let i = 0;; i = (i + 1) % scenes.length) {
-      const s = scenes[i];
-      res.innerHTML = ""; typed.textContent = "";
-      await sleep(500);
-      for (const ch of s.q) { typed.textContent += ch; await sleep(70 + Math.random() * 50); }
-      await sleep(180); show(s);
-      await sleep(2600);
-      while (typed.textContent.length) { typed.textContent = typed.textContent.slice(0, -1); await sleep(25); }
-      res.innerHTML = "";
-    }
-  })();
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => sel(t));
+    t.addEventListener("keydown", e => {
+      const k = {ArrowRight: 1, ArrowLeft: -1}[e.key];
+      if (k) { e.preventDefault(); sel(tabs[(i + k + tabs.length) % tabs.length], true); }
+      else if (e.key === "Home") { e.preventDefault(); sel(tabs[0], true); }
+      else if (e.key === "End") { e.preventDefault(); sel(tabs[tabs.length - 1], true); }
+    });
+  });
+})();
+
+/* ---------- Lightbox ---------- */
+(function(){
+  const d = document.createElement("dialog");
+  d.className = "lb"; d.setAttribute("aria-label", "Screenshot");
+  d.innerHTML = '<button type="button" aria-label="Close">Esc ✕</button><img alt="">';
+  document.body.appendChild(d);
+  const big = d.querySelector("img");
+  document.querySelectorAll(".shot img").forEach(i => {
+    i.tabIndex = 0;
+    const open = () => { big.src = i.currentSrc || i.src; big.alt = i.alt; d.showModal(); };
+    i.addEventListener("click", open);
+    i.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } });
+  });
+  d.addEventListener("click", () => d.close());
 })();
 </script>
 </body>
