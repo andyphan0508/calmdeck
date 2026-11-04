@@ -6,16 +6,18 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#F7F7F6" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E0F11" media="(prefers-color-scheme: dark)">
-<title>MacCleaner: a calmer Mac for people who ship</title>
-<meta name="description" content="A native macOS app that cleans caches and old build folders, shows what holds a port, and finds leaked keys. Everything runs on your Mac. Free to use, Pro 29 US$ once.">
+<title>Calmdeck: a calmer Mac for people who ship</title>
+<meta name="description" content="A native macOS app that clears caches and old build folders, shows what holds a port, and finds leaked keys. Everything runs on your Mac. Free to use, with Pro for a one-time 29 US$.">
+<link rel="canonical" href="https://andyphan0508.github.io/calmdeck/">
+<meta property="og:url" content="https://andyphan0508.github.io/calmdeck/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="MacCleaner: a calmer Mac for people who ship">
-<meta property="og:description" content="Clean caches and old build folders, see what holds a port, and find leaked keys. All on your Mac.">
-<meta property="og:image" content="https://andyphan0508.github.io/maccleaner-site/assets/og.jpg">
+<meta property="og:title" content="Calmdeck: a calmer Mac for people who ship">
+<meta property="og:description" content="Clear caches and old build folders, see what holds a port, and find leaked keys. All on your Mac.">
+<meta property="og:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://andyphan0508.github.io/maccleaner-site/assets/og.jpg">
+<meta name="twitter:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
 <script>document.documentElement.classList.add("js")</script>
 <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -137,6 +139,7 @@ nav{height:64px;display:flex;align-items:center;gap:28px}
 .plan li{display:flex;gap:10px;align-items:flex-start;font-size:16px;color:var(--muted)}
 .plan li i{color:var(--accent);margin-top:4px}
 .plan .fine{margin-top:16px;font-size:14px;color:var(--faint)}
+[hidden]{display:none!important}
 .pricing .after{margin-top:48px;color:var(--faint);font-size:14px;display:grid;gap:6px}
 .soon{display:none;margin-top:24px;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);font-size:15px}
 .soon.on{display:block}
@@ -153,10 +156,13 @@ details[open] summary::after{content:"\2212"}
 details p{padding:0 0 22px;color:var(--muted);font-size:16px}
 
 /* closing + footer */
+.betasec p{max-width:56ch;color:var(--muted);margin:16px 0 28px}
 .closing{text-align:center;padding-bottom:96px}
 .closing .btn{margin-top:28px}
 footer{border-top:1px solid var(--line);padding:28px 0;color:var(--faint);font-size:14px}
 footer .wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+footer .cp{display:grid;gap:4px}
+footer .cp small{font-size:12px;color:var(--faint);opacity:.85}
 footer .fl{margin-left:auto;display:flex;gap:20px}
 footer a{color:var(--faint);text-decoration:none}
 footer a:hover{color:var(--text)}
@@ -183,7 +189,7 @@ footer a:hover{color:var(--text)}
 <header>
   <div class="wrap">
     <nav aria-label="Main">
-      <a class="brand" href="#top"><img src="assets/icon.png" width="24" height="24" alt=""><span>MacCleaner</span></a>
+      <a class="brand" href="#top"><img src="assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a>
       <div class="links">
         <a href="#features" data-vi="Tính năng">Features</a>
         <a href="#pricing" data-vi="Giá">Pricing</a>
@@ -205,29 +211,29 @@ footer a:hover{color:var(--text)}
   <div class="wrap">
     <div>
       <h1 data-vi="Mac gọn gàng cho dev.">A calmer Mac for people who ship.</h1>
-      <p class="sub" data-vi="Dọn cache và thư mục build cũ, xem cái gì đang giữ một cổng, và tìm khoá bị lộ. Tất cả chạy ngay trên máy bạn.">Clean caches and old build folders, see what holds a port, and find leaked keys. All on your Mac.</p>
+      <p class="sub" data-vi="Dọn cache và thư mục build cũ, xem tiến trình nào đang giữ một cổng, và tìm khoá bị lộ. Tất cả chạy ngay trên máy của bạn.">Clear caches and old build folders, see what holds a port, and find leaked keys. All on your Mac.</p>
       <div class="cta">
         <a class="btn" data-cta="download" href="#" data-vi="Tải cho Mac">Download for Mac</a>
         <a class="link" data-cta="buy" href="#pricing" data-vi="Mua Pro">Buy Pro</a>
       </div>
     </div>
-    <img class="shot" src="assets/win/palette.jpg" width="1440" height="900" fetchpriority="high" alt="The command palette open over the MacCleaner overview" data-alt-vi="Bảng lệnh mở trên màn hình tổng quan của MacCleaner">
+    <img class="shot" src="assets/win/palette.jpg" width="1440" height="900" fetchpriority="high" alt="The Command Palette open over the Calmdeck overview" data-alt-vi="Bảng lệnh mở trên màn hình Tổng quan của Calmdeck">
   </div>
-  <div class="wrap"><p class="note" data-vi="Dùng miễn phí. Kèm 7 ngày dùng thử Pro. Cần macOS 27 trở lên.">Free to use. 7-day Pro trial included. macOS 27 or later.</p></div>
+  <div class="wrap"><p class="note" data-vi="Dùng miễn phí, kèm 7 ngày dùng thử Pro. Yêu cầu macOS 27 trở lên.">Free to use, with a 7-day Pro trial included. Requires macOS 27 or later.</p></div>
 </section>
 
 <section class="tour" id="tour">
   <div class="wrap">
     <h2 data-vi="Mọi thứ trong một cửa sổ.">Everything in one window.</h2>
-    <div class="tabs" role="tablist" aria-label="Screens"><button type="button" role="tab" id="tab-0" aria-controls="p-0" aria-selected="true" tabindex="0" data-vi="Tổng quan">Overview</button><button type="button" role="tab" id="tab-1" aria-controls="p-1" aria-selected="false" tabindex="-1" data-vi="Dọn dẹp">Cleanup</button><button type="button" role="tab" id="tab-2" aria-controls="p-2" aria-selected="false" tabindex="-1" data-vi="Dev Reclaim">Dev Reclaim</button><button type="button" role="tab" id="tab-3" aria-controls="p-3" aria-selected="false" tabindex="-1" data-vi="Cổng">Ports</button><button type="button" role="tab" id="tab-4" aria-controls="p-4" aria-selected="false" tabindex="-1" data-vi="Bí mật">Secrets</button><button type="button" role="tab" id="tab-5" aria-controls="p-5" aria-selected="false" tabindex="-1" data-vi="Mã nguồn">Source</button><button type="button" role="tab" id="tab-6" aria-controls="p-6" aria-selected="false" tabindex="-1" data-vi="Doctor">Doctor</button><button type="button" role="tab" id="tab-7" aria-controls="p-7" aria-selected="false" tabindex="-1" data-vi="Workspace">Workspaces</button></div>
-    <div class="stage"><figure role="tabpanel" id="p-0" aria-labelledby="tab-0" class="panel on"><img class="shot" src="assets/win/home.jpg" width="1440" height="900" alt="The MacCleaner overview showing disk usage and suggestions" data-alt-vi="Màn hình tổng quan MacCleaner hiển thị dung lượng và gợi ý"><figcaption data-vi="Toàn bộ chiếc Mac trong một cái nhìn, kèm bước tiếp theo.">Your whole Mac at a glance, with the next best step.</figcaption></figure><figure role="tabpanel" id="p-1" aria-labelledby="tab-1" class="panel"><img class="shot" src="assets/win/junk.jpg" width="1440" height="900" loading="lazy" alt="The Cleanup screen listing caches and logs" data-alt-vi="Màn hình Dọn dẹp liệt kê cache và log"><figcaption data-vi="Cache và log sẽ tự tạo lại, mỗi mục đều được giải thích.">Caches and logs that regenerate, each one explained.</figcaption></figure><figure role="tabpanel" id="p-2" aria-labelledby="tab-2" class="panel"><img class="shot" src="assets/win/reclaim.jpg" width="1440" height="900" loading="lazy" alt="The Dev Reclaim screen listing idle projects" data-alt-vi="Màn hình Dev Reclaim liệt kê các dự án không dùng"><figcaption data-vi="Thư mục build cũ và phần thừa của Docker, nhóm theo dự án.">Old build folders and Docker leftovers, grouped by project.</figcaption></figure><figure role="tabpanel" id="p-3" aria-labelledby="tab-3" class="panel"><img class="shot" src="assets/win/ports.jpg" width="1440" height="900" loading="lazy" alt="The Ports and Processes screen" data-alt-vi="Màn hình Cổng và Tiến trình"><figcaption data-vi="Xem tiến trình nào đang nghe trên từng cổng và dự án nào đã chạy nó.">See what listens on each port and which project started it.</figcaption></figure><figure role="tabpanel" id="p-4" aria-labelledby="tab-4" class="panel"><img class="shot" src="assets/win/secrets.jpg" width="1440" height="900" loading="lazy" alt="The Secrets Scan screen with masked values" data-alt-vi="Màn hình Quét bí mật với giá trị được ẩn"><figcaption data-vi="Khoá tìm thấy trên ổ đĩa, được ẩn đi, khoá đã commit được đánh dấu.">Keys found on disk, masked, with the committed ones flagged.</figcaption></figure><figure role="tabpanel" id="p-5" aria-labelledby="tab-5" class="panel"><img class="shot" src="assets/win/source.jpg" width="1440" height="900" loading="lazy" alt="The Source Control screen" data-alt-vi="Màn hình Quản lý mã nguồn"><figcaption data-vi="Mọi repository trên máy bạn, kèm diff và nhánh.">Every repository on your Mac, with diffs and branches.</figcaption></figure><figure role="tabpanel" id="p-6" aria-labelledby="tab-6" class="panel"><img class="shot" src="assets/win/doctor.jpg" width="1440" height="900" loading="lazy" alt="The Dev Doctor screen" data-alt-vi="Màn hình Dev Doctor"><figcaption data-vi="Kiểm tra toolchain, PATH, git và SSH, kèm cách sửa dễ hiểu.">Toolchains, PATH, git and SSH checked, with plain fixes.</figcaption></figure><figure role="tabpanel" id="p-7" aria-labelledby="tab-7" class="panel"><img class="shot" src="assets/win/workspaces.jpg" width="1440" height="900" loading="lazy" alt="The Workspaces screen" data-alt-vi="Màn hình Workspace"><figcaption data-vi="Khởi động mọi thứ một dự án cần chỉ với một cú nhấp.">Start everything a project needs with one click.</figcaption></figure></div>
+    <div class="tabs" role="tablist" aria-label="Screens"><button type="button" role="tab" id="tab-0" aria-controls="p-0" aria-selected="true" tabindex="0" data-vi="Tổng quan">Overview</button><button type="button" role="tab" id="tab-1" aria-controls="p-1" aria-selected="false" tabindex="-1" data-vi="Dọn dẹp">Cleanup</button><button type="button" role="tab" id="tab-2" aria-controls="p-2" aria-selected="false" tabindex="-1" data-vi="Dev Reclaim">Dev Reclaim</button><button type="button" role="tab" id="tab-3" aria-controls="p-3" aria-selected="false" tabindex="-1" data-vi="Cổng">Ports</button><button type="button" role="tab" id="tab-4" aria-controls="p-4" aria-selected="false" tabindex="-1" data-vi="Quét bí mật">Secrets Scan</button><button type="button" role="tab" id="tab-5" aria-controls="p-5" aria-selected="false" tabindex="-1" data-vi="Quản lý mã nguồn">Source Control</button><button type="button" role="tab" id="tab-6" aria-controls="p-6" aria-selected="false" tabindex="-1" data-vi="Dev Doctor">Dev Doctor</button><button type="button" role="tab" id="tab-7" aria-controls="p-7" aria-selected="false" tabindex="-1" data-vi="Workspace">Workspaces</button></div>
+    <div class="stage"><figure role="tabpanel" id="p-0" aria-labelledby="tab-0" class="panel on"><img class="shot" src="assets/win/home.jpg" width="1440" height="900" alt="The Calmdeck Overview showing disk usage and suggestions" data-alt-vi="Màn hình Tổng quan của Calmdeck hiển thị dung lượng và gợi ý"><figcaption data-vi="Toàn bộ chiếc Mac trong một cái nhìn, kèm bước tiếp theo rõ ràng.">Your whole Mac at a glance, with a clear next step.</figcaption></figure><figure role="tabpanel" id="p-1" aria-labelledby="tab-1" class="panel"><img class="shot" src="assets/win/junk.jpg" width="1440" height="900" loading="lazy" alt="The Cleanup screen listing caches and logs" data-alt-vi="Màn hình Dọn dẹp liệt kê cache và log"><figcaption data-vi="Cache và log sẽ tự tạo lại, mỗi mục đều có giải thích.">Caches and logs that regenerate, each one explained.</figcaption></figure><figure role="tabpanel" id="p-2" aria-labelledby="tab-2" class="panel"><img class="shot" src="assets/win/reclaim.jpg" width="1440" height="900" loading="lazy" alt="The Dev Reclaim screen listing idle projects" data-alt-vi="Màn hình Dev Reclaim liệt kê các dự án không dùng"><figcaption data-vi="Thư mục build cũ và phần thừa của Docker, nhóm theo dự án.">Old build folders and Docker leftovers, grouped by project.</figcaption></figure><figure role="tabpanel" id="p-3" aria-labelledby="tab-3" class="panel"><img class="shot" src="assets/win/ports.jpg" width="1440" height="900" loading="lazy" alt="The Ports &amp; Processes screen" data-alt-vi="Màn hình Cổng &amp; Tiến trình"><figcaption data-vi="Xem tiến trình nào đang nghe trên từng cổng và dự án nào đã chạy nó.">See what listens on each port and which project started it.</figcaption></figure><figure role="tabpanel" id="p-4" aria-labelledby="tab-4" class="panel"><img class="shot" src="assets/win/secrets.jpg" width="1440" height="900" loading="lazy" alt="The Secrets Scan screen with masked values" data-alt-vi="Màn hình Quét bí mật với giá trị được ẩn"><figcaption data-vi="Khoá tìm thấy trên ổ đĩa được ẩn đi, và khoá đã commit vào git được đánh dấu.">Keys found on disk are masked, and the ones committed to git are flagged.</figcaption></figure><figure role="tabpanel" id="p-5" aria-labelledby="tab-5" class="panel"><img class="shot" src="assets/win/source.jpg" width="1440" height="900" loading="lazy" alt="The Source Control screen" data-alt-vi="Màn hình Quản lý mã nguồn"><figcaption data-vi="Mọi repository trên máy của bạn, kèm diff và nhánh.">Every repository on your Mac, with diffs and branches.</figcaption></figure><figure role="tabpanel" id="p-6" aria-labelledby="tab-6" class="panel"><img class="shot" src="assets/win/doctor.jpg" width="1440" height="900" loading="lazy" alt="The Dev Doctor screen" data-alt-vi="Màn hình Dev Doctor"><figcaption data-vi="Kiểm tra toolchain, PATH, git và SSH, kèm hướng dẫn sửa dễ hiểu.">Toolchains, PATH, git and SSH checked, with plain-language fixes.</figcaption></figure><figure role="tabpanel" id="p-7" aria-labelledby="tab-7" class="panel"><img class="shot" src="assets/win/workspaces.jpg" width="1440" height="900" loading="lazy" alt="The Workspaces screen" data-alt-vi="Màn hình Workspaces"><figcaption data-vi="Khởi động mọi thứ một dự án cần chỉ với một cú nhấp.">Start everything a project needs with one click.</figcaption></figure></div>
   </div>
 </section>
 
 <section class="features" id="features">
   <div class="wrap">
-    <h2 data-vi="Làm cho đúng việc bạn làm mỗi ngày.">Built for the work you actually do.</h2>
-    <ul><li><i class="ph ph-recycle" aria-hidden="true"></i><div><h3><span data-vi="Dev Reclaim">Dev Reclaim</span></h3><p data-vi="Xoá node_modules, thư mục build và phần thừa của Docker khỏi những dự án bạn không còn đụng tới.">Removes node_modules, build folders and Docker leftovers from projects you stopped touching.</p></div></li><li><i class="ph ph-plugs" aria-hidden="true"></i><div><h3><span data-vi="Cổng &amp; Tiến trình">Ports &amp; Processes</span></h3><p data-vi="Cho biết tiến trình nào đang nghe trên từng cổng và dự án nào đã khởi chạy nó.">Shows what listens on each port and which project started it.</p></div></li><li><i class="ph ph-key" aria-hidden="true"></i><div><h3><span data-vi="Quét bí mật">Secrets Scan</span></h3><p data-vi="Tìm khoá API và khoá riêng trên ổ đĩa, và đánh dấu những khoá đã bị commit vào git.">Finds API keys and private keys on disk, and flags the ones committed to git.</p></div></li><li><i class="ph ph-git-branch" aria-hidden="true"></i><div><h3><span data-vi="Quản lý mã nguồn">Source Control</span></h3><p data-vi="Mọi repository trên máy bạn, cùng diff, commit và nhánh ở một nơi.">Every repository on your Mac, with diffs, commits and branches in one place.</p></div></li><li><i class="ph ph-stethoscope" aria-hidden="true"></i><div><h3><span data-vi="Dev Doctor">Dev Doctor</span></h3><p data-vi="Kiểm tra toolchain, PATH, git và SSH, rồi giải thích cần sửa gì.">Checks your toolchains, PATH, git and SSH setup, and explains what to fix.</p></div></li><li><i class="ph ph-command" aria-hidden="true"></i><div><h3><span data-vi="Bảng lệnh">Command Palette</span></h3><p data-vi="Nhấn ⌥⌘K ở bất cứ đâu để giải phóng một cổng, mở dự án hoặc kết nối SSH.">Press ⌥⌘K anywhere to free a port, open a project or connect over SSH.</p></div></li><li><i class="ph ph-stack" aria-hidden="true"></i><div><h3><span data-vi="Workspace">Workspaces</span> <small class="beta" data-vi="Beta">Beta</small></h3><p data-vi="Khởi động tunnel, container và dev server mà một dự án cần chỉ với một cú nhấp.">Start the tunnels, containers and dev server a project needs with one click.</p></div></li><li><i class="ph ph-broom" aria-hidden="true"></i><div><h3><span data-vi="Dọn dẹp">Cleanup</span></h3><p data-vi="Dọn cache và log sẽ tự tạo lại, và giải thích từng mục trước khi xoá.">Clears caches and logs that regenerate, and explains each one before it goes.</p></div></li></ul>
+    <h2 data-vi="Được làm cho công việc hằng ngày của bạn.">Built for the work you do every day.</h2>
+    <ul><li><i class="ph ph-recycle" aria-hidden="true"></i><div><h3><span data-vi="Dev Reclaim">Dev Reclaim</span></h3><p data-vi="Xoá node_modules, thư mục build và phần thừa của Docker khỏi những dự án bạn không còn làm việc.">Removes node_modules, build folders and Docker leftovers from projects you no longer work on.</p></div></li><li><i class="ph ph-plugs" aria-hidden="true"></i><div><h3><span data-vi="Cổng &amp; Tiến trình">Ports &amp; Processes</span></h3><p data-vi="Cho biết tiến trình nào đang lắng nghe trên từng cổng và dự án nào đã khởi chạy nó.">Shows what listens on each port and which project started it.</p></div></li><li><i class="ph ph-key" aria-hidden="true"></i><div><h3><span data-vi="Quét bí mật">Secrets Scan</span></h3><p data-vi="Tìm khoá API và khoá riêng trên ổ đĩa, và đánh dấu những khoá đã bị commit vào git.">Finds API keys and private keys on disk, and flags the ones committed to git.</p></div></li><li><i class="ph ph-git-branch" aria-hidden="true"></i><div><h3><span data-vi="Quản lý mã nguồn">Source Control</span></h3><p data-vi="Mọi repository trên máy của bạn, cùng diff, commit và nhánh ở một nơi.">Every repository on your Mac, with diffs, commits and branches in one place.</p></div></li><li><i class="ph ph-stethoscope" aria-hidden="true"></i><div><h3><span data-vi="Dev Doctor">Dev Doctor</span></h3><p data-vi="Kiểm tra toolchain, PATH, git và SSH, rồi giải thích cần sửa gì.">Checks your toolchains, PATH, git and SSH setup, and explains what to fix.</p></div></li><li><i class="ph ph-command" aria-hidden="true"></i><div><h3><span data-vi="Bảng lệnh">Command Palette</span></h3><p data-vi="Nhấn ⌥⌘K ở bất cứ đâu để giải phóng một cổng, mở dự án hoặc kết nối SSH.">Press ⌥⌘K anywhere to free a port, open a project or connect over SSH.</p></div></li><li><i class="ph ph-stack" aria-hidden="true"></i><div><h3><span data-vi="Workspace">Workspaces</span> <small class="beta" data-vi="Beta">Beta</small></h3><p data-vi="Khởi động tunnel, container và dev server mà một dự án cần chỉ với một cú nhấp.">Start the tunnels, containers and dev server a project needs with one click.</p></div></li><li><i class="ph ph-broom" aria-hidden="true"></i><div><h3><span data-vi="Dọn dẹp">Cleanup</span></h3><p data-vi="Dọn cache và log sẽ tự tạo lại, và giải thích từng mục trước khi xoá.">Clears caches and logs that regenerate, and explains each one before it goes.</p></div></li></ul>
   </div>
 </section>
 
@@ -236,12 +242,20 @@ footer a:hover{color:var(--text)}
     <div>
       <h2 data-vi="Cẩn trọng từ thiết kế.">Careful by design.</h2>
       <ul>
-        <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Chạy hoàn toàn trên máy bạn. Không analytics, không theo dõi.">Runs entirely on your Mac. No analytics, no tracking.</span></li>
+        <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Chạy hoàn toàn trên máy của bạn, không có analytics và không theo dõi.">Runs entirely on your Mac, with no analytics and no tracking.</span></li>
         <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Hiện tóm tắt và hỏi Touch ID trước khi xoá bất cứ thứ gì.">Shows a summary and asks for Touch ID before anything is deleted.</span></li>
-        <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Giá trị bí mật luôn được ẩn và không bao giờ rời khỏi máy.">Secret values stay masked and never leave the device.</span></li>
+        <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Giá trị bí mật luôn được ẩn và không bao giờ rời khỏi máy của bạn.">Secret values stay masked and never leave your Mac.</span></li>
       </ul>
     </div>
-    <img class="shot" src="assets/win/secrets.jpg" width="1440" height="900" loading="lazy" alt="Secrets Scan with values masked" data-alt-vi="Quét bí mật với các giá trị được ẩn">
+    <img class="shot" src="assets/win/secrets.jpg" width="1440" height="900" loading="lazy" alt="Secrets Scan with masked values" data-alt-vi="Quét bí mật với giá trị được ẩn">
+  </div>
+</section>
+
+<section class="betasec" id="beta">
+  <div class="wrap">
+    <h2 data-vi="Cùng làm Calmdeck tốt hơn.">Help shape Calmdeck.</h2>
+    <p data-vi="Người thử nghiệm được dùng Pro miễn phí 60 ngày, đổi lại là những phản hồi thẳng thắn. Hãy tải ứng dụng, mở Quyền &amp; Cài đặt › Bản quyền › Tham gia beta, rồi nhập mã mời của bạn.">Testers get Pro free for 60 days in exchange for honest feedback. Download the app, open Permissions &amp; Settings › License › Join the beta, and enter your invite code.</p>
+    <a class="btn sec" id="betaInvite" href="#" data-vi="Xin mã mời">Request an invite</a>
   </div>
 </section>
 
@@ -259,16 +273,17 @@ footer a:hover{color:var(--text)}
       <div class="plan">
         <h3>Pro</h3>
         <p class="price">29 US$<small data-vi="một lần">once</small></p>
-        <p class="lede" data-vi="Hai máy Mac. Gồm một năm cập nhật.">Two Macs. One year of updates included.</p>
+        <p class="lede" data-vi="Dùng cho hai máy Mac. Gồm một năm cập nhật.">For two Macs. One year of updates included.</p>
+        <p class="fine" id="proSoon" hidden data-vi="Pro sẽ sớm ra mắt. Mỗi bản tải về đều gồm 7 ngày dùng thử Pro.">Pro launches soon. Every download includes a 7-day Pro trial.</p>
         <ul><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Dọn dẹp và Dev Reclaim không giới hạn">Unlimited cleanup and Dev Reclaim</span></li><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Sửa lỗi chỉ một chạm">One-tap fixes</span></li><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Commit message do AI viết ngay trên máy">AI commit messages on device</span></li><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Pull request, issue và CI ngay trong ứng dụng">Pull requests, issues and CI in the app</span></li><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Workspace không giới hạn">Unlimited workspaces</span></li></ul>
         <a class="btn" data-cta="buy" href="#pricing" data-vi="Mua Pro">Buy Pro</a>
-        <p class="fine" data-vi="Dùng phiên bản của bạn mãi mãi. Gia hạn cập nhật 15 US$ mỗi năm nếu bạn muốn. Thêm một máy: 9 US$.">Keep using your version forever. Renew updates for 15 US$ a year if you want them. Extra Mac: 9 US$.</p>
+        <p class="fine" data-vi="Dùng phiên bản của bạn mãi mãi. Gia hạn cập nhật 15 US$ mỗi năm nếu bạn muốn. Thêm một máy: 9 US$.">Use your version forever. Renew updates for 15 US$ a year if you want them. Extra Mac: 9 US$.</p>
       </div>
     </div>
-    <div class="soon" role="status" data-vi="Pro sắp ra mắt. Hãy tải bản miễn phí ngay bây giờ, 7 ngày dùng thử Pro sẽ tự bắt đầu.">Pro is launching soon. Download the free version now; your 7-day Pro trial starts automatically.</div>
-    <div class="after">
-      <p data-vi="Thanh toán an toàn bằng thẻ, PayPal hoặc Apple Pay. Hoàn tiền trong 14 ngày.">Secure checkout with cards, PayPal or Apple Pay. 14-day money-back guarantee.</p>
-      <p lang="vi">Ở Việt Nam: 390.000 ₫ qua chuyển khoản hoặc VietQR, liên hệ <a data-cta="contact" href="#">anduy0508@gmail.com</a>.</p>
+    <div class="soon" role="status" data-vi="Pro sẽ sớm ra mắt. Hãy tải Calmdeck ngay bây giờ, 7 ngày dùng thử Pro sẽ tự bắt đầu.">Pro launches soon. Download Calmdeck now and your 7-day Pro trial starts automatically.</div>
+    <div class="after" id="after" hidden>
+      <p id="payLine" hidden data-vi="Thanh toán an toàn bằng thẻ, PayPal hoặc Apple Pay. Hoàn tiền trong 14 ngày.">Secure checkout with cards, PayPal or Apple Pay. 14-day money-back guarantee.</p>
+      <p id="vnLine" hidden data-vi="Ở Việt Nam: thanh toán 390.000 ₫ bằng VietQR ngay trong ứng dụng, mã bản quyền kích hoạt tự động.">In Vietnam: pay 390,000 ₫ by VietQR inside the app, and your license activates automatically.</p>
     </div>
   </div>
 </section>
@@ -276,7 +291,7 @@ footer a:hover{color:var(--text)}
 <section class="faq" id="faq">
   <div class="wrap"><div class="col">
     <h2 data-vi="Câu hỏi thường gặp.">Questions.</h2>
-    <details><summary data-vi="Đây có phải gói đăng ký không?">Is this a subscription?</summary><p data-vi="Không. Pro là khoản mua một lần 29 US$. Bạn dùng mãi phiên bản đã mua, và năm đầu được cập nhật miễn phí.">No. Pro is a one-time purchase of 29 US$. You keep the version you bought forever, and the first year of updates is included.</p></details><details><summary data-vi="Điều gì xảy ra sau năm đầu?">What happens after the first year?</summary><p data-vi="Ứng dụng vẫn chạy bình thường và không có gì bị khoá. Nếu muốn nhận bản mới, bạn có thể gia hạn cập nhật 15 US$ một năm. Việc này hoàn toàn tuỳ chọn.">The app keeps working and nothing is locked. If you want new versions, you can renew updates for 15 US$ a year. It is optional.</p></details><details><summary data-vi="Tôi có thể chuyển giấy phép sang máy Mac mới không?">Can I move my license to a new Mac?</summary><p data-vi="Được. Một giấy phép dùng cho hai máy Mac. Hãy huỷ kích hoạt một máy trong ứng dụng rồi kích hoạt máy mới. Máy thứ ba là 9 US$.">Yes. One license covers two Macs. Deactivate one in the app, then activate the new one. A third Mac costs 9 US$.</p></details><details><summary data-vi="Nếu máy Mac cũ bị mất thì sao?">What if my old Mac is lost?</summary><p data-vi="Hãy liên hệ với chúng tôi, chúng tôi sẽ giải phóng chỗ của máy đó để bạn kích hoạt máy thay thế.">Write to us and we will free that seat, so you can activate your replacement.</p></details><details><summary data-vi="MacCleaner có gửi dữ liệu của tôi đi đâu không?">Does MacCleaner send my data anywhere?</summary><p data-vi="Không. Ứng dụng chạy hoàn toàn trên máy bạn, kể cả phần AI viết commit, không có analytics và không theo dõi. Để kiểm tra giấy phép, ứng dụng chỉ gửi khoá giấy phép tới dịch vụ cấp phép của chúng tôi.">No. It runs entirely on your Mac, including the AI that writes commit messages, with no analytics and no tracking. To check your license, the app sends only your license key to our licensing service.</p></details><details><summary data-vi="Nó có xoá nhầm thứ quan trọng không?">Will it delete something important?</summary><p data-vi="Không nếu bạn chưa biết. Mỗi mục đều có nhãn rủi ro, ứng dụng đang chạy được bảo vệ, và mọi lần xoá đều hiện tóm tắt và hỏi Touch ID trước.">Not without you knowing. Each item is labelled by risk, running apps are protected, and every deletion shows a summary and asks for Touch ID first.</p></details><details><summary data-vi="Tôi cần gì để chạy nó?">What do I need to run it?</summary><p data-vi="macOS 27 trở lên và khoảng 6 MB dung lượng. Giao diện có tiếng Anh và tiếng Việt.">macOS 27 or later and about 6 MB of disk space. The interface comes in English and Vietnamese.</p></details><details><summary data-vi="Cài đặt thế nào?">How do I install it?</summary><p data-vi="Tải tệp DMG, kéo MacCleaner vào Applications rồi mở. Lần đầu, macOS sẽ hỏi bạn có muốn mở ứng dụng tải từ internet không.">Download the DMG, drag MacCleaner into Applications, and open it. The first time, macOS asks you to confirm opening an app from the internet.</p></details>
+    <details><summary data-vi="Đây có phải gói đăng ký không?">Is this a subscription?</summary><p data-vi="Không. Pro là khoản mua một lần với giá 29 US$. Bạn dùng mãi phiên bản đã mua, và năm đầu được cập nhật miễn phí.">No. Pro is a one-time purchase of 29 US$. You keep the version you bought forever, and the first year of updates is included.</p></details><details><summary data-vi="Điều gì xảy ra sau năm đầu?">What happens after the first year?</summary><p data-vi="Ứng dụng vẫn chạy bình thường và không có gì bị khoá. Nếu muốn nhận bản mới, bạn có thể gia hạn cập nhật 15 US$ một năm. Việc gia hạn hoàn toàn tuỳ chọn.">The app keeps working and nothing is locked. If you want new versions, you can renew updates for 15 US$ a year. Renewal is optional.</p></details><details><summary data-vi="Tôi có thể chuyển bản quyền sang máy Mac mới không?">Can I move my license to a new Mac?</summary><p data-vi="Được. Một bản quyền dùng cho hai máy Mac. Hãy huỷ kích hoạt một máy trong ứng dụng rồi kích hoạt máy mới. Máy thứ ba có giá 9 US$.">Yes. One license covers two Macs. Deactivate one in the app, then activate the new one. A third Mac costs 9 US$.</p></details><details><summary data-vi="Nếu máy Mac cũ bị mất thì sao?">What if my old Mac is lost?</summary><p data-vi="Hãy liên hệ với chúng tôi và chúng tôi sẽ giải phóng suất kích hoạt của máy đó để bạn kích hoạt máy thay thế.">Contact us and we will free that seat so you can activate your replacement.</p></details><details><summary data-vi="Calmdeck có gửi dữ liệu của tôi đi đâu không?">Does Calmdeck send my data anywhere?</summary><p data-vi="Không. Calmdeck chạy hoàn toàn trên máy của bạn, kể cả phần AI viết commit message, không có analytics và không theo dõi. Để xác minh bản quyền, ứng dụng chỉ gửi mã bản quyền tới dịch vụ cấp phép của chúng tôi.">No. Calmdeck runs entirely on your Mac, including the AI that writes commit messages, with no analytics and no tracking. To verify your license, the app sends only your license key to our licensing service.</p></details><details><summary data-vi="Nó có xoá nhầm thứ quan trọng không?">Will it delete something important?</summary><p data-vi="Không khi bạn chưa xác nhận. Mỗi mục đều có nhãn mức rủi ro, ứng dụng đang chạy được bảo vệ, và mọi lần xoá đều hiện bản tóm tắt và yêu cầu Touch ID trước.">Not without your confirmation. Each item is labelled by risk, running apps are protected, and every deletion shows a summary and asks for Touch ID first.</p></details><details><summary data-vi="Tôi cần gì để chạy nó?">What do I need to run it?</summary><p data-vi="macOS 27 trở lên và khoảng 6 MB dung lượng. Giao diện có tiếng Anh và tiếng Việt.">macOS 27 or later and about 6 MB of disk space. The interface comes in English and Vietnamese.</p></details><details><summary data-vi="Cài đặt thế nào?">How do I install it?</summary><p data-vi="Tải tệp DMG, kéo Calmdeck vào Applications rồi mở. Lần đầu, macOS sẽ yêu cầu bạn xác nhận việc mở ứng dụng tải từ internet.">Download the DMG, drag Calmdeck into Applications, and open it. The first time, macOS asks you to confirm opening an app downloaded from the internet.</p></details>
   </div></div>
 </section>
 
@@ -290,10 +305,11 @@ footer a:hover{color:var(--text)}
 
 <footer>
   <div class="wrap">
-    <span>© 2026 Andy Phan</span>
+    <div class="cp"><span>© 2026 Calmdeck Labs</span><small>Mac and macOS are trademarks of Apple Inc. Calmdeck is not affiliated with Apple.</small></div>
     <div class="fl">
       <a href="privacy.html" data-vi="Quyền riêng tư">Privacy</a>
       <a href="terms.html" data-vi="Điều khoản">Terms</a>
+      <a href="changelog.html" data-vi="Có gì mới">What's new</a>
       <a id="contact" href="#" data-vi="Liên hệ">Contact</a>
     </div>
   </div>
@@ -301,12 +317,13 @@ footer a:hover{color:var(--text)}
 
 <script>
 const CONFIG = {
-  downloadURL: "https://github.com/andyphan0508/maccleaner-site/releases/latest/download/MacCleaner.dmg",
+  downloadURL: "https://github.com/andyphan0508/calmdeck/releases/latest/download/Calmdeck.dmg",
   buyURL: "#buy",
   renewURL: "#buy",
   seatURL: "#buy",
   contactEmail: "anduy0508@gmail.com",
-  version: "1.3"
+  vnCheckout: false,
+  version: "1.4"
 };
 
 /* ---------- CTA wiring ---------- */
@@ -315,7 +332,7 @@ const CONFIG = {
   const urls = {download: CONFIG.downloadURL, buy: CONFIG.buyURL, renew: CONFIG.renewURL, seat: CONFIG.seatURL, contact: "mailto:" + CONFIG.contactEmail};
   document.querySelectorAll("[data-cta]").forEach(a => {
     const k = a.dataset.cta, u = urls[k];
-    if (k === "download") { a.href = u; a.setAttribute("download", "MacCleaner.dmg"); return; }
+    if (k === "download") { a.href = u; a.setAttribute("download", "Calmdeck.dmg"); return; }
     if (k === "contact") { a.href = u; return; }
     if (isPlaceholder(u)) {
       a.href = "#pricing";
@@ -326,7 +343,13 @@ const CONFIG = {
       });
     } else { a.href = u; a.rel = "noopener"; }
   });
+  const live = !isPlaceholder(CONFIG.buyURL);
+  document.getElementById("payLine").hidden = !live;
+  document.getElementById("proSoon").hidden = live;
+  document.getElementById("vnLine").hidden = !CONFIG.vnCheckout;
+  document.getElementById("after").hidden = !live && !CONFIG.vnCheckout;
   document.getElementById("contact").href = "mailto:" + CONFIG.contactEmail;
+  document.getElementById("betaInvite").href = "mailto:" + CONFIG.contactEmail + "?subject=Calmdeck%20beta";
 
 })();
 
