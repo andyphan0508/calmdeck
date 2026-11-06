@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://andyphan0508.github.io/calmdeck/sitemap.xml

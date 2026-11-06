@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>How to safely clear Xcode DerivedData, Archives and simulators on Mac | Calmdeck</title>
+<meta name="description" content="Which Xcode folders are safe to delete on a Mac, and the Terminal commands to measure and clear DerivedData, Archives, device support and simulators.">
+<link rel="canonical" href="https://andyphan0508.github.io/calmdeck/guides/clear-xcode-deriveddata.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andyphan0508.github.io/calmdeck/guides/clear-xcode-deriveddata.html">
+<meta property="og:title" content="How to safely clear Xcode DerivedData, Archives and simulators on Mac">
+<meta property="og:description" content="Which Xcode folders are safe to delete on a Mac, and the Terminal commands to measure and clear DerivedData, Archives, device support and simulators.">
+<meta property="og:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "How to safely clear Xcode DerivedData, Archives and simulators on Mac", "description": "Which Xcode folders are safe to delete on a Mac, and the Terminal commands to measure and clear DerivedData, Archives, device support and simulators.", "mainEntityOfPage": "https://andyphan0508.github.io/calmdeck/guides/clear-xcode-deriveddata.html", "inLanguage": "en", "image": "https://andyphan0508.github.io/calmdeck/assets/og.jpg", "author": {"@type": "Organization", "name": "Calmdeck Labs"}, "publisher": {"@type": "Organization", "name": "Calmdeck Labs"}}</script>
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#F7F7F6;--surface:#FFFFFF;--text:#18181B;--muted:#5B5B66;--faint:#8A8A94;--line:#E4E4E7;--accent:#0F766E;--accent-ink:#FFFFFF;--sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}
+*{box-sizing:border-box}
+body{margin:0;background:#F7F7F6;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+header{border-bottom:1px solid var(--line)}
+nav{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600}
+.brand img{width:24px;height:24px}
+.back{margin-left:auto;color:var(--muted);text-decoration:none;font-size:15px}
+.back:hover{color:var(--text)}
+main{max-width:720px;margin:0 auto;padding:72px 24px 96px}
+h1{font-size:clamp(2.4rem,4.6vw,3.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.15rem;font-weight:600;margin:40px 0 8px}
+p{margin:0 0 12px;color:var(--muted)}
+p.m{color:var(--faint);font-size:14px;margin-top:12px}
+.vi{display:none}
+:root[lang=vi] .en{display:none}
+:root[lang=vi] .vi{display:block}
+p.lede{font-size:1.1rem}
+h1{font-size:clamp(2rem,4vw,3rem)}
+ul,ol{color:var(--muted);margin:0 0 12px;padding-left:22px}
+li{margin-bottom:6px}
+code{font:400 .88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;margin:0 0 16px}
+pre code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:var(--text)}
+.note{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:15px}
+footer{border-top:1px solid var(--line);padding:28px 24px;color:var(--faint);font-size:14px;text-align:center}
+footer a{color:var(--faint)}
+</style>
+</head>
+<body>
+<header><nav><a class="brand" href="../index.html"><img src="../assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a><a class="back" href="../index.html">Back to Calmdeck</a></nav></header>
+<main>
+<h1>How to safely clear Xcode DerivedData, Archives and simulators on Mac</h1>
+<p class="lede">Xcode is one of the largest disk users on a developer Mac. Most of that space is regenerable build output and simulator data, but a few folders hold things you cannot rebuild. This guide shows how to measure first, what is safe to remove, and what to keep.</p>
+<p>Quit Xcode and any running simulators before deleting anything below.</p>
+<h2>1. Measure first</h2>
+<p>See where the space is going before you delete anything:</p>
+<pre><code>du -sh ~/Library/Developer/Xcode/DerivedData
+du -sh ~/Library/Developer/Xcode/Archives
+du -sh ~/Library/Developer/Xcode/iOS\ DeviceSupport
+du -sh ~/Library/Developer/CoreSimulator</code></pre>
+<p>A missing folder just means you have never used that feature. Sizes of 10 to 50 GB for DerivedData and CoreSimulator are common on a Mac that has built many projects.</p>
+<h2>2. DerivedData: safe to delete</h2>
+<p>DerivedData holds build products, indexes and intermediate files. Xcode recreates it on the next build, so deleting it loses nothing except time: the first build and the first indexing pass afterwards will be slower.</p>
+<pre><code>rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre>
+<p>To clear a single project, delete only its folder inside DerivedData (the folder name starts with the project name followed by a hash). Clearing DerivedData is also the standard first fix for odd build errors and stale indexing.</p>
+<h2>3. Archives: be careful</h2>
+<p>Archives are the builds you created with Product &gt; Archive. They live in <code>~/Library/Developer/Xcode/Archives</code>, grouped by date. Unlike DerivedData, they cannot be regenerated exactly: each archive contains the dSYM files for that build, and you need the matching dSYMs to symbolicate crash reports from that version.</p>
+<ul>
+<li>Keep the archive (or at least its dSYMs) for every version you shipped to users and still support.</li>
+<li>Archives of builds you only tested, or of versions long since replaced, are safe to delete.</li>
+<li>If you upload dSYMs to a crash reporting service or to App Store Connect, you have a second copy, but verify that before deleting the local one.</li>
+</ul>
+<h2>4. iOS DeviceSupport</h2>
+<p>When you connect a physical device, Xcode copies that device's system symbols into <code>~/Library/Developer/Xcode/iOS DeviceSupport</code>, one folder per OS version, often several GB each. Old folders for OS versions you no longer test on can be deleted. Xcode recreates a folder the next time you connect a device running that version, which takes a few minutes. The same applies to <code>watchOS DeviceSupport</code> and <code>tvOS DeviceSupport</code>.</p>
+<pre><code>ls ~/Library/Developer/Xcode/iOS\ DeviceSupport
+rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/"&lt;folder name&gt;"</code></pre>
+<h2>5. Simulators</h2>
+<p>Simulator data lives in <code>~/Library/Developer/CoreSimulator</code>. Do not delete that folder by hand; use <code>simctl</code>, which keeps Xcode's records consistent.</p>
+<p>First remove simulators that no longer work with your installed Xcode, usually left over from older versions:</p>
+<pre><code>xcrun simctl delete unavailable</code></pre>
+<p>This is safe: it only removes simulators that Xcode already cannot use. Then look at the downloaded simulator runtimes, which are often the biggest item:</p>
+<pre><code>xcrun simctl runtime list</code></pre>
+<p>The output lists each runtime with an identifier and its size. Delete the ones you no longer need by identifier:</p>
+<pre><code>xcrun simctl runtime delete &lt;identifier&gt;</code></pre>
+<p>You can also manage runtimes in Xcode under Settings &gt; Components. A deleted runtime can be downloaded again, but the download is large, so keep the runtimes for the OS versions you actually target.</p>
+<p>Deleting a simulator device erases the apps and data installed on it. If you rely on test data stored in a particular simulator, keep that one.</p>
+<h2>What not to delete</h2>
+<ul>
+<li><code>~/Library/Developer/Xcode/UserData</code>: your key bindings, code snippets and font and color themes.</li>
+<li>Archives for shipped versions, as described above.</li>
+<li>Provisioning profiles in <code>~/Library/MobileDevice/Provisioning Profiles</code> unless you know they are unused.</li>
+<li>The Xcode app itself, unless you have decided to remove an old copy of Xcode.</li>
+</ul>
+<h2>A short routine</h2>
+<ol>
+<li>Quit Xcode and the Simulator.</li>
+<li>Measure with <code>du -sh</code>.</li>
+<li>Clear DerivedData.</li>
+<li>Run <code>xcrun simctl delete unavailable</code> and remove runtimes you do not use.</li>
+<li>Remove DeviceSupport folders for old OS versions.</li>
+<li>Review Archives by hand.</li>
+</ol>
+<p class="note">Calmdeck is a free native Mac app that finds and clears these folders, shows what holds a port, and asks for Touch ID and shows a summary before every delete. It runs locally, with no account and no analytics. It is optional: everything above works with Terminal alone. <a href="../index.html">Learn more</a>.</p>
+</main>
+<footer><a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a> &middot; &copy; 2026 Calmdeck Labs</footer>
+</body></html>

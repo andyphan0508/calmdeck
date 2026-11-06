@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>What is using port 3000 on my Mac? Find and stop it | Calmdeck</title>
+<meta name="description" content="How to find which process holds a port on macOS with lsof, stop it with kill, and why ports 5000 and 7000 are often taken by AirPlay Receiver or Docker.">
+<link rel="canonical" href="https://andyphan0508.github.io/calmdeck/guides/port-in-use-mac.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andyphan0508.github.io/calmdeck/guides/port-in-use-mac.html">
+<meta property="og:title" content="What is using port 3000 on my Mac? Find and stop it">
+<meta property="og:description" content="How to find which process holds a port on macOS with lsof, stop it with kill, and why ports 5000 and 7000 are often taken by AirPlay Receiver or Docker.">
+<meta property="og:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "What is using port 3000 on my Mac? Find and stop it", "description": "How to find which process holds a port on macOS with lsof, stop it with kill, and why ports 5000 and 7000 are often taken by AirPlay Receiver or Docker.", "mainEntityOfPage": "https://andyphan0508.github.io/calmdeck/guides/port-in-use-mac.html", "inLanguage": "en", "image": "https://andyphan0508.github.io/calmdeck/assets/og.jpg", "author": {"@type": "Organization", "name": "Calmdeck Labs"}, "publisher": {"@type": "Organization", "name": "Calmdeck Labs"}}</script>
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#F7F7F6;--surface:#FFFFFF;--text:#18181B;--muted:#5B5B66;--faint:#8A8A94;--line:#E4E4E7;--accent:#0F766E;--accent-ink:#FFFFFF;--sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}
+*{box-sizing:border-box}
+body{margin:0;background:#F7F7F6;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+header{border-bottom:1px solid var(--line)}
+nav{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600}
+.brand img{width:24px;height:24px}
+.back{margin-left:auto;color:var(--muted);text-decoration:none;font-size:15px}
+.back:hover{color:var(--text)}
+main{max-width:720px;margin:0 auto;padding:72px 24px 96px}
+h1{font-size:clamp(2.4rem,4.6vw,3.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.15rem;font-weight:600;margin:40px 0 8px}
+p{margin:0 0 12px;color:var(--muted)}
+p.m{color:var(--faint);font-size:14px;margin-top:12px}
+.vi{display:none}
+:root[lang=vi] .en{display:none}
+:root[lang=vi] .vi{display:block}
+p.lede{font-size:1.1rem}
+h1{font-size:clamp(2rem,4vw,3rem)}
+ul,ol{color:var(--muted);margin:0 0 12px;padding-left:22px}
+li{margin-bottom:6px}
+code{font:400 .88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;margin:0 0 16px}
+pre code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:var(--text)}
+.note{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:15px}
+footer{border-top:1px solid var(--line);padding:28px 24px;color:var(--faint);font-size:14px;text-align:center}
+footer a{color:var(--faint)}
+</style>
+</head>
+<body>
+<header><nav><a class="brand" href="../index.html"><img src="../assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a><a class="back" href="../index.html">Back to Calmdeck</a></nav></header>
+<main>
+<h1>What is using port 3000 on my Mac? Find and stop it</h1>
+<p class="lede">When a dev server fails with "address already in use" or "EADDRINUSE", something on your Mac is already listening on that port. Terminal can tell you what, and then you can decide whether to stop it.</p>
+<h2>1. Find the process</h2>
+<p>Replace 3000 with your port number:</p>
+<pre><code>lsof -nP -iTCP:3000 -sTCP:LISTEN</code></pre>
+<p>The flags: <code>-n</code> and <code>-P</code> skip host and port name lookups, <code>-iTCP:3000</code> selects TCP port 3000, and <code>-sTCP:LISTEN</code> keeps only sockets that are listening (not clients connected to it). The output looks like this:</p>
+<pre><code>COMMAND   PID  USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+node    48213  andy   23u  IPv6  0x...   0t0  TCP *:3000 (LISTEN)</code></pre>
+<p>The COMMAND and PID columns tell you what holds the port. If nothing is printed, no process owned by your user is listening there. Try again with <code>sudo</code> to see processes owned by other users.</p>
+<p>To see the full command line of the process, which helps you recognise it:</p>
+<pre><code>ps -p 48213 -o pid,ppid,command</code></pre>
+<h2>2. Stop it</h2>
+<p>If it is a leftover dev server that you recognise, ask it to quit:</p>
+<pre><code>kill 48213</code></pre>
+<p><code>kill</code> sends SIGTERM, which lets the program shut down cleanly: close files, finish writes and release the port. Wait a moment and run the <code>lsof</code> command again to confirm the port is free.</p>
+<p>If the process ignores SIGTERM and is still there, force it:</p>
+<pre><code>kill -9 48213</code></pre>
+<p><code>kill -9</code> sends SIGKILL, which ends the process immediately and gives it no chance to clean up. Use it as a last resort. It can leave lock files or half-written data behind. Never kill a process you cannot identify, and be especially careful with system processes and anything owned by root.</p>
+<p>Some tools respawn what you kill. If the port is taken again straight away, the parent is restarting it (a file watcher, a process manager, or an IDE run configuration). Look at the PPID in the <code>ps</code> output and stop the parent instead.</p>
+<h2>3. Ports 5000 and 7000: AirPlay Receiver</h2>
+<p>On recent versions of macOS, the AirPlay Receiver feature listens on ports 5000 and 7000. If your app or a framework such as Flask defaults to port 5000, it may fail to start because of this, and the process shown by <code>lsof</code> will be a system one (often named ControlCe, short for Control Center).</p>
+<p>You have two options. The simpler one is to run your server on another port. Otherwise, open System Settings → General → AirDrop &amp; Handoff and turn off AirPlay Receiver. Doing so disables receiving AirPlay streams on that Mac, so only do it if you do not use that feature.</p>
+<h2>4. Ports published by Docker</h2>
+<p>If a container publishes the port, <code>lsof</code> shows a Docker process (for example <code>com.docker.backend</code>) rather than your app. Killing that process would disrupt Docker itself. Find the container instead:</p>
+<pre><code>docker ps --format 'table {{.Names}}\t{{.Ports}}'</code></pre>
+<p>Then stop the one that publishes your port:</p>
+<pre><code>docker stop &lt;container name&gt;</code></pre>
+<p>If you started it with Docker Compose, <code>docker compose down</code> in that project folder stops its containers cleanly.</p>
+<h2>5. Check everything that is listening</h2>
+<p>To list all TCP listeners at once:</p>
+<pre><code>lsof -nP -iTCP -sTCP:LISTEN</code></pre>
+<p>This is a good way to spot forgotten servers (old databases, test servers, tunnels) that keep running in the background.</p>
+<h2>If nothing seems to be listening</h2>
+<ul>
+<li>Run the command with <code>sudo</code>; the holder may belong to another user.</li>
+<li>Check whether your server binds IPv6 or a specific address; the <code>NAME</code> column shows it.</li>
+<li>Wait a few seconds. A port closed by a crashed process can stay in a TIME_WAIT state briefly, and the next start usually succeeds.</li>
+</ul>
+<p class="note">Calmdeck is a free native Mac app that finds and clears these folders, shows what holds a port, and asks for Touch ID and shows a summary before every delete. It runs locally, with no account and no analytics. It is optional: everything above works with Terminal alone. <a href="../index.html">Learn more</a>.</p>
+</main>
+<footer><a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a> &middot; &copy; 2026 Calmdeck Labs</footer>
+</body></html>

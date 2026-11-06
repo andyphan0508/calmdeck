@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Free up disk space on a developer Mac: node_modules, Docker, caches | Calmdeck</title>
+<meta name="description" content="Reclaim disk space on a developer Mac: measure first, then clean node_modules, Docker, Homebrew, npm, pnpm, pip, Gradle and CocoaPods caches.">
+<link rel="canonical" href="https://andyphan0508.github.io/calmdeck/guides/free-disk-space-developer-mac.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://andyphan0508.github.io/calmdeck/guides/free-disk-space-developer-mac.html">
+<meta property="og:title" content="Free up disk space on a developer Mac: node_modules, Docker, caches">
+<meta property="og:description" content="Reclaim disk space on a developer Mac: measure first, then clean node_modules, Docker, Homebrew, npm, pnpm, pip, Gradle and CocoaPods caches.">
+<meta property="og:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://andyphan0508.github.io/calmdeck/assets/og.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Free up disk space on a developer Mac: node_modules, Docker, caches", "description": "Reclaim disk space on a developer Mac: measure first, then clean node_modules, Docker, Homebrew, npm, pnpm, pip, Gradle and CocoaPods caches.", "mainEntityOfPage": "https://andyphan0508.github.io/calmdeck/guides/free-disk-space-developer-mac.html", "inLanguage": "en", "image": "https://andyphan0508.github.io/calmdeck/assets/og.jpg", "author": {"@type": "Organization", "name": "Calmdeck Labs"}, "publisher": {"@type": "Organization", "name": "Calmdeck Labs"}}</script>
+<link rel="icon" type="image/png" sizes="64x64" href="../assets/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#F7F7F6;--surface:#FFFFFF;--text:#18181B;--muted:#5B5B66;--faint:#8A8A94;--line:#E4E4E7;--accent:#0F766E;--accent-ink:#FFFFFF;--sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}
+*{box-sizing:border-box}
+body{margin:0;background:#F7F7F6;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+header{border-bottom:1px solid var(--line)}
+nav{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600}
+.brand img{width:24px;height:24px}
+.back{margin-left:auto;color:var(--muted);text-decoration:none;font-size:15px}
+.back:hover{color:var(--text)}
+main{max-width:720px;margin:0 auto;padding:72px 24px 96px}
+h1{font-size:clamp(2.4rem,4.6vw,3.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.15rem;font-weight:600;margin:40px 0 8px}
+p{margin:0 0 12px;color:var(--muted)}
+p.m{color:var(--faint);font-size:14px;margin-top:12px}
+.vi{display:none}
+:root[lang=vi] .en{display:none}
+:root[lang=vi] .vi{display:block}
+p.lede{font-size:1.1rem}
+h1{font-size:clamp(2rem,4vw,3rem)}
+ul,ol{color:var(--muted);margin:0 0 12px;padding-left:22px}
+li{margin-bottom:6px}
+code{font:400 .88em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+pre{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;margin:0 0 16px}
+pre code{background:none;border:0;padding:0;font-size:14px;line-height:1.6;color:var(--text)}
+.note{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:15px}
+footer{border-top:1px solid var(--line);padding:28px 24px;color:var(--faint);font-size:14px;text-align:center}
+footer a{color:var(--faint)}
+</style>
+</head>
+<body>
+<header><nav><a class="brand" href="../index.html"><img src="../assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a><a class="back" href="../index.html">Back to Calmdeck</a></nav></header>
+<main>
+<h1>Free up disk space on a developer Mac: node_modules, Docker, caches</h1>
+<p class="lede">Developer tools quietly collect tens of gigabytes: dependency folders, container images, package caches. Most of it can be regenerated, but a few commands, run carelessly, delete data you want. Measure first, then clean the big items one at a time.</p>
+<h2>1. Measure first</h2>
+<p>List the largest folders in your home directory and in Library:</p>
+<pre><code>du -hd 1 ~ 2&gt;/dev/null | sort -h | tail -15
+du -hd 1 ~/Library 2&gt;/dev/null | sort -h | tail -15</code></pre>
+<p>Check the usual suspects directly:</p>
+<pre><code>du -sh ~/.npm ~/.gradle ~/Library/Caches/CocoaPods ~/Library/Caches/Homebrew 2&gt;/dev/null
+docker system df</code></pre>
+<h2>2. node_modules</h2>
+<p>Every JavaScript project keeps its own copy of its dependencies. They can be reinstalled with <code>npm install</code> (or pnpm, yarn), so deleting them in projects you are not working on is safe. First list them with sizes. The <code>-prune</code> option stops <code>find</code> from descending into each one, which keeps the search fast and avoids nested duplicates:</p>
+<pre><code>find ~/code -name node_modules -type d -prune -exec du -sh {} + 2&gt;/dev/null | sort -h</code></pre>
+<p>Replace <code>~/code</code> with the folder where your projects live. After reviewing the list, delete the ones you do not need:</p>
+<pre><code>rm -rf ~/code/old-project/node_modules</code></pre>
+<p>Delete them one project at a time, picking from the list. Run <code>npm install</code> again when you come back to a project.</p>
+<h2>3. Docker</h2>
+<p>See what Docker uses:</p>
+<pre><code>docker system df</code></pre>
+<p>Then remove unused data in increasing order of risk:</p>
+<pre><code>docker builder prune</code></pre>
+<p>This clears the build cache only. Containers, images and volumes are not touched. Next:</p>
+<pre><code>docker system prune</code></pre>
+<p>This removes stopped containers, unused networks, dangling images and unused build cache. It asks for confirmation. It does not remove volumes, and it keeps images that a container uses. To also remove every image not used by a container:</p>
+<pre><code>docker system prune -a</code></pre>
+<p>You will need to pull or rebuild those images again later.</p>
+<p><strong>Volumes need extra care.</strong> Volumes often hold database data. <code>docker system prune --volumes</code> and <code>docker volume prune</code> delete unused volumes permanently, and "unused" means no container currently references it, which includes a database container that is merely stopped. List them first with <code>docker volume ls</code>, and only remove ones you are certain are disposable.</p>
+<p>After a large cleanup, Docker Desktop's disk image may not shrink right away, so the free space shown in macOS can lag behind what Docker reports.</p>
+<h2>4. Homebrew</h2>
+<pre><code>brew cleanup
+brew autoremove</code></pre>
+<p><code>brew cleanup</code> deletes old versions of installed formulae and cached downloads. <code>brew autoremove</code> removes dependencies that nothing needs any more. Both are safe, though a formula you installed only as a dependency of something you removed will go too. Run <code>brew autoremove --dry-run</code> first if you want to see the list.</p>
+<h2>5. Package manager caches</h2>
+<p>These caches only speed up future installs. Clearing them is safe; the cost is re-downloading packages later.</p>
+<ul>
+<li><strong>npm:</strong> <code>npm cache clean --force</code> (the cache is in <code>~/.npm</code>).</li>
+<li><strong>pnpm:</strong> <code>pnpm store prune</code> removes packages no project uses. It leaves the packages that are still referenced.</li>
+<li><strong>Yarn:</strong> <code>yarn cache clean</code>.</li>
+<li><strong>pip:</strong> <code>pip cache purge</code>; <code>pip cache dir</code> shows where it is.</li>
+<li><strong>CocoaPods:</strong> <code>pod cache clean --all</code> (cache in <code>~/Library/Caches/CocoaPods</code>).</li>
+<li><strong>Gradle:</strong> stop the daemons with <code>./gradlew --stop</code> and then remove <code>~/.gradle/caches</code>. The next build downloads dependencies again, so do it while you have a network connection.</li>
+</ul>
+<h2>6. Xcode</h2>
+<p>If you build for Apple platforms, Xcode's DerivedData, simulators and device support are usually the largest single item. See <a href="clear-xcode-deriveddata.html">our guide to clearing Xcode DerivedData, Archives and simulators</a>.</p>
+<h2>Habits that help</h2>
+<ul>
+<li>Check <code>docker system df</code> now and then instead of waiting for a full disk.</li>
+<li>Delete node_modules from finished projects; it costs one command to restore.</li>
+<li>Never delete something you cannot name. Cache folders are safe because you know what they are.</li>
+</ul>
+<p class="note">Calmdeck is a free native Mac app that finds and clears these folders, shows what holds a port, and asks for Touch ID and shows a summary before every delete. It runs locally, with no account and no analytics. It is optional: everything above works with Terminal alone. <a href="../index.html">Learn more</a>.</p>
+</main>
+<footer><a href="../privacy.html">Privacy</a> &middot; <a href="../terms.html">Terms</a> &middot; &copy; 2026 Calmdeck Labs</footer>
+</body></html>
