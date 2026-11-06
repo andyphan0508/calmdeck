@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Support | Calmdeck</title>
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap&subset=vietnamese" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#F7F7F6;--surface:#FFFFFF;--text:#18181B;--muted:#5B5B66;--faint:#8A8A94;--line:#E4E4E7;--accent:#0F766E;--accent-ink:#FFFFFF;--sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}
+*{box-sizing:border-box}
+body{margin:0;background:#F7F7F6;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+header{border-bottom:1px solid var(--line)}
+nav{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600}
+.brand img{width:24px;height:24px}
+.back{margin-left:auto;color:var(--muted);text-decoration:none;font-size:15px}
+.back:hover{color:var(--text)}
+main{max-width:680px;margin:0 auto;padding:72px 24px 96px}
+h1{font-size:clamp(2.4rem,4.6vw,3.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.15rem;font-weight:600;margin:40px 0 8px}
+p{margin:0 0 12px;color:var(--muted)}
+p.m{color:var(--faint);font-size:14px;margin-top:12px}
+.vi{display:none}
+:root[lang=vi] .en{display:none}
+:root[lang=vi] .vi{display:block}
+.qr{display:block;width:min(300px,100%);height:auto;margin:20px 0 8px;border-radius:12px}
+</style>
+</head>
+<body data-vi="Ủng hộ">
+<header><nav><a class="brand" href="index.html"><img src="assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a><a class="back" href="index.html" data-t>Back to Calmdeck</a></nav></header>
+<main>
+<div class="en">
+<h1>Support Calmdeck</h1>
+<p class="m">Early Preview</p>
+<p>Calmdeck is built on evenings and weekends by one developer in Vietnam. During the Early Preview every Pro feature is free. If it saved you some disk space or a late-night <code>lsof</code>, a coffee keeps it going.</p>
+<h2>In Vietnam</h2>
+<p>Scan with any banking app (VietQR, Napas 247). Add “Calmdeck” to the transfer note.</p>
+<img class="qr" src="assets/support-qr.png" width="300" height="382" alt="VietQR code for supporting Calmdeck">
+<h2>Outside Vietnam</h2>
+<p>Card tips arrive with the Pro launch. Until then, telling a friend or <a class="contact" href="#">sending feedback</a> helps just as much.</p>
+<p class="m">Tips are voluntary gifts. They don’t unlock features or replace a Pro license.</p>
+</div>
+<div class="vi">
+<h1>Ủng hộ Calmdeck</h1>
+<p class="m">Early Preview</p>
+<p>Calmdeck do một dev ở Việt Nam làm vào buổi tối và cuối tuần. Trong giai đoạn Early Preview, mọi tính năng Pro đều miễn phí. Nếu app giúp bạn lấy lại chút dung lượng hay đỡ một lần gõ <code>lsof</code> lúc nửa đêm, một ly cà phê sẽ giúp app đi tiếp.</p>
+<h2>Trong nước</h2>
+<p>Quét bằng app ngân hàng bất kỳ (VietQR, Napas 247). Ghi “Calmdeck” ở nội dung chuyển khoản.</p>
+<img class="qr" src="assets/support-qr.png" width="300" height="382" alt="Mã VietQR ủng hộ Calmdeck">
+<h2>Ngoài nước</h2>
+<p>Ủng hộ bằng thẻ sẽ có khi Pro mở bán. Trước đó, giới thiệu cho bạn bè hoặc <a class="contact" href="#">gửi góp ý</a> cũng quý như vậy.</p>
+<p class="m">Tiền ủng hộ là quà tự nguyện, không mở khoá tính năng và không thay cho bản quyền Pro.</p>
+</div>
+</main>
+<script>
+(function(){var l="en",s=null;try{s=localStorage.getItem("mc-lang")}catch(e){}
+if(s==="vi"||s==="en")l=s;else if((navigator.language||"").toLowerCase().indexOf("vi")===0)l="vi";
+var q=new URLSearchParams(location.search).get("lang");if(q==="vi"||q==="en")l=q;
+document.documentElement.lang=l;
+document.querySelectorAll("a.contact").forEach(function(a){a.href="mailto:anduy0508@gmail.com?subject=Calmdeck%20feedback"});
+if(l==="vi"){var b=document.querySelector("[data-t]");b.textContent="Về Calmdeck";document.title=document.title.replace(/^[^|]+/,document.body.dataset.vi+" ")}})();
+</script>
+</body></html>
