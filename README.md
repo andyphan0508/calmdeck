@@ -35,7 +35,7 @@ The script downloads the latest release from this repo and checks the code signa
 
 ## Pricing
 
-Free to use. Pro is a one-time 29 US$ for two Macs with a year of updates. During the Early Preview, Pro is free until 1 February 2027.
+Free to use. Pro is a one-time 29 US$ for two Macs with a year of updates. During the Early Preview, Pro is free until 1 July 2027.
 
 ## Feedback
 
