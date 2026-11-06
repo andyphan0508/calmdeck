@@ -72,6 +72,8 @@ section{padding:112px 0}
 .btn.sec{background:transparent;color:var(--text);border-color:var(--line)}
 .btn.sec:hover{background:color-mix(in srgb,var(--text) 6%,transparent)}
 .btn.sm{padding:8px 16px;font-size:14px}
+.btn.coffee{background:#FFDD00;color:#18181B;font-weight:600}
+.btn.coffee:hover{background:#F5CF00}
 .link{color:var(--text);font-weight:500;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:5px;white-space:nowrap}
 .link:hover{text-decoration-color:var(--accent);color:var(--accent)}
 
@@ -166,6 +168,8 @@ footer .cp small{font-size:12px;color:var(--faint);opacity:.85}
 footer .fl{margin-left:auto;display:flex;gap:20px}
 footer a{color:var(--faint);text-decoration:none}
 footer a:hover{color:var(--text)}
+footer a#tip{color:#18181B;background:#FFDD00;border-radius:999px;padding:6px 14px;font-weight:600}
+footer a#tip:hover{background:#F5CF00}
 
 @media (max-width:900px){
   section{padding:72px 0}
@@ -215,6 +219,7 @@ footer a:hover{color:var(--text)}
       <p class="sub" data-vi="Dọn cache và thư mục build cũ, xem tiến trình nào đang giữ một cổng, và tìm khoá bị lộ. Tất cả chạy ngay trên máy của bạn.">Clear caches and old build folders, see what holds a port, and find leaked keys. All on your Mac.</p>
       <div class="cta">
         <a class="btn" data-cta="download" href="#" data-vi="Tải cho Mac">Download for Mac</a>
+        <a class="btn coffee" data-cta="tip" href="support.html" data-vi="☕ Ủng hộ một ly cà phê">☕ Buy me a coffee</a>
         <a class="link" data-cta="buy" href="#pricing" data-vi="Mua Pro">Buy Pro</a>
       </div>
       <p class="fine" data-vi="Hoặc cài và cập nhật bằng một lệnh trong Terminal:">Or install and update with one Terminal command:</p>
@@ -284,6 +289,7 @@ footer a:hover{color:var(--text)}
       </div>
     </div>
     <div class="soon" role="status" data-vi="Early Preview: tải Calmdeck ngay, mọi tính năng Pro miễn phí đến 01/02/2027. Thích app thì có thể ủng hộ một ly cà phê.">Early Preview: download Calmdeck now and every Pro feature is free until 1 February 2027. If you like it, you can buy us a coffee.</div>
+    <p class="fine" id="founderLine" hidden data-vi="Giá founder: 19 US$ thay vì 29 US$ đến hết 15/02/2027, mã FOUNDER tự áp dụng khi thanh toán.">Founder price: 19 US$ instead of 29 US$ until 15 February 2027. The FOUNDER code applies automatically at checkout.</p>
     <div class="after" id="after" hidden>
       <p id="payLine" hidden data-vi="Thanh toán an toàn bằng thẻ, PayPal hoặc Apple Pay. Hoàn tiền trong 14 ngày.">Secure checkout with cards, PayPal or Apple Pay. 14-day money-back guarantee.</p>
       <p id="vnLine" hidden data-vi="Ở Việt Nam: thanh toán 390.000 ₫ bằng VietQR ngay trong ứng dụng, mã bản quyền kích hoạt tự động.">In Vietnam: pay 390,000 ₫ by VietQR inside the app, and your license activates automatically.</p>
@@ -302,6 +308,7 @@ footer a:hover{color:var(--text)}
   <div class="wrap">
     <h2 data-vi="Cho chiếc Mac của bạn một ngày yên tĩnh hơn.">Give your Mac a quieter day.</h2>
     <a class="btn" data-cta="download" href="#" data-vi="Tải cho Mac">Download for Mac</a>
+    <a class="btn coffee" data-cta="tip" href="support.html" data-vi="☕ Ủng hộ một ly cà phê">☕ Buy me a coffee</a>
   </div>
 </section>
 </main>
@@ -328,17 +335,23 @@ const CONFIG = {
   contactEmail: "anduy0508@gmail.com",
   vnCheckout: false,
   tipURL: "support.html",
-  version: "1.6"
+  founderCode: "FOUNDER",
+  founderUntil: "2027-02-15T16:59:59Z",
+  version: "1.6.1"
 };
 
 /* ---------- CTA wiring ---------- */
 (function(){
   const isPlaceholder = u => !u || u.charAt(0) === "#";
-  const urls = {download: CONFIG.downloadURL, buy: CONFIG.buyURL, renew: CONFIG.renewURL, seat: CONFIG.seatURL, contact: "mailto:" + CONFIG.contactEmail};
+  // Giá founder: link mua tự gắn mã giảm giá (Lemon Squeezy: checkout[discount_code]) cho đến hạn.
+  const founder = CONFIG.founderCode && Date.now() < Date.parse(CONFIG.founderUntil);
+  const withCode = u => founder && !isPlaceholder(u) ? u + (u.includes("?") ? "&" : "?") + "checkout[discount_code]=" + encodeURIComponent(CONFIG.founderCode) : u;
+  const urls = {download: CONFIG.downloadURL, buy: withCode(CONFIG.buyURL), renew: CONFIG.renewURL, seat: CONFIG.seatURL, contact: "mailto:" + CONFIG.contactEmail, tip: CONFIG.tipURL};
   document.querySelectorAll("[data-cta]").forEach(a => {
     const k = a.dataset.cta, u = urls[k];
     if (k === "download") { a.href = u; a.setAttribute("download", "Calmdeck.dmg"); return; }
     if (k === "contact") { a.href = u; return; }
+    if (k === "tip") { if (u) a.href = u; else a.hidden = true; return; }
     if (isPlaceholder(u)) {
       a.href = "#pricing";
       a.addEventListener("click", e => {
@@ -351,6 +364,7 @@ const CONFIG = {
   const live = !isPlaceholder(CONFIG.buyURL);
   document.getElementById("payLine").hidden = !live;
   document.getElementById("proSoon").hidden = live;
+  document.getElementById("founderLine").hidden = !(live && founder);
   document.getElementById("vnLine").hidden = !CONFIG.vnCheckout;
   document.getElementById("after").hidden = !live && !CONFIG.vnCheckout;
   document.getElementById("contact").href = "mailto:" + CONFIG.contactEmail;
