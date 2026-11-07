@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Security | Calmdeck</title>
+<meta name="description" content="How Calmdeck keeps your Mac, passwords and servers safe: what stays on your Mac, what is sent, and what we check before any change.">
+<link rel="canonical" href="https://andyphan0508.github.io/calmdeck/security.html">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&display=swap&subset=vietnamese" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#F7F7F6;--surface:#FFFFFF;--text:#18181B;--muted:#5B5B66;--faint:#8A8A94;--line:#E4E4E7;--accent:#0F766E;--accent-ink:#FFFFFF;--sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;--accent:#2DD4BF;--accent-ink:#0B1A18}
+*{box-sizing:border-box}
+body{margin:0;background:#F7F7F6;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+header{border-bottom:1px solid var(--line)}
+nav{max-width:1120px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600}
+.brand img{width:24px;height:24px}
+.back{margin-left:auto;color:var(--muted);text-decoration:none;font-size:15px}
+.back:hover{color:var(--text)}
+main{max-width:680px;margin:0 auto;padding:72px 24px 96px}
+h1{font-size:clamp(2.4rem,4.6vw,3.6rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.15rem;font-weight:600;margin:40px 0 8px}
+p{margin:0 0 12px;color:var(--muted)}
+p.m{color:var(--faint);font-size:14px;margin-top:12px}
+p.lead{font-size:1.1rem;color:var(--text);margin-top:24px}
+ul{margin:0 0 12px;padding-left:20px;color:var(--muted)}
+li{margin:6px 0}
+strong{color:var(--text);font-weight:600}
+.vi{display:none}
+:root[lang=vi] .en{display:none}
+:root[lang=vi] .vi{display:block}
+</style>
+</head>
+<body data-vi="Bảo mật">
+<header><nav><a class="brand" href="index.html"><img src="assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a><a class="back" href="index.html" data-t>Back to Calmdeck</a></nav></header>
+<main>
+<div class="en">
+<h1>Security</h1>
+<p class="m">Last updated: November 2026</p>
+<p class="lead">Calmdeck works on your Mac, your passwords and your servers, so it has to earn your trust. This page explains what stays on your Mac, what is sent and where, and what Calmdeck checks before it changes anything.</p>
+
+<h2>What stays on your Mac</h2>
+<ul>
+<li>Calmdeck has <strong>no analytics, no telemetry and no account</strong>. It does not report what you scan, clean or connect to.</li>
+<li>Your files, scan results, server list, workspaces and activity log are kept only on your Mac. The activity log can be read only by your user account.</li>
+<li>Secret values found by Secrets Scan <strong>never leave your Mac and are never saved</strong>. On screen they are shown masked, for example <code>ghp_…x9</code>.</li>
+</ul>
+
+<h2>What Calmdeck sends, and when</h2>
+<p>Calmdeck itself connects to the internet on its own in only these cases:</p>
+<ul>
+<li><strong>Update check</strong>, at most once a day: it asks GitHub for the latest version and downloads a small public settings file from this website. Nothing about you or your Mac is sent. You can turn this off in Settings.</li>
+<li><strong>License check</strong>, only if you have bought Pro, at most once every three days: your license key is checked with Lemon Squeezy, our payment provider. When you activate a license, Lemon Squeezy also receives your Mac's name so you can recognise it in your purchase account.</li>
+<li><strong>Uptime checks you create</strong>: Calmdeck checks only the addresses you add, on the schedule you set.</li>
+</ul>
+<p>Everything else (connecting to a server, a cluster, GitHub or GitLab) happens only when you use that feature. Your licence is tied to an anonymous code derived from your Mac; your Mac's hardware ID is never sent.</p>
+
+<h2>Passwords and tokens</h2>
+<ul>
+<li>Saved SSH passwords and access tokens are stored in the <strong>macOS Keychain</strong>, not in ordinary files.</li>
+<li>While Calmdeck signs in to a server with a password, the password sits briefly in a temporary file that only your account can read, and the file is deleted as soon as the sign-in finishes. It is never placed in a command line where other programs could see it.</li>
+<li>When a task needs administrator rights, macOS asks for your password in its own window. <strong>Calmdeck never sees your Mac's administrator password.</strong></li>
+<li>Calmdeck never reads your GitHub CLI token, and never changes your Kubernetes config files.</li>
+</ul>
+
+<h2>Before anything changes</h2>
+<ul>
+<li>Server and cluster actions show you the <strong>exact command</strong> that will run before you confirm it. Names and paths are checked and safely quoted, so a strange file or service name cannot turn into a different command.</li>
+<li>Cleanup never deletes key system or home folders, such as your home folder itself, Documents or the system Library, and it removes shortcuts (symbolic links) without following them to the files they point to.</li>
+<li>During cleanup, administrator rights are requested only for items outside your home folder, only after a normal delete has failed, and only if you allow it in Settings.</li>
+<li>When Touch ID confirmation is on (it is by default), Calmdeck asks for it <strong>every time</strong> before sensitive actions such as deleting permanently, using a saved server password or revealing a cluster secret.</li>
+<li>Scanning or opening a project does not run code from it. If a project's git settings could start other programs, Calmdeck does not run git there until you choose to trust that project.</li>
+<li>Cleanups, administrator commands, and server and cluster actions are written to a local activity log, so you can see what happened and when.</li>
+</ul>
+
+<h2>Servers</h2>
+<ul>
+<li>The first time you connect to a server, Calmdeck remembers its identity. If that identity later changes, the connection is <strong>refused</strong>, which protects you from someone impersonating your server.</li>
+<li>Port forwards are open only to your own Mac unless you choose to share them with your network.</li>
+<li>Calmdeck installs nothing on your servers, and it does not read project folders on a server that belong to another account.</li>
+</ul>
+
+<h2>Updates</h2>
+<ul>
+<li>Updates are downloaded only from GitHub over a secure connection.</li>
+<li>Before replacing the app, Calmdeck checks that the new copy is signed by Calmdeck's own Apple developer team and that it is genuinely newer than the version you have. If anything fails, your current copy is kept.</li>
+</ul>
+
+<h2>What Calmdeck cannot be made to do</h2>
+<ul>
+<li>Websites and other apps cannot send commands to Calmdeck: it has no web link handler and no scripting interface.</li>
+<li>Calmdeck is signed by our Apple developer team with macOS runtime protection turned on, which stops other programs from injecting code into it.</li>
+<li>Send Feedback never sends anything by itself. It opens your mail app or GitHub with a short summary (app version, macOS version, language, settings) that you can read before sending. It contains no file paths and no user name.</li>
+</ul>
+
+<h2>Why Calmdeck needs broad access</h2>
+<p>Calmdeck is not limited to the App Store sandbox, because cleaning developer caches, managing ports and connecting over SSH require reaching files and tools across your Mac. If you grant Full Disk Access, Calmdeck uses it to measure and clean folders such as caches and Xcode data and to read security settings. You can remove that access at any time in System Settings, Privacy &amp; Security; the parts that need it will then show what is missing.</p>
+
+<h2>Good to know</h2>
+<ul>
+<li>The Home page runs developer tools you already have, such as Homebrew, to check their health. Those tools may contact their own servers according to their own settings.</li>
+<li>Commands you type into a console, and automatic fixes you set up for uptime checks, run as you wrote them.</li>
+<li>The very first connection to a new server is trusted as described above; check its fingerprint with your host if it matters to you.</li>
+</ul>
+
+<h2>Report a security issue</h2>
+<p>If you find a problem, please tell us privately using the Contact link in the footer of the home page. We will reply, fix it, and credit you in the changelog if you wish.</p>
+<p>See also: <a href="privacy.html">Privacy</a>.</p>
+</div>
+
+<div class="vi">
+<h1>Bảo mật</h1>
+<p class="m">Cập nhật: Tháng 11/2026</p>
+<p class="lead">Calmdeck làm việc với máy Mac, mật khẩu và máy chủ của bạn, nên phải xứng đáng với sự tin tưởng đó. Trang này nói rõ dữ liệu nào ở lại trên máy, dữ liệu nào được gửi đi và gửi tới đâu, và Calmdeck kiểm tra những gì trước khi thay đổi bất cứ thứ gì.</p>
+
+<h2>Những gì ở lại trên máy Mac</h2>
+<ul>
+<li>Calmdeck <strong>không có analytics, không telemetry, không cần tài khoản</strong>. Ứng dụng không báo cáo bạn quét, dọn hay kết nối tới đâu.</li>
+<li>Tệp, kết quả quét, danh sách máy chủ, workspace và nhật ký hoạt động chỉ nằm trên máy của bạn. Nhật ký hoạt động chỉ tài khoản của bạn đọc được.</li>
+<li>Giá trị bí mật do Quét bí mật tìm thấy <strong>không bao giờ rời máy và không được lưu lại</strong>. Trên màn hình chúng chỉ hiện dạng che, ví dụ <code>ghp_…x9</code>.</li>
+</ul>
+
+<h2>Calmdeck gửi gì, khi nào</h2>
+<p>Bản thân Calmdeck chỉ tự kết nối Internet trong các trường hợp sau:</p>
+<ul>
+<li><strong>Kiểm tra cập nhật</strong>, tối đa mỗi ngày một lần: hỏi GitHub phiên bản mới nhất và tải một tệp cài đặt công khai nhỏ từ website này. Không có thông tin nào về bạn hay máy Mac được gửi đi. Bạn có thể tắt việc này trong Cài đặt.</li>
+<li><strong>Xác minh bản quyền</strong>, chỉ khi bạn đã mua Pro, tối đa ba ngày một lần: mã bản quyền được kiểm tra với Lemon Squeezy, đơn vị thanh toán của chúng tôi. Khi kích hoạt, Lemon Squeezy nhận thêm tên máy Mac để bạn nhận ra máy trong tài khoản mua hàng.</li>
+<li><strong>Kiểm tra hoạt động do bạn tạo</strong>: Calmdeck chỉ kiểm tra các địa chỉ bạn thêm, theo lịch bạn đặt.</li>
+</ul>
+<p>Mọi kết nối khác (tới máy chủ, cụm Kubernetes, GitHub hay GitLab) chỉ diễn ra khi bạn dùng tính năng đó. Bản quyền gắn với một mã ẩn danh tính từ máy Mac; mã phần cứng của máy không bao giờ được gửi đi.</p>
+
+<h2>Mật khẩu và token</h2>
+<ul>
+<li>Mật khẩu SSH và token truy cập đã lưu nằm trong <strong>Keychain của macOS</strong>, không nằm trong tệp thường.</li>
+<li>Khi Calmdeck đăng nhập máy chủ bằng mật khẩu, mật khẩu chỉ nằm thoáng qua trong một tệp tạm mà chỉ tài khoản của bạn đọc được, và tệp bị xoá ngay khi đăng nhập xong. Mật khẩu không bao giờ nằm trong dòng lệnh, nơi chương trình khác có thể thấy.</li>
+<li>Khi cần quyền quản trị, macOS hỏi mật khẩu trong cửa sổ của chính hệ thống. <strong>Calmdeck không bao giờ thấy mật khẩu quản trị của máy Mac.</strong></li>
+<li>Calmdeck không đọc token của GitHub CLI và không sửa tệp cấu hình Kubernetes của bạn.</li>
+</ul>
+
+<h2>Trước mỗi thay đổi</h2>
+<ul>
+<li>Thao tác trên máy chủ và cụm Kubernetes hiện <strong>đúng nguyên văn lệnh</strong> sẽ chạy trước khi bạn xác nhận. Tên và đường dẫn được kiểm tra và đặt trong dấu nháy an toàn, nên một tên tệp hay tên dịch vụ lạ không thể biến thành lệnh khác.</li>
+<li>Khi dọn dẹp, Calmdeck không bao giờ xoá các thư mục hệ thống hay thư mục cá nhân quan trọng, như chính thư mục home, Documents hay Library của hệ thống. Lối tắt (symbolic link) bị xoá như một lối tắt, không đi theo tới tệp mà nó trỏ đến.</li>
+<li>Khi dọn dẹp, quyền quản trị chỉ được xin cho mục nằm ngoài thư mục home, chỉ sau khi xoá thường thất bại, và chỉ khi bạn cho phép trong Cài đặt.</li>
+<li>Khi bật xác nhận bằng Touch ID (mặc định bật), Calmdeck hỏi <strong>mỗi lần</strong> trước các thao tác nhạy cảm như xoá vĩnh viễn, dùng mật khẩu máy chủ đã lưu hay xem secret của cụm Kubernetes.</li>
+<li>Quét hay mở một dự án không chạy mã nằm trong đó. Nếu cấu hình git của dự án có thể khởi chạy chương trình khác, Calmdeck không chạy git ở đó cho tới khi bạn chọn tin cậy dự án.</li>
+<li>Các lần dọn dẹp, lệnh quản trị, thao tác trên máy chủ và cụm Kubernetes được ghi vào nhật ký hoạt động trên máy, để bạn xem lại đã xảy ra gì và khi nào.</li>
+</ul>
+
+<h2>Máy chủ</h2>
+<ul>
+<li>Lần đầu kết nối, Calmdeck ghi nhớ danh tính của máy chủ. Nếu danh tính đó thay đổi về sau, kết nối <strong>bị từ chối</strong>, giúp bạn tránh kẻ giả mạo máy chủ.</li>
+<li>Chuyển tiếp cổng chỉ mở cho chính máy Mac của bạn, trừ khi bạn chọn chia sẻ cho mạng nội bộ.</li>
+<li>Calmdeck không cài gì lên máy chủ, và không đọc thư mục dự án trên máy chủ thuộc về tài khoản khác.</li>
+</ul>
+
+<h2>Cập nhật</h2>
+<ul>
+<li>Bản cập nhật chỉ được tải từ GitHub qua kết nối bảo mật.</li>
+<li>Trước khi thay ứng dụng, Calmdeck kiểm tra bản mới được ký bởi chính đội phát triển Apple của Calmdeck và thật sự mới hơn bản bạn đang dùng. Có bất kỳ lỗi nào, bản hiện tại được giữ nguyên.</li>
+</ul>
+
+<h2>Những điều không thể bắt Calmdeck làm</h2>
+<ul>
+<li>Website và ứng dụng khác không gửi lệnh được cho Calmdeck: ứng dụng không có trình mở liên kết web và không có giao diện điều khiển bằng script.</li>
+<li>Calmdeck được ký bởi đội phát triển Apple của chúng tôi và bật lớp bảo vệ khi chạy của macOS, ngăn chương trình khác chèn mã vào ứng dụng.</li>
+<li>Gửi phản hồi không tự gửi gì. Ứng dụng mở trình mail hoặc GitHub kèm bản tóm tắt ngắn (phiên bản app, phiên bản macOS, ngôn ngữ, cài đặt) để bạn đọc trước khi gửi. Bản tóm tắt không chứa đường dẫn tệp hay tên người dùng.</li>
+</ul>
+
+<h2>Vì sao Calmdeck cần quyền truy cập rộng</h2>
+<p>Calmdeck không bị giới hạn trong sandbox của App Store, vì dọn bộ nhớ đệm của công cụ lập trình, quản lý cổng và kết nối SSH đều cần truy cập tệp và công cụ trên khắp máy. Nếu bạn cấp Full Disk Access, Calmdeck dùng quyền này để đo và dọn các thư mục như bộ nhớ đệm, dữ liệu Xcode, và để đọc các thiết lập bảo mật. Bạn có thể gỡ quyền bất cứ lúc nào trong Cài đặt hệ thống, mục Quyền riêng tư &amp; Bảo mật; các phần cần quyền đó sẽ báo rõ còn thiếu gì.</p>
+
+<h2>Nên biết</h2>
+<ul>
+<li>Trang Tổng quan chạy các công cụ lập trình bạn đã cài, như Homebrew, để kiểm tra tình trạng. Các công cụ đó có thể tự kết nối máy chủ của chúng theo cài đặt riêng.</li>
+<li>Lệnh bạn tự gõ trong console, và cách khắc phục tự động bạn đặt cho kiểm tra hoạt động, chạy đúng như bạn viết.</li>
+<li>Lần kết nối đầu tiên tới một máy chủ mới được tin tưởng như mô tả ở trên; nếu cần chắc chắn, hãy đối chiếu dấu vân tay khoá với nhà cung cấp máy chủ.</li>
+</ul>
+
+<h2>Báo lỗi bảo mật</h2>
+<p>Nếu bạn phát hiện vấn đề, hãy báo riêng cho chúng tôi qua liên kết Liên hệ ở chân trang chủ. Chúng tôi sẽ phản hồi, sửa lỗi và ghi công bạn trong changelog nếu bạn muốn.</p>
+<p>Xem thêm: <a href="privacy.html">Quyền riêng tư</a>.</p>
+</div>
+</main>
+<script>
+(function(){var l="en",s=null;try{s=localStorage.getItem("mc-lang")}catch(e){}
+if(s==="vi"||s==="en")l=s;else if((navigator.language||"").toLowerCase().indexOf("vi")===0)l="vi";
+var q=new URLSearchParams(location.search).get("lang");if(q==="vi"||q==="en")l=q;
+document.documentElement.lang=l;
+if(l==="vi"){var b=document.querySelector("[data-t]");b.textContent="Về Calmdeck";document.title=document.title.replace(/^[^|]+/,document.body.dataset.vi+" ")}})();
+</script>
+</body></html>
