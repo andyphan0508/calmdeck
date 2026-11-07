@@ -4,7 +4,7 @@
 # Downloads the latest release from GitHub, checks it is signed by Calmdeck's team, and copies it to Applications.
 set -euo pipefail
 URL="https://github.com/andyphan0508/calmdeck/releases/latest/download/Calmdeck.dmg"
-TEAM="9LQ3RLWTBT"
+TEAM="9LQ3RLWTBT"   # phải khớp UpdateInstall.allowedTeams trong MacCleaner/UpdateChecker.swift
 DEST="/Applications"; [ -w "$DEST" ] || { DEST="$HOME/Applications"; mkdir -p "$DEST"; }
 TMP="$(mktemp -d)"; MNT="$TMP/mnt"; mkdir "$MNT"
 trap 'hdiutil detach -quiet "$MNT" 2>/dev/null || true; rm -rf "$TMP"' EXIT

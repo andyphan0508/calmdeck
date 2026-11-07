@@ -31,178 +31,266 @@
 <style>
 :root{
   color-scheme:light;
-  --bg:#F7F7F6;--surface:#FFFFFF;--text:#18181B;--muted:#5B5B66;--faint:#8A8A94;--line:#E4E4E7;
+  --bg:#F7F7F6;--surface:#FFFFFF;--text:#18181B;--muted:#55555F;--faint:#8A8A94;--line:#E4E4E7;
   --accent:#0F766E;--accent-ink:#FFFFFF;
-  --shadow:0 1px 2px rgb(24 24 27 / .06),0 12px 40px -12px rgb(24 24 27 / .18);
+  --shadow:0 1px 2px rgb(24 24 27 / .05),0 24px 60px -24px rgb(24 24 27 / .22);
   --sans:"Be Vietnam Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
   --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,.7,.2,1);
+  --head:72px;
+  interpolate-size:allow-keywords;
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-theme=light]){
     color-scheme:dark;
     --bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;
     --accent:#2DD4BF;--accent-ink:#0B1A18;
-    --shadow:0 1px 2px rgb(0 0 0 / .4),0 16px 48px -12px rgb(0 8 8 / .7);
+    --shadow:0 1px 2px rgb(0 0 0 / .4),0 24px 60px -24px rgb(0 0 0 / .8);
   }
 }
 :root[data-theme=dark]{
   color-scheme:dark;
   --bg:#0E0F11;--surface:#17181B;--text:#EDEDEF;--muted:#A1A1AA;--faint:#71717A;--line:#27272A;
   --accent:#2DD4BF;--accent-ink:#0B1A18;
-  --shadow:0 1px 2px rgb(0 0 0 / .4),0 16px 48px -12px rgb(0 8 8 / .7);
+  --shadow:0 1px 2px rgb(0 0 0 / .4),0 24px 60px -24px rgb(0 0 0 / .8);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:80px}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:#F7F7F6;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
+body{margin:0;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;background:#F7F7F6;background:var(--bg);color:var(--text);font:400 18px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
 a{color:var(--accent)}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-code{font:400 .88em var(--mono);color:var(--text)}
-h1,h2,h3{color:var(--text);margin:0}
-h1{font-size:clamp(2.2rem,3.6vw,3.1rem);font-weight:600;letter-spacing:-.03em;line-height:1.08;text-wrap:balance}
-h2{font-size:clamp(1.6rem,2.6vw,2.2rem);font-weight:600;letter-spacing:-.02em;line-height:1.2}
-h3{font-size:1rem;font-weight:600;line-height:1.4}
-p{margin:0;max-width:62ch}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
-section{padding:112px 0}
-.shot{width:100%;height:auto;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);background:var(--surface)}
+[tabindex="-1"]:focus{outline:none}
+code{font:400 .86em var(--mono);color:var(--text)}
+h1,h2,h3{color:var(--text);margin:0;font-weight:600}
+h1{font-size:clamp(2.5rem,4.4vw,3.5rem);letter-spacing:-.035em;line-height:1.05;text-wrap:balance}
+h2{font-size:clamp(2rem,3.4vw,2.8rem);letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
+h3{font-size:1.05rem;line-height:1.4}
+p{margin:0;max-width:60ch}
+.wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 32px}
+.lead{margin-top:24px;font-size:clamp(1.1rem,1.35vw,1.25rem);line-height:1.6;color:var(--muted);max-width:42ch}
+.eyebrow{font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint)}
+.fine{font-size:15px;color:var(--faint)}
+.shot{width:100%;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);background:var(--surface)}
+[hidden]{display:none!important}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;padding:11px 22px;font:500 15px/1.2 var(--sans);text-decoration:none;border:1px solid transparent;background:var(--accent);color:var(--accent-ink);transition:background-color .15s,color .15s}
-.btn:hover{background:color-mix(in srgb,var(--accent) 86%,var(--text))}
-.btn:active{transform:translateY(1px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;border-radius:999px;padding:13px 24px;font:500 16px/1.2 var(--sans);text-decoration:none;border:1px solid transparent;background:var(--accent);color:var(--accent-ink);transition:background-color .2s,transform .25s var(--ease),box-shadow .25s var(--ease)}
+.btn:hover{background:color-mix(in srgb,var(--accent) 88%,var(--text));transform:translateY(-1px);box-shadow:0 8px 24px -12px color-mix(in srgb,var(--accent) 70%,transparent)}
+.btn:active{transform:translateY(0)}
 .btn.sec{background:transparent;color:var(--text);border-color:var(--line)}
-.btn.sec:hover{background:color-mix(in srgb,var(--text) 6%,transparent)}
-.btn.sm{padding:8px 16px;font-size:14px}
+.btn.sec:hover{background:color-mix(in srgb,var(--text) 5%,transparent);box-shadow:none}
+.btn.sm{padding:9px 18px;font-size:15px}
 .btn.coffee{background:#FFDD00;color:#18181B;font-weight:600}
-.btn.coffee:hover{background:#F5CF00}
-.link{color:var(--text);font-weight:500;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:5px;white-space:nowrap}
-.link:hover{text-decoration-color:var(--accent);color:var(--accent)}
+.btn.coffee:hover{background:#F5CF00;box-shadow:0 8px 24px -12px rgb(245 207 0 / .8)}
+.link{color:var(--text);font-weight:500;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:6px;white-space:nowrap;transition:color .2s,text-decoration-color .2s}
+.link:hover{color:var(--accent);text-decoration-color:var(--accent)}
 
-/* nav */
-header{position:sticky;top:0;z-index:10;background:rgb(247 247 246 / .85);background:color-mix(in srgb,var(--bg) 85%,transparent);border-bottom:1px solid var(--line)}
-nav{height:64px;display:flex;align-items:center;gap:28px}
-.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600;white-space:nowrap}
-.brand img{width:24px;height:24px}
-.links{display:flex;gap:24px;margin-left:12px}
-.links a{color:var(--muted);text-decoration:none;font-size:15px}
+/* header */
+header{position:sticky;top:0;z-index:10;background:rgb(247 247 246 / .8);background:color-mix(in srgb,var(--bg) 80%,transparent);-webkit-backdrop-filter:saturate(1.5) blur(14px);backdrop-filter:saturate(1.5) blur(14px);border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+nav{min-height:var(--head);display:flex;align-items:center;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;font-weight:600;font-size:17px;white-space:nowrap}
+.brand img{width:26px;height:26px}
+.links{display:flex;gap:4px;margin-left:16px}
+.links a{position:relative;white-space:nowrap;padding:8px 16px;border-radius:999px;color:var(--muted);text-decoration:none;font-size:16px;font-weight:500;transition:color .2s,background-color .3s var(--ease)}
 .links a:hover{color:var(--text)}
+.links a[aria-current=page]{color:var(--text);background:color-mix(in srgb,var(--text) 7%,transparent)}
 .right{margin-left:auto;display:flex;align-items:center;gap:20px}
-.lang{display:flex;gap:6px;font-size:14px;color:var(--faint)}
-.lang button{all:unset;cursor:pointer;color:var(--faint);font:500 14px var(--sans)}
+.lang{display:flex;gap:8px}
+.lang button{all:unset;cursor:pointer;color:var(--faint);font:500 14px var(--sans);transition:color .2s}
 .lang button[aria-pressed=true]{color:var(--text)}
 .lang button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
 
-/* hero */
-.hero{padding:72px 0 0}
-.hero .wrap{display:grid;grid-template-columns:6fr 7fr;gap:56px;align-items:center}
-.hero p.sub{margin-top:24px;font-size:18px;color:var(--muted);max-width:40ch}
-.cta{margin-top:32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-.note{padding:28px 0 0;color:var(--faint);font-size:14px}
+/* views: one at a time, each about one screen */
+main{flex:1;display:flex;flex-direction:column}
+.view{padding:96px 0}
+.js .view{display:none}
+.js .view.on{flex:1;display:flex;align-items:stretch;padding:72px 0 96px;animation:viewIn .6s var(--ease) both}
+.js .view.on .reveal{animation:rise .8s var(--ease) both;animation-delay:calc(var(--i,0) * 90ms + 80ms)}
+.view>.wrap{margin-block:auto}   /* centred when it fits, top-aligned (never under the header) when taller */
+@keyframes viewIn{from{opacity:0}to{opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
-/* tour */
-.tour{text-align:center}
-.tour h2{margin-bottom:32px}
-.tabs{display:inline-flex;gap:2px;padding:4px;background:var(--surface);border:1px solid var(--line);border-radius:8px;max-width:100%;overflow-x:auto;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tabs button{all:unset;cursor:pointer;white-space:nowrap;padding:7px 14px;border-radius:6px;font:500 14px var(--sans);color:var(--muted)}
-.tabs button:hover{color:var(--text)}
-.tabs button[aria-selected=true]{background:var(--bg);color:var(--text);box-shadow:inset 0 0 0 1px var(--line)}
-.tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.stage{display:grid;margin-top:32px}
-.panel{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}
-.panel.on{opacity:1;visibility:visible}
-.panel figcaption{margin-top:20px;color:var(--muted);font-size:15px}
-@media (prefers-reduced-motion:reduce){.panel{transition:none}}
+/* overview */
+.hero>*,.fwrap>*,.faqgrid>*{min-width:0}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.cta{margin-top:40px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.cta .link{margin-left:10px}
+.install-block{margin-top:36px}
+.install{margin:10px 0 0;padding:12px 16px;border-radius:10px;background:color-mix(in srgb,var(--text) 6%,transparent);overflow-x:auto;font:13.5px/1.5 var(--mono);user-select:all}
+.trust{margin-top:80px;padding-top:32px;border-top:1px solid var(--line)}
+.trust ul{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.trust li{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:16px;line-height:1.55}
+.trust li i{color:var(--accent);font-size:18px;margin-top:3px}
+.note{margin-top:28px;font-size:14.5px;color:var(--faint);max-width:none}
 
-/* features */
-.features h2{max-width:20ch}
-.features ul{list-style:none;margin:56px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:40px 64px}
-.features li{display:flex;gap:16px;align-items:flex-start}
-.features li>i{font-size:20px;color:var(--accent);margin-top:2px}
-.features li p{margin-top:4px;color:var(--muted);font-size:16px}
-.beta{font-weight:400;color:var(--faint);font-size:13px;margin-left:6px}
-
-/* careful */
-.careful .wrap{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center}
-.careful ul{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:14px}
-.careful li{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}
-.careful li i{color:var(--accent);font-size:18px;margin-top:4px}
+/* features: list on the left, screen on the right */
+.fwrap{display:grid;grid-template-columns:4fr 7fr;gap:64px;align-items:start;margin-top:48px}
+.feat{display:grid;gap:4px}
+.feat button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:flex;gap:16px;align-items:flex-start;padding:12px 18px;border-radius:14px;transition:background-color .3s var(--ease),box-shadow .3s var(--ease)}
+.feat button:hover{background:color-mix(in srgb,var(--text) 4%,transparent)}
+.feat button[aria-selected=true]{background:var(--surface);box-shadow:inset 0 0 0 1px var(--line),0 10px 30px -18px rgb(0 0 0 / .25)}
+.feat button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.feat i{font-size:22px;color:var(--faint);margin-top:1px;transition:color .3s}
+.feat [aria-selected=true] i{color:var(--accent)}
+.ft{display:grid;min-width:0}
+.fn{font-weight:600;font-size:17px;color:var(--muted);transition:color .3s}
+.fn .beta{font-weight:400;color:var(--faint);font-size:12.5px;margin-left:6px}
+.feat [aria-selected=true] .fn{color:var(--text)}
+.fd{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .45s var(--ease),opacity .35s}
+.fd>span{overflow:hidden;font-size:15.5px;line-height:1.6;color:var(--muted)}
+.feat [aria-selected=true] .fd{grid-template-rows:1fr;opacity:1}
+.feat [aria-selected=true] .fd>span{padding-top:6px}
+.fstage{display:grid;position:sticky;top:calc(var(--head) + 40px)}
+.fpanel{grid-area:1/1;margin:0;opacity:0;visibility:hidden;transform:translateY(10px) scale(.985);transition:opacity .45s var(--ease),transform .7s var(--ease),visibility 0s .45s}
+.fpanel.on{opacity:1;visibility:visible;transform:none;transition:opacity .45s var(--ease),transform .7s var(--ease),visibility 0s}
 
 /* pricing */
-.pricing h2{margin-bottom:56px}
-.plans{display:grid;grid-template-columns:1fr 1fr}
-.plan{padding:0 56px}
-.plan:first-child{padding-left:0;border-right:1px solid var(--line)}
-.plan:last-child{padding-right:0}
-.plan h3{font-size:1rem;color:var(--muted);font-weight:500}
-.price{margin:8px 0 0;font-size:2.4rem;font-weight:600;letter-spacing:-.03em;line-height:1.1;color:var(--text)}
-.price small{font-size:1rem;font-weight:400;color:var(--muted);letter-spacing:0;margin-left:6px}
-.plan .lede{margin-top:6px;color:var(--muted);font-size:15px;min-height:1.65em}
-.plan ul{list-style:none;margin:28px 0;padding:0;display:grid;gap:10px}
-.plan li{display:flex;gap:10px;align-items:flex-start;font-size:16px;color:var(--muted)}
+.pricing-lead{margin-top:16px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+.plan{padding:40px;border:1px solid var(--line);border-radius:20px;background:var(--surface);display:flex;flex-direction:column;align-items:flex-start;transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.plan:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.plan:last-child{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.plan h3{font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint)}
+.price{margin:12px 0 0;font-size:3rem;font-weight:600;letter-spacing:-.035em;line-height:1;color:var(--text)}
+.price small{font-size:1rem;font-weight:400;color:var(--muted);letter-spacing:0;margin-left:8px}
+.plan .lede{margin-top:12px;color:var(--muted);font-size:16px;min-height:1.6em}
+.plan ul{list-style:none;margin:28px 0 32px;padding:0;display:grid;gap:12px;flex:1;align-content:start}
+.plan li{display:flex;gap:12px;align-items:flex-start;font-size:16px;color:var(--muted)}
 .plan li i{color:var(--accent);margin-top:4px}
-.plan .fine{margin-top:16px;font-size:14px;color:var(--faint)}
-[hidden]{display:none!important}
-.pricing .after{margin-top:48px;color:var(--faint);font-size:14px;display:grid;gap:6px}
-.soon{display:none;margin-top:24px;padding:14px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--muted);font-size:15px}
-.soon.on{display:block}
+.plan .fine{margin-top:18px;font-size:14px}
+.soon{display:none;margin-top:28px;padding:16px 20px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--muted);font-size:16px}
+.soon.on{display:block;animation:rise .5s var(--ease) both}
+#v-pricing .wrap>.fine,#v-pricing .after{margin-top:20px;color:var(--faint);font-size:14.5px;display:grid;gap:6px}
 
 /* faq */
-.faq .col{max-width:720px;margin:0 auto}
-.faq h2{margin-bottom:32px}
-details{border-bottom:1px solid var(--line)}
-details:first-of-type{border-top:1px solid var(--line)}
-summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:20px 0;font-weight:500;color:var(--text)}
+.faqgrid{display:grid;grid-template-columns:4fr 7fr;gap:72px;align-items:start}
+.closing{max-width:28ch}
+.qa details{border-bottom:1px solid var(--line)}
+.qa details:first-child{border-top:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center;padding:22px 0;font-weight:500;font-size:17px;color:var(--text);transition:color .2s}
+summary:hover{color:var(--accent)}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";color:var(--faint);font-size:20px;line-height:1}
-details[open] summary::after{content:"\2212"}
-details p{padding:0 0 22px;color:var(--muted);font-size:16px}
+summary::after{content:"+";color:var(--faint);font-size:22px;line-height:1;transition:transform .35s var(--ease)}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 24px;color:var(--muted);font-size:16px}
+details::details-content{height:0;overflow:clip;transition:height .4s var(--ease),content-visibility .4s allow-discrete}
+details[open]::details-content{height:auto}
 
-/* closing + footer */
-.betasec p{max-width:56ch;color:var(--muted);margin:16px 0 28px}
-.closing{text-align:center;padding-bottom:96px}
-.closing .btn{margin-top:28px}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--faint);font-size:14px}
+/* footer */
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--faint);font-size:14px}
 footer .wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
 footer .cp{display:grid;gap:4px}
-footer .cp small{font-size:12px;color:var(--faint);opacity:.85}
-footer .fl{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap}
+footer .cp small{font-size:12px;opacity:.85}
+footer .fl{margin-left:auto;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
 footer .gl{color:var(--text);opacity:.7}
-footer a{color:var(--faint);text-decoration:none}
+footer a{color:var(--faint);text-decoration:none;transition:color .2s}
 footer a:hover{color:var(--text)}
 footer a#tip{color:#18181B;background:#FFDD00;border-radius:999px;padding:6px 14px;font-weight:600}
 footer a#tip:hover{background:#F5CF00}
 
-@media (max-width:900px){
-  section{padding:72px 0}
-  .hero{padding-top:40px}
-  .hero .wrap,.careful .wrap{grid-template-columns:1fr;gap:40px}
-  .features ul{grid-template-columns:1fr;gap:32px}
+@media (max-width:960px){
+  .wrap{padding:0 24px}
+  nav{flex-wrap:wrap;gap:12px 20px;padding:12px 0}
+  .links{order:3;width:100%;margin:0 -8px;overflow-x:auto;scrollbar-width:none}
+  .links::-webkit-scrollbar{display:none}
+  .js .view.on{padding:40px 0 64px}
+  .hero,.fwrap,.faqgrid{grid-template-columns:minmax(0,1fr);gap:40px}
+  .trust{margin-top:56px}
+  .trust ul{grid-template-columns:1fr;gap:16px}
+  .fstage{position:static;order:-1}
   .plans{grid-template-columns:1fr}
-  .plan,.plan:first-child,.plan:last-child{padding:0;border:0}
-  .plan:last-child{margin-top:48px;padding-top:48px;border-top:1px solid var(--line)}
-  .links{display:none}
-  nav{gap:16px}
+  .plan{padding:32px}
 }
 @media (max-width:520px){
   .wrap{padding:0 18px}
+  body{font-size:17px}
   .brand span{display:none}
   .right{gap:14px}
+  .right .btn.sm{padding:8px 14px}
+  .cta .link{margin-left:0}
 }
-.install{margin:.4rem 0 0;padding:.6rem .8rem;border-radius:8px;background:rgba(127,127,127,.12);overflow-x:auto;font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;user-select:all}
+@media (prefers-reduced-motion:reduce){
+  .js .view.on,.js .view.on .reveal,.soon.on{animation:none}
+  *,*::before,*::after{transition-duration:0s!important}
+}
+/* tips:css:start */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.fab{all:unset;box-sizing:border-box;position:fixed;right:24px;bottom:24px;z-index:30;display:flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;border-radius:999px;cursor:pointer;background:var(--text);color:var(--bg);font:600 15px/1 var(--sans);box-shadow:0 12px 32px -10px rgb(0 0 0 / .45);animation:fabIn .7s var(--ease) 1.2s both;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.fab:hover{transform:translateY(-2px);box-shadow:0 18px 40px -12px rgb(0 0 0 / .5)}
+.fab:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.fab-ico{font-size:18px;line-height:1}
+.fab-dot{position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:#FFDD00;box-shadow:0 0 0 0 rgb(255 221 0 / .7);animation:pulse 2s ease-out 2s infinite}
+.fab.seen .fab-dot{display:none}
+.fab[aria-expanded=true]{transform:scale(.9);opacity:0;pointer-events:none}
+@keyframes fabIn{from{opacity:0;transform:translateY(16px) scale(.9)}to{opacity:1;transform:none}}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgb(255 221 0 / 0)}100%{box-shadow:0 0 0 0 rgb(255 221 0 / 0)}}
+.tips-scrim{position:fixed;inset:0;z-index:31;background:rgb(0 0 0 / .18);animation:viewIn .3s both}
+.tips{position:fixed;right:24px;bottom:24px;z-index:32;width:min(460px,calc(100vw - 32px));max-height:min(720px,calc(100svh - 48px));display:flex;flex-direction:column;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 80px -20px rgb(0 0 0 / .45);transform-origin:bottom right;animation:sheetIn .45s var(--ease) both;overflow:hidden}
+.tips.closing{animation:sheetOut .25s ease-in both}
+@keyframes sheetIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes sheetOut{to{opacity:0;transform:translateY(10px) scale(.97)}}
+.tips-head{display:flex;gap:16px;align-items:flex-start;padding:24px 24px 16px}
+.tips-head h3{font-size:20px;letter-spacing:-.02em}
+.tips-head p{margin-top:6px;font-size:14.5px;color:var(--muted);line-height:1.5}
+.tips-x{all:unset;cursor:pointer;margin-left:auto;width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;color:var(--muted);transition:background-color .2s,color .2s}
+.tips-x:hover{background:color-mix(in srgb,var(--text) 7%,transparent);color:var(--text)}
+.tips-x:focus-visible{outline:2px solid var(--accent)}
+.tips-tabs{display:flex;align-items:center;flex:none;gap:6px;padding:2px 24px 14px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tips-tabs button{all:unset;display:inline-flex;align-items:center;cursor:pointer;white-space:nowrap;padding:8px 14px;border-radius:999px;font:500 14px var(--sans);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);transition:background-color .25s,color .25s,box-shadow .25s}
+.tips-tabs button:hover{color:var(--text)}
+.tips-tabs button[aria-selected=true]{background:var(--text);color:var(--bg);box-shadow:none}
+.tips-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tips-body{overflow-y:auto;padding:18px 24px 8px;overscroll-behavior:contain}
+.tpane{display:none}
+.tpane.on{display:block}
+.tpane.on .intro,.tpane.on .step,.tpane.on .warn{animation:rise .5s var(--ease) both;animation-delay:calc(var(--i,0) * 60ms)}
+.intro{font-size:15px;color:var(--muted);line-height:1.55}
+.steps{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:4px}
+.step{display:grid;grid-template-columns:28px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.step:first-child{border-top:0}
+.num{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--sans);background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.sbody{min-width:0}
+.shead{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.shead h4{margin:0;font-size:15.5px;font-weight:600}
+.badge{font:600 11.5px/1 var(--sans);letter-spacing:.02em;padding:4px 8px;border-radius:999px}
+.badge.read{color:var(--muted);background:color-mix(in srgb,var(--text) 7%,transparent)}
+.badge.safe{color:var(--accent);background:color-mix(in srgb,var(--accent) 13%,transparent)}
+.badge.careful{color:#B45309;background:rgb(245 158 11 / .15)}
+.sbody p{margin-top:4px;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.cmd{margin-top:10px;display:flex;align-items:stretch;border-radius:10px;background:color-mix(in srgb,var(--text) 6%,transparent);overflow:hidden}
+.cmd code{flex:1;min-width:0;padding:10px 12px;font:12.5px/1.5 var(--mono);overflow-x:auto;white-space:pre;user-select:all}
+.copy{all:unset;cursor:pointer;flex:none;padding:0 14px;font:600 12.5px var(--sans);color:var(--accent);border-left:1px solid var(--line);transition:background-color .2s}
+.copy:hover{background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.copy:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.copy.done{color:var(--text)}
+.warn{display:flex;gap:10px;margin-top:12px;padding:12px 14px;border-radius:12px;background:rgb(245 158 11 / .1);color:var(--muted);font-size:14px;line-height:1.5}
+.warn i{color:#D97706;font-size:17px;margin-top:1px}
+.guide{display:inline-flex;gap:6px;margin:16px 0 8px;font-weight:600;font-size:15px;text-decoration:none}
+.guide span[aria-hidden]{transition:transform .25s var(--ease)}
+.guide:hover span[aria-hidden]{transform:translateX(3px)}
+.tips-foot{display:flex;align-items:center;gap:14px;padding:14px 24px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);background:color-mix(in srgb,var(--text) 2.5%,var(--surface))}
+.tips-foot .btn{margin-left:auto;flex:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .badge.careful{color:#FBBF24}}
+@media (max-width:600px){
+  .fab{right:16px;bottom:16px;padding:12px 16px}
+  .tips{right:0;bottom:0;left:0;width:100%;max-height:88svh;border-radius:22px 22px 0 0;border-bottom:0;transform-origin:bottom center}
+  .tips-head,.tips-body,.tips-foot{padding-left:18px;padding-right:18px}
+  .tips-tabs{padding-left:18px;padding-right:18px}
+}
+@media (prefers-reduced-motion:reduce){.fab,.fab-dot,.tips,.tips-scrim,.tpane.on .intro,.tpane.on .step,.tpane.on .warn{animation:none}}
+/* tips:css:end */
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
     <nav aria-label="Main">
-      <a class="brand" href="#top"><img src="assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a>
+      <a class="brand" href="#home" data-nav="home"><img src="assets/icon.png" width="24" height="24" alt=""><span>Calmdeck</span></a>
       <div class="links">
-        <a href="#features" data-vi="Tính năng">Features</a>
-        <a href="#pricing" data-vi="Giá">Pricing</a>
-        <a href="#faq" data-vi="Hỏi đáp">FAQ</a>
+        <a href="#home" data-nav="home" data-vi="Tổng quan">Overview</a>
+        <a href="#features" data-nav="features" data-vi="Tính năng">Features</a>
+        <a href="#pricing" data-nav="pricing" data-vi="Giá">Pricing</a>
+        <a href="#faq" data-nav="faq" data-vi="Hỏi đáp">FAQ</a>
       </div>
       <div class="right">
         <div class="lang" role="group" aria-label="Language">
@@ -216,65 +304,44 @@ footer a#tip:hover{background:#F5CF00}
 </header>
 
 <main id="top">
-<section class="hero">
+<section class="view on" id="v-home" data-view="home" aria-label="Overview">
   <div class="wrap">
-    <div>
-      <h1 data-vi="Mac gọn gàng cho dev.">A calmer Mac for people who ship.</h1>
-      <p class="sub" data-vi="Dọn cache và thư mục build cũ, xem tiến trình nào đang giữ một cổng, và tìm khoá bị lộ. Tất cả chạy ngay trên máy của bạn.">Clear caches and old build folders, see what holds a port, and find leaked keys. All on your Mac.</p>
-      <div class="cta">
+    <div class="hero">
+      <div>
+        <div class="reveal" style="--i:0"><h1 tabindex="-1" data-vi="Mac gọn gàng cho dev.">A calmer Mac for people who ship.</h1></div>
+        <div class="reveal" style="--i:1"><p class="lead" data-vi="Dọn cache và thư mục build cũ, xem tiến trình nào đang giữ một cổng, và tìm khoá bị lộ. Tất cả chạy ngay trên máy của bạn.">Clear caches and old build folders, see what holds a port, and find leaked keys. All on your Mac.</p></div>
+        <div class="reveal" style="--i:2"><div class="cta">
         <a class="btn" data-cta="download" href="#" data-vi="Tải cho Mac">Download for Mac</a>
         <a class="btn coffee" data-cta="tip" href="support.html" data-vi="☕ Ủng hộ một ly cà phê">☕ Buy me a coffee</a>
         <a class="link" data-cta="buy" href="#pricing" data-vi="Mua Pro">Buy Pro</a>
+      </div></div>
+        <div class="reveal install-block" style="--i:3"><p class="fine" data-vi="Hoặc cài và cập nhật bằng một lệnh trong Terminal:">Or install and update with one Terminal command:</p>
+      <pre class="install"><code>curl -fsSL https://andyphan0508.github.io/calmdeck/install.sh | bash</code></pre></div>
       </div>
-      <p class="fine" data-vi="Hoặc cài và cập nhật bằng một lệnh trong Terminal:">Or install and update with one Terminal command:</p>
-      <pre class="install"><code>curl -fsSL https://andyphan0508.github.io/calmdeck/install.sh | bash</code></pre>
+      <div class="reveal" style="--i:2"><img class="shot" src="assets/win/palette.jpg" width="1440" height="900" fetchpriority="high" alt="The Command Palette open over the Calmdeck overview" data-alt-vi="Bảng lệnh mở trên màn hình Tổng quan của Calmdeck"></div>
     </div>
-    <img class="shot" src="assets/win/palette.jpg" width="1440" height="900" fetchpriority="high" alt="The Command Palette open over the Calmdeck overview" data-alt-vi="Bảng lệnh mở trên màn hình Tổng quan của Calmdeck">
-  </div>
-  <div class="wrap"><p class="note" data-vi="Early Preview: mọi tính năng Pro miễn phí đến 01/07/2027. Yêu cầu máy Mac chip Apple (M1 trở lên), macOS 26 trở lên.">Early Preview: every Pro feature is free until 1 July 2027. Requires a Mac with Apple silicon (M1 or later) and macOS 26 or later.</p></div>
-</section>
-
-<section class="tour" id="tour">
-  <div class="wrap">
-    <h2 data-vi="Mọi thứ trong một cửa sổ.">Everything in one window.</h2>
-    <div class="tabs" role="tablist" aria-label="Screens"><button type="button" role="tab" id="tab-0" aria-controls="p-0" aria-selected="true" tabindex="0" data-vi="Tổng quan">Overview</button><button type="button" role="tab" id="tab-1" aria-controls="p-1" aria-selected="false" tabindex="-1" data-vi="Dọn dẹp">Cleanup</button><button type="button" role="tab" id="tab-2" aria-controls="p-2" aria-selected="false" tabindex="-1" data-vi="Dev Reclaim">Dev Reclaim</button><button type="button" role="tab" id="tab-3" aria-controls="p-3" aria-selected="false" tabindex="-1" data-vi="Cổng">Ports</button><button type="button" role="tab" id="tab-4" aria-controls="p-4" aria-selected="false" tabindex="-1" data-vi="Quét bí mật">Secrets Scan</button><button type="button" role="tab" id="tab-5" aria-controls="p-5" aria-selected="false" tabindex="-1" data-vi="Quản lý mã nguồn">Source Control</button><button type="button" role="tab" id="tab-8" aria-controls="p-8" aria-selected="false" tabindex="-1" data-vi="Máy chủ">Servers</button><button type="button" role="tab" id="tab-6" aria-controls="p-6" aria-selected="false" tabindex="-1" data-vi="Dev Doctor">Dev Doctor</button><button type="button" role="tab" id="tab-7" aria-controls="p-7" aria-selected="false" tabindex="-1" data-vi="Workspace">Workspaces</button></div>
-    <div class="stage"><figure role="tabpanel" id="p-0" aria-labelledby="tab-0" class="panel on"><img class="shot" src="assets/win/home.jpg" width="1440" height="900" alt="The Calmdeck Overview showing disk usage and suggestions" data-alt-vi="Màn hình Tổng quan của Calmdeck hiển thị dung lượng và gợi ý"><figcaption data-vi="Toàn bộ chiếc Mac trong một cái nhìn, kèm bước tiếp theo rõ ràng.">Your whole Mac at a glance, with a clear next step.</figcaption></figure><figure role="tabpanel" id="p-1" aria-labelledby="tab-1" class="panel"><img class="shot" src="assets/win/junk.jpg" width="1440" height="900" loading="lazy" alt="The Cleanup screen listing caches and logs" data-alt-vi="Màn hình Dọn dẹp liệt kê cache và log"><figcaption data-vi="Cache và log sẽ tự tạo lại, mỗi mục đều có giải thích.">Caches and logs that regenerate, each one explained.</figcaption></figure><figure role="tabpanel" id="p-2" aria-labelledby="tab-2" class="panel"><img class="shot" src="assets/win/reclaim.jpg" width="1440" height="900" loading="lazy" alt="The Dev Reclaim screen listing idle projects" data-alt-vi="Màn hình Dev Reclaim liệt kê các dự án không dùng"><figcaption data-vi="Thư mục build cũ và phần thừa của Docker, nhóm theo dự án.">Old build folders and Docker leftovers, grouped by project.</figcaption></figure><figure role="tabpanel" id="p-3" aria-labelledby="tab-3" class="panel"><img class="shot" src="assets/win/ports.jpg" width="1440" height="900" loading="lazy" alt="The Ports &amp; Processes screen" data-alt-vi="Màn hình Cổng &amp; Tiến trình"><figcaption data-vi="Xem tiến trình nào đang nghe trên từng cổng và dự án nào đã chạy nó.">See what listens on each port and which project started it.</figcaption></figure><figure role="tabpanel" id="p-4" aria-labelledby="tab-4" class="panel"><img class="shot" src="assets/win/secrets.jpg" width="1440" height="900" loading="lazy" alt="The Secrets Scan screen with masked values" data-alt-vi="Màn hình Quét bí mật với giá trị được ẩn"><figcaption data-vi="Khoá tìm thấy trên ổ đĩa được ẩn đi, và khoá đã commit vào git được đánh dấu.">Keys found on disk are masked, and the ones committed to git are flagged.</figcaption></figure><figure role="tabpanel" id="p-5" aria-labelledby="tab-5" class="panel"><img class="shot" src="assets/win/source.jpg" width="1440" height="900" loading="lazy" alt="The Source Control screen" data-alt-vi="Màn hình Quản lý mã nguồn"><figcaption data-vi="Mọi repository trên máy của bạn, kèm diff và nhánh.">Every repository on your Mac, with diffs and branches.</figcaption></figure><figure role="tabpanel" id="p-8" aria-labelledby="tab-8" class="panel"><img class="shot" src="assets/win/servers.jpg" width="1440" height="900" loading="lazy" alt="The Servers screen showing a live overview of a Linux server" data-alt-vi="Màn hình Máy chủ hiển thị tổng quan trực tiếp của một server Linux"><figcaption data-vi="Theo dõi và quản trị server Linux qua SSH, không cần cài gì lên server.">Watch and run your Linux servers over SSH, with nothing to install on them.</figcaption></figure><figure role="tabpanel" id="p-6" aria-labelledby="tab-6" class="panel"><img class="shot" src="assets/win/doctor.jpg" width="1440" height="900" loading="lazy" alt="The Dev Doctor screen" data-alt-vi="Màn hình Dev Doctor"><figcaption data-vi="Kiểm tra toolchain, PATH, git và SSH, kèm hướng dẫn sửa dễ hiểu.">Toolchains, PATH, git and SSH checked, with plain-language fixes.</figcaption></figure><figure role="tabpanel" id="p-7" aria-labelledby="tab-7" class="panel"><img class="shot" src="assets/win/workspaces.jpg" width="1440" height="900" loading="lazy" alt="The Workspaces screen" data-alt-vi="Màn hình Workspaces"><figcaption data-vi="Khởi động mọi thứ một dự án cần chỉ với một cú nhấp.">Start everything a project needs with one click.</figcaption></figure></div>
-  </div>
-</section>
-
-<section class="features" id="features">
-  <div class="wrap">
-    <h2 data-vi="Được làm cho công việc hằng ngày của bạn.">Built for the work you do every day.</h2>
-    <ul><li><i class="ph ph-recycle" aria-hidden="true"></i><div><h3><span data-vi="Dev Reclaim">Dev Reclaim</span></h3><p data-vi="Xoá node_modules, thư mục build và phần thừa của Docker khỏi những dự án bạn không còn làm việc.">Removes node_modules, build folders and Docker leftovers from projects you no longer work on.</p></div></li><li><i class="ph ph-plugs" aria-hidden="true"></i><div><h3><span data-vi="Cổng &amp; Tiến trình">Ports &amp; Processes</span></h3><p data-vi="Cho biết tiến trình nào đang lắng nghe trên từng cổng và dự án nào đã khởi chạy nó.">Shows what listens on each port and which project started it.</p></div></li><li><i class="ph ph-key" aria-hidden="true"></i><div><h3><span data-vi="Quét bí mật">Secrets Scan</span></h3><p data-vi="Tìm khoá API và khoá riêng trên ổ đĩa, và đánh dấu những khoá đã bị commit vào git.">Finds API keys and private keys on disk, and flags the ones committed to git.</p></div></li><li><i class="ph ph-git-branch" aria-hidden="true"></i><div><h3><span data-vi="Quản lý mã nguồn">Source Control</span></h3><p data-vi="Mọi repository trên máy của bạn, cùng diff, commit và nhánh ở một nơi.">Every repository on your Mac, with diffs, commits and branches in one place.</p></div></li><li><i class="ph ph-hard-drives" aria-hidden="true"></i><div><h3><span data-vi="Máy chủ">Servers</span> <small class="beta" data-vi="Beta">Beta</small></h3><p data-vi="Dịch vụ, gói, Docker, site nginx và nhật ký trên server Linux qua SSH. Mọi thay đổi đều hiện đúng lệnh trước khi chạy, cấu hình lỗi thì tự khôi phục.">Services, packages, Docker, nginx sites and logs on your Linux servers over SSH. Every change shows the exact command first, and a bad config rolls back on its own.</p></div></li><li><i class="ph ph-stethoscope" aria-hidden="true"></i><div><h3><span data-vi="Dev Doctor">Dev Doctor</span></h3><p data-vi="Kiểm tra toolchain, PATH, git và SSH, rồi giải thích cần sửa gì.">Checks your toolchains, PATH, git and SSH setup, and explains what to fix.</p></div></li><li><i class="ph ph-command" aria-hidden="true"></i><div><h3><span data-vi="Bảng lệnh">Command Palette</span></h3><p data-vi="Nhấn ⌥⌘K ở bất cứ đâu để giải phóng một cổng, mở dự án hoặc kết nối SSH.">Press ⌥⌘K anywhere to free a port, open a project or connect over SSH.</p></div></li><li><i class="ph ph-stack" aria-hidden="true"></i><div><h3><span data-vi="Workspace">Workspaces</span> <small class="beta" data-vi="Beta">Beta</small></h3><p data-vi="Khởi động tunnel, container và dev server mà một dự án cần chỉ với một cú nhấp.">Start the tunnels, containers and dev server a project needs with one click.</p></div></li><li><i class="ph ph-broom" aria-hidden="true"></i><div><h3><span data-vi="Dọn dẹp">Cleanup</span></h3><p data-vi="Dọn cache và log sẽ tự tạo lại, và giải thích từng mục trước khi xoá.">Clears caches and logs that regenerate, and explains each one before it goes.</p></div></li></ul>
-  </div>
-</section>
-
-<section class="careful">
-  <div class="wrap">
-    <div>
-      <h2 data-vi="Cẩn trọng từ thiết kế.">Careful by design.</h2>
-      <ul>
-        <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Chạy hoàn toàn trên máy của bạn, không có analytics và không theo dõi.">Runs entirely on your Mac, with no analytics and no tracking.</span></li>
-        <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Hiện tóm tắt và hỏi Touch ID trước khi xoá bất cứ thứ gì.">Shows a summary and asks for Touch ID before anything is deleted.</span></li>
-        <li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Giá trị bí mật luôn được ẩn và không bao giờ rời khỏi máy của bạn.">Secret values stay masked and never leave your Mac.</span></li>
-      </ul>
+    <div class="trust reveal" style="--i:4">
+      <p class="eyebrow" data-vi="Cẩn trọng từ thiết kế.">Careful by design.</p>
+      <ul><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Chạy hoàn toàn trên máy của bạn, không có analytics và không theo dõi.">Runs entirely on your Mac, with no analytics and no tracking.</span></li><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Hiện tóm tắt và hỏi Touch ID trước khi xoá bất cứ thứ gì.">Shows a summary and asks for Touch ID before anything is deleted.</span></li><li><i class="ph ph-check" aria-hidden="true"></i><span data-vi="Giá trị bí mật luôn được ẩn và không bao giờ rời khỏi máy của bạn.">Secret values stay masked and never leave your Mac.</span></li></ul>
+      <p class="note" data-vi="Early Preview: mọi tính năng Pro miễn phí đến 01/07/2027. Yêu cầu máy Mac chip Apple (M1 trở lên), macOS 26 trở lên.">Early Preview: every Pro feature is free until 1 July 2027. Requires a Mac with Apple silicon (M1 or later) and macOS 26 or later.</p>
     </div>
-    <img class="shot" src="assets/win/secrets.jpg" width="1440" height="900" loading="lazy" alt="Secrets Scan with masked values" data-alt-vi="Quét bí mật với giá trị được ẩn">
   </div>
 </section>
 
-<section class="betasec" id="beta">
+<section class="view" id="v-features" data-view="features" aria-label="Features">
   <div class="wrap">
-    <h2 data-vi="Cùng làm Calmdeck tốt hơn.">Help shape Calmdeck.</h2>
-    <p data-vi="Người thử nghiệm được dùng Pro miễn phí 60 ngày, đổi lại là những phản hồi thẳng thắn. Hãy tải ứng dụng, mở Quyền &amp; Cài đặt › Bản quyền, sao chép Mã máy rồi gửi cho chúng tôi. Bạn sẽ nhận mã Pro beta để dán vào nút Nhập mã.">Testers get Pro free for 60 days in exchange for honest feedback. Download the app, open Permissions &amp; Settings › License, copy your Machine ID and send it to us. You will get a Pro beta key to paste under Enter key.</p>
-    <a class="btn sec" id="betaInvite" href="#" data-vi="Xin mã mời">Request an invite</a>
+    <div class="reveal" style="--i:0"><h2 tabindex="-1" data-vi="Được làm cho công việc hằng ngày của bạn.">Built for the work you do every day.</h2></div>
+    <div class="fwrap">
+      <div class="feat reveal" style="--i:1" role="tablist" aria-orientation="vertical" aria-label="Features"><button type="button" role="tab" id="f-0" aria-controls="fp-0" aria-selected="true" tabindex="0"><i class="ph ph-recycle" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Dev Reclaim">Dev Reclaim</span></span><span class="fd"><span data-vi="Xoá node_modules, thư mục build và phần thừa của Docker khỏi những dự án bạn không còn làm việc.">Removes node_modules, build folders and Docker leftovers from projects you no longer work on.</span></span></span></button><button type="button" role="tab" id="f-1" aria-controls="fp-1" aria-selected="false" tabindex="-1"><i class="ph ph-plugs" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Cổng &amp; Tiến trình">Ports &amp; Processes</span></span><span class="fd"><span data-vi="Cho biết tiến trình nào đang lắng nghe trên từng cổng và dự án nào đã khởi chạy nó.">Shows what listens on each port and which project started it.</span></span></span></button><button type="button" role="tab" id="f-2" aria-controls="fp-2" aria-selected="false" tabindex="-1"><i class="ph ph-key" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Quét bí mật">Secrets Scan</span></span><span class="fd"><span data-vi="Tìm khoá API và khoá riêng trên ổ đĩa, và đánh dấu những khoá đã bị commit vào git.">Finds API keys and private keys on disk, and flags the ones committed to git.</span></span></span></button><button type="button" role="tab" id="f-3" aria-controls="fp-3" aria-selected="false" tabindex="-1"><i class="ph ph-broom" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Dọn dẹp">Cleanup</span></span><span class="fd"><span data-vi="Dọn cache và log sẽ tự tạo lại, và giải thích từng mục trước khi xoá.">Clears caches and logs that regenerate, and explains each one before it goes.</span></span></span></button><button type="button" role="tab" id="f-4" aria-controls="fp-4" aria-selected="false" tabindex="-1"><i class="ph ph-git-branch" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Quản lý mã nguồn">Source Control</span></span><span class="fd"><span data-vi="Mọi repository trên máy của bạn, cùng diff, commit và nhánh ở một nơi.">Every repository on your Mac, with diffs, commits and branches in one place.</span></span></span></button><button type="button" role="tab" id="f-5" aria-controls="fp-5" aria-selected="false" tabindex="-1"><i class="ph ph-hard-drives" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Máy chủ">Servers</span> <small class="beta" data-vi="Beta">Beta</small></span><span class="fd"><span data-vi="Dịch vụ, gói, Docker, site nginx và nhật ký trên server Linux qua SSH. Mọi thay đổi đều hiện đúng lệnh trước khi chạy, cấu hình lỗi thì tự khôi phục.">Services, packages, Docker, nginx sites and logs on your Linux servers over SSH. Every change shows the exact command first, and a bad config rolls back on its own.</span></span></span></button><button type="button" role="tab" id="f-6" aria-controls="fp-6" aria-selected="false" tabindex="-1"><i class="ph ph-stack" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Workspace">Workspaces</span> <small class="beta" data-vi="Beta">Beta</small></span><span class="fd"><span data-vi="Khởi động tunnel, container và dev server mà một dự án cần chỉ với một cú nhấp.">Start the tunnels, containers and dev server a project needs with one click.</span></span></span></button><button type="button" role="tab" id="f-7" aria-controls="fp-7" aria-selected="false" tabindex="-1"><i class="ph ph-stethoscope" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Dev Doctor">Dev Doctor</span></span><span class="fd"><span data-vi="Kiểm tra toolchain, PATH, git và SSH, rồi giải thích cần sửa gì.">Checks your toolchains, PATH, git and SSH setup, and explains what to fix.</span></span></span></button><button type="button" role="tab" id="f-8" aria-controls="fp-8" aria-selected="false" tabindex="-1"><i class="ph ph-command" aria-hidden="true"></i><span class="ft"><span class="fn"><span data-vi="Bảng lệnh">Command Palette</span></span><span class="fd"><span data-vi="Nhấn ⌥⌘K ở bất cứ đâu để giải phóng một cổng, mở dự án hoặc kết nối SSH.">Press ⌥⌘K anywhere to free a port, open a project or connect over SSH.</span></span></span></button></div>
+      <div class="fstage reveal" style="--i:2"><figure role="tabpanel" id="fp-0" aria-labelledby="f-0" class="fpanel on"><img loading="lazy" class="shot" src="assets/win/reclaim.jpg" width="1440" height="900" alt="The Dev Reclaim screen listing idle projects" data-alt-vi="Màn hình Dev Reclaim liệt kê các dự án không dùng"></figure><figure role="tabpanel" id="fp-1" aria-labelledby="f-1" class="fpanel"><img loading="lazy" class="shot" src="assets/win/ports.jpg" width="1440" height="900" alt="The Ports &amp; Processes screen" data-alt-vi="Màn hình Cổng &amp; Tiến trình"></figure><figure role="tabpanel" id="fp-2" aria-labelledby="f-2" class="fpanel"><img loading="lazy" class="shot" src="assets/win/secrets.jpg" width="1440" height="900" alt="The Secrets Scan screen with masked values" data-alt-vi="Màn hình Quét bí mật với giá trị được ẩn"></figure><figure role="tabpanel" id="fp-3" aria-labelledby="f-3" class="fpanel"><img loading="lazy" class="shot" src="assets/win/junk.jpg" width="1440" height="900" alt="The Cleanup screen listing caches and logs" data-alt-vi="Màn hình Dọn dẹp liệt kê cache và log"></figure><figure role="tabpanel" id="fp-4" aria-labelledby="f-4" class="fpanel"><img loading="lazy" class="shot" src="assets/win/source.jpg" width="1440" height="900" alt="The Source Control screen" data-alt-vi="Màn hình Quản lý mã nguồn"></figure><figure role="tabpanel" id="fp-5" aria-labelledby="f-5" class="fpanel"><img loading="lazy" class="shot" src="assets/win/servers.jpg" width="1440" height="900" alt="The Servers screen showing a live overview of a Linux server" data-alt-vi="Màn hình Máy chủ hiển thị tổng quan trực tiếp của một server Linux"></figure><figure role="tabpanel" id="fp-6" aria-labelledby="f-6" class="fpanel"><img loading="lazy" class="shot" src="assets/win/workspaces.jpg" width="1440" height="900" alt="The Workspaces screen" data-alt-vi="Màn hình Workspaces"></figure><figure role="tabpanel" id="fp-7" aria-labelledby="f-7" class="fpanel"><img loading="lazy" class="shot" src="assets/win/doctor.jpg" width="1440" height="900" alt="The Dev Doctor screen" data-alt-vi="Màn hình Dev Doctor"></figure><figure role="tabpanel" id="fp-8" aria-labelledby="f-8" class="fpanel"><img loading="lazy" class="shot" src="assets/win/palette.jpg" width="1440" height="900" alt="The Command Palette open over the Calmdeck overview" data-alt-vi="Bảng lệnh mở trên màn hình Tổng quan của Calmdeck"></figure></div>
+    </div>
   </div>
 </section>
 
-<section class="pricing" id="pricing">
+<section class="view" id="v-pricing" data-view="pricing" aria-label="Pricing">
   <div class="wrap">
-    <h2 data-vi="Giá đơn giản.">Simple pricing.</h2>
-    <div class="plans">
+    <h2 tabindex="-1" class="reveal" style="--i:0" data-vi="Giá đơn giản.">Simple pricing.</h2>
+    <div class="plans reveal" style="--i:1">
       <div class="plan">
         <h3 data-vi="Miễn phí">Free</h3>
         <p class="price">0 US$</p>
@@ -301,18 +368,14 @@ footer a#tip:hover{background:#F5CF00}
   </div>
 </section>
 
-<section class="faq" id="faq">
-  <div class="wrap"><div class="col">
-    <h2 data-vi="Câu hỏi thường gặp.">Questions.</h2>
-    <details><summary data-vi="Đây có phải gói đăng ký không?">Is this a subscription?</summary><p data-vi="Không. Pro là khoản mua một lần với giá 29 US$. Bạn dùng mãi phiên bản đã mua, và năm đầu được cập nhật miễn phí.">No. Pro is a one-time purchase of 29 US$. You keep the version you bought forever, and the first year of updates is included.</p></details><details><summary data-vi="Điều gì xảy ra sau năm đầu?">What happens after the first year?</summary><p data-vi="Ứng dụng vẫn chạy bình thường và không có gì bị khoá. Nếu muốn nhận bản mới, bạn có thể gia hạn cập nhật 15 US$ một năm. Việc gia hạn hoàn toàn tuỳ chọn.">The app keeps working and nothing is locked. If you want new versions, you can renew updates for 15 US$ a year. Renewal is optional.</p></details><details><summary data-vi="Tôi có thể chuyển bản quyền sang máy Mac mới không?">Can I move my license to a new Mac?</summary><p data-vi="Được. Một bản quyền dùng cho hai máy Mac. Hãy huỷ kích hoạt một máy trong ứng dụng rồi kích hoạt máy mới. Máy thứ ba có giá 9 US$.">Yes. One license covers two Macs. Deactivate one in the app, then activate the new one. A third Mac costs 9 US$.</p></details><details><summary data-vi="Nếu máy Mac cũ bị mất thì sao?">What if my old Mac is lost?</summary><p data-vi="Hãy liên hệ với chúng tôi và chúng tôi sẽ giải phóng suất kích hoạt của máy đó để bạn kích hoạt máy thay thế.">Contact us and we will free that seat so you can activate your replacement.</p></details><details><summary data-vi="Calmdeck có gửi dữ liệu của tôi đi đâu không?">Does Calmdeck send my data anywhere?</summary><p data-vi="Không. Calmdeck chạy hoàn toàn trên máy của bạn, kể cả phần AI viết commit message, không có analytics và không theo dõi. Để xác minh bản quyền, ứng dụng chỉ gửi mã bản quyền tới dịch vụ cấp phép của chúng tôi.">No. Calmdeck runs entirely on your Mac, including the AI that writes commit messages, with no analytics and no tracking. To verify your license, the app sends only your license key to our licensing service.</p></details><details><summary data-vi="Nó có xoá nhầm thứ quan trọng không?">Will it delete something important?</summary><p data-vi="Không khi bạn chưa xác nhận. Mỗi mục đều có nhãn mức rủi ro, ứng dụng đang chạy được bảo vệ, và mọi lần xoá đều hiện bản tóm tắt và yêu cầu Touch ID trước.">Not without your confirmation. Each item is labelled by risk, running apps are protected, and every deletion shows a summary and asks for Touch ID first.</p></details><details><summary data-vi="Tôi cần gì để chạy nó?">What do I need to run it?</summary><p data-vi="macOS 26 trở lên và khoảng 6 MB dung lượng. Giao diện có tiếng Anh và tiếng Việt.">macOS 26 or later and about 6 MB of disk space. The interface comes in English and Vietnamese.</p></details><details><summary data-vi="Cài đặt thế nào?">How do I install it?</summary><p data-vi="Cách nhanh nhất: chạy lệnh cài một dòng ở đầu trang trong Terminal. Lệnh tải bản mới nhất từ GitHub, kiểm tra chữ ký rồi chép vào Applications; chạy lại để cập nhật. Nếu dùng tệp DMG: kéo Calmdeck vào Applications và mở. Calmdeck chưa được Apple notarize nên macOS sẽ chặn lần mở đầu tiên; vào Cài đặt hệ thống › Quyền riêng tư &amp; Bảo mật và bấm Vẫn mở.">Fastest: run the one-line install command at the top of this page in Terminal. It downloads the latest release from GitHub, checks the signature and copies the app to Applications; run it again to update. With the DMG: drag Calmdeck into Applications and open it. Calmdeck is not yet notarized by Apple, so macOS blocks the first launch; open System Settings › Privacy &amp; Security and click Open Anyway.</p></details>
-  </div></div>
-</section>
-
-<section class="closing">
-  <div class="wrap">
-    <h2 data-vi="Cho chiếc Mac của bạn một ngày yên tĩnh hơn.">Give your Mac a quieter day.</h2>
-    <a class="btn" data-cta="download" href="#" data-vi="Tải cho Mac">Download for Mac</a>
-    <a class="btn coffee" data-cta="tip" href="support.html" data-vi="☕ Ủng hộ một ly cà phê">☕ Buy me a coffee</a>
+<section class="view" id="v-faq" data-view="faq" aria-label="FAQ">
+  <div class="wrap faqgrid">
+    <div class="reveal" style="--i:0">
+      <h2 tabindex="-1" data-vi="Câu hỏi thường gặp.">Questions.</h2>
+      <p class="lead closing" data-vi="Cho chiếc Mac của bạn một ngày yên tĩnh hơn.">Give your Mac a quieter day.</p>
+      <div class="cta"><a class="btn" data-cta="download" href="#" data-vi="Tải cho Mac">Download for Mac</a><a class="btn coffee" data-cta="tip" href="support.html" data-vi="☕ Ủng hộ một ly cà phê">☕ Buy me a coffee</a></div>
+    </div>
+    <div class="qa reveal" style="--i:1"><details><summary data-vi="Đây có phải gói đăng ký không?">Is this a subscription?</summary><p data-vi="Không. Pro là khoản mua một lần với giá 29 US$. Bạn dùng mãi phiên bản đã mua, và năm đầu được cập nhật miễn phí.">No. Pro is a one-time purchase of 29 US$. You keep the version you bought forever, and the first year of updates is included.</p></details><details><summary data-vi="Điều gì xảy ra sau năm đầu?">What happens after the first year?</summary><p data-vi="Ứng dụng vẫn chạy bình thường và không có gì bị khoá. Nếu muốn nhận bản mới, bạn có thể gia hạn cập nhật 15 US$ một năm. Việc gia hạn hoàn toàn tuỳ chọn.">The app keeps working and nothing is locked. If you want new versions, you can renew updates for 15 US$ a year. Renewal is optional.</p></details><details><summary data-vi="Tôi có thể chuyển bản quyền sang máy Mac mới không?">Can I move my license to a new Mac?</summary><p data-vi="Được. Một bản quyền dùng cho hai máy Mac. Hãy huỷ kích hoạt một máy trong ứng dụng rồi kích hoạt máy mới. Máy thứ ba có giá 9 US$.">Yes. One license covers two Macs. Deactivate one in the app, then activate the new one. A third Mac costs 9 US$.</p></details><details><summary data-vi="Nếu máy Mac cũ bị mất thì sao?">What if my old Mac is lost?</summary><p data-vi="Hãy liên hệ với chúng tôi và chúng tôi sẽ giải phóng suất kích hoạt của máy đó để bạn kích hoạt máy thay thế.">Contact us and we will free that seat so you can activate your replacement.</p></details><details><summary data-vi="Calmdeck có gửi dữ liệu của tôi đi đâu không?">Does Calmdeck send my data anywhere?</summary><p data-vi="Không. Calmdeck chạy hoàn toàn trên máy của bạn, kể cả phần AI viết commit message, không có analytics và không theo dõi. Để xác minh bản quyền, ứng dụng chỉ gửi mã bản quyền tới dịch vụ cấp phép của chúng tôi.">No. Calmdeck runs entirely on your Mac, including the AI that writes commit messages, with no analytics and no tracking. To verify your license, the app sends only your license key to our licensing service.</p></details><details><summary data-vi="Nó có xoá nhầm thứ quan trọng không?">Will it delete something important?</summary><p data-vi="Không khi bạn chưa xác nhận. Mỗi mục đều có nhãn mức rủi ro, ứng dụng đang chạy được bảo vệ, và mọi lần xoá đều hiện bản tóm tắt và yêu cầu Touch ID trước.">Not without your confirmation. Each item is labelled by risk, running apps are protected, and every deletion shows a summary and asks for Touch ID first.</p></details><details><summary data-vi="Tôi cần gì để chạy nó?">What do I need to run it?</summary><p data-vi="macOS 26 trở lên và khoảng 6 MB dung lượng. Giao diện có tiếng Anh và tiếng Việt.">macOS 26 or later and about 6 MB of disk space. The interface comes in English and Vietnamese.</p></details><details><summary data-vi="Cài đặt thế nào?">How do I install it?</summary><p data-vi="Cách nhanh nhất: chạy lệnh cài một dòng ở đầu trang trong Terminal. Lệnh tải bản mới nhất từ GitHub, kiểm tra chữ ký rồi chép vào Applications; chạy lại để cập nhật. Nếu dùng tệp DMG: kéo Calmdeck vào Applications và mở. Calmdeck chưa được Apple notarize nên macOS sẽ chặn lần mở đầu tiên; vào Cài đặt hệ thống › Quyền riêng tư &amp; Bảo mật và bấm Vẫn mở.">Fastest: run the one-line install command at the top of this page in Terminal. It downloads the latest release from GitHub, checks the signature and copies the app to Applications; run it again to update. With the DMG: drag Calmdeck into Applications and open it. Calmdeck is not yet notarized by Apple, so macOS blocks the first launch; open System Settings › Privacy &amp; Security and click Open Anyway.</p></details></div>
   </div>
 </section>
 </main>
@@ -324,15 +387,32 @@ footer a#tip:hover{background:#F5CF00}
       <a href="privacy.html" data-vi="Quyền riêng tư">Privacy</a>
       <a href="terms.html" data-vi="Điều khoản">Terms</a>
       <a href="changelog.html" data-vi="Có gì mới">What's new</a>
-      <span class="gl" data-vi="Hướng dẫn">Guides</span>
-      <a href="guides/clear-xcode-deriveddata.html">Xcode cleanup</a>
-      <a href="guides/port-in-use-mac.html">Port in use</a>
-      <a href="guides/free-disk-space-developer-mac.html">Free disk space</a>
       <a id="contact" href="#" data-vi="Liên hệ">Contact</a>
       <a id="tip" href="#" hidden data-vi="Ủng hộ ☕">Buy me a coffee ☕</a>
     </div>
   </div>
 </footer>
+
+<!-- tips:start -->
+<button type="button" class="fab" id="tipsFab" aria-haspopup="dialog" aria-controls="tipsPanel" aria-expanded="false">
+  <span class="fab-ico" aria-hidden="true">💡</span><span class="fab-label" data-vi="Mẹo Mac miễn phí">Free Mac tips</span><span class="fab-dot" aria-hidden="true"></span>
+</button>
+<div class="tips-scrim" id="tipsScrim" hidden></div>
+<section class="tips" id="tipsPanel" role="dialog" aria-modal="true" aria-labelledby="tipsTitle" hidden>
+  <header class="tips-head">
+    <div><h3 id="tipsTitle" data-vi="Mẹo Mac miễn phí">Free Mac tips</h3>
+    <p data-vi="Chọn vấn đề, làm theo từng bước. Copy lệnh rồi dán vào Terminal.">Pick a problem and follow the steps. Copy a command, paste it into Terminal.</p></div>
+    <button type="button" class="tips-x" id="tipsClose" aria-label="Close"><i class="ph ph-x" aria-hidden="true"></i></button>
+  </header>
+  <div class="tips-tabs" role="tablist" aria-label="Problems"><button type="button" role="tab" id="tt-disk" aria-controls="tp-disk" aria-selected="true" tabindex="0" data-vi="Ổ đầy">Disk full</button><button type="button" role="tab" id="tt-port" aria-controls="tp-port" aria-selected="false" tabindex="-1" data-vi="Cổng bị chiếm">Port in use</button><button type="button" role="tab" id="tt-xcode" aria-controls="tp-xcode" aria-selected="false" tabindex="-1" data-vi="Xcode quá nặng">Xcode is huge</button></div>
+  <div class="tips-body"><div role="tabpanel" id="tp-disk" aria-labelledby="tt-disk" class="tpane on"><p class="intro" data-vi="Bắt đầu bằng việc đo. Không lệnh nào bên dưới xoá gì cho tới khi bạn tự chọn.">Start by measuring. Nothing below deletes anything until you choose to.</p><ol class="steps"><li class="step" style="--i:0"><span class="num">1</span><div class="sbody"><div class="shead"><h4 data-vi="Xem thư mục nào lớn nhất">See your biggest folders</h4><span class="badge read" data-vi="Chỉ xem">Only reads</span></div><p data-vi="Liệt kê 15 thư mục lớn nhất trong thư mục nhà. Lệnh này chỉ đọc.">Lists the 15 largest folders in your home folder. It only reads.</p><div class="cmd"><code>du -hd 1 ~ 2&gt;/dev/null | sort -h | tail -15</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:1"><span class="num">2</span><div class="sbody"><div class="shead"><h4 data-vi="Tìm node_modules cũ">Find old node_modules</h4><span class="badge read" data-vi="Chỉ xem">Only reads</span></div><p data-vi="Liệt kê mọi node_modules theo dung lượng. Đổi ~/code thành thư mục dự án của bạn, rồi xoá ở các dự án đã xong. Chạy npm install là có lại.">Lists every node_modules by size. Change ~/code to your projects folder, then delete the ones from finished projects. npm install brings them back.</p><div class="cmd"><code>find ~/code -name node_modules -type d -prune -exec du -sh {} + 2&gt;/dev/null | sort -h</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:2"><span class="num">3</span><div class="sbody"><div class="shead"><h4 data-vi="Dọn cache build của Docker">Clear Docker&#x27;s build cache</h4><span class="badge safe" data-vi="An toàn">Safe</span></div><p data-vi="Chỉ xoá cache build. Container, image và volume của bạn giữ nguyên.">Removes only the build cache. Your containers, images and volumes stay untouched.</p><div class="cmd"><code>docker builder prune</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:3"><span class="num">4</span><div class="sbody"><div class="shead"><h4 data-vi="Dọn Homebrew">Tidy Homebrew</h4><span class="badge safe" data-vi="An toàn">Safe</span></div><p data-vi="Xoá phiên bản cũ và file tải về mà Homebrew không còn cần.">Deletes old versions and downloads that Homebrew no longer needs.</p><div class="cmd"><code>brew cleanup &amp;&amp; brew autoremove</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li></ol><p class="warn"><i class="ph ph-warning" aria-hidden="true"></i><span data-vi="Đừng chạy docker volume prune nếu chưa chắc: volume thường chứa database, và xoá là mất hẳn.">Skip docker volume prune unless you are sure: volumes often hold databases, and deleting them is permanent.</span></p><a class="guide" href="guides/free-disk-space-developer-mac.html"><span data-vi="Đọc hướng dẫn đầy đủ">Read the full guide</span> <span aria-hidden="true">→</span></a></div><div role="tabpanel" id="tp-port" aria-labelledby="tt-port" class="tpane"><p class="intro" data-vi="Dành cho lỗi &quot;address already in use&quot; hoặc EADDRINUSE. Mất khoảng hai phút.">For &quot;address already in use&quot; or EADDRINUSE. Two minutes, start to finish.</p><ol class="steps"><li class="step" style="--i:0"><span class="num">1</span><div class="sbody"><div class="shead"><h4 data-vi="Tìm tiến trình đang giữ cổng">Find what holds the port</h4><span class="badge read" data-vi="Chỉ xem">Only reads</span></div><p data-vi="Đổi 3000 thành cổng của bạn. Ghi lại số ở cột PID.">Change 3000 to your port. Note the number in the PID column.</p><div class="cmd"><code>lsof -nP -iTCP:3000 -sTCP:LISTEN</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:1"><span class="num">2</span><div class="sbody"><div class="shead"><h4 data-vi="Yêu cầu nó dừng">Ask it to stop</h4><span class="badge safe" data-vi="An toàn">Safe</span></div><p data-vi="Thay PID bằng số vừa ghi. Chương trình tự đóng gọn và trả lại cổng. Chạy lại bước 1 để kiểm tra.">Replace PID with that number. The program closes cleanly and frees the port. Run step 1 again to check.</p><div class="cmd"><code>kill PID</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:2"><span class="num">3</span><div class="sbody"><div class="shead"><h4 data-vi="Chỉ khi nó vẫn còn">Only if it is still there</h4><span class="badge careful" data-vi="Cẩn thận">Careful</span></div><p data-vi="Dừng chương trình ngay lập tức, không dọn dẹp gì. Chỉ dùng khi bước 2 không hiệu quả.">Ends the program immediately with no cleanup. Use it only when step 2 did not work.</p><div class="cmd"><code>kill -9 PID</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:3"><span class="num">4</span><div class="sbody"><div class="shead"><h4 data-vi="Cổng 5000 hoặc 7000?">Port 5000 or 7000?</h4><span class="badge read" data-vi="Chỉ xem">Only reads</span></div><p data-vi="Thường là AirPlay Receiver. Tắt nó trong Cài đặt hệ thống › Cài đặt chung › AirDrop &amp; Handoff, hoặc chạy app ở cổng khác.">That is usually AirPlay Receiver. Turn it off in System Settings › General › AirDrop &amp; Handoff, or run your app on another port.</p></div></li></ol><p class="warn"><i class="ph ph-warning" aria-hidden="true"></i><span data-vi="Nếu lsof hiện com.docker.backend thì một container đang giữ cổng: hãy dừng container đó, đừng kill Docker.">If lsof shows com.docker.backend, a container owns the port: stop that container instead of killing Docker.</span></p><a class="guide" href="guides/port-in-use-mac.html"><span data-vi="Đọc hướng dẫn đầy đủ">Read the full guide</span> <span aria-hidden="true">→</span></a></div><div role="tabpanel" id="tp-xcode" aria-labelledby="tt-xcode" class="tpane"><p class="intro" data-vi="Thoát Xcode và Simulator trước. Phần lớn dung lượng này sẽ tự tạo lại khi cần.">Quit Xcode and the Simulator first. Most of this space comes back by itself.</p><ol class="steps"><li class="step" style="--i:0"><span class="num">1</span><div class="sbody"><div class="shead"><h4 data-vi="Đo các thư mục của Xcode">Measure Xcode&#x27;s folders</h4><span class="badge read" data-vi="Chỉ xem">Only reads</span></div><p data-vi="Cho biết dữ liệu build và simulator đang chiếm bao nhiêu. Lệnh này chỉ đọc.">Shows how much build output and simulator data you have. It only reads.</p><div class="cmd"><code>du -sh ~/Library/Developer/Xcode/DerivedData ~/Library/Developer/CoreSimulator</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:1"><span class="num">2</span><div class="sbody"><div class="shead"><h4 data-vi="Xoá DerivedData">Clear DerivedData</h4><span class="badge safe" data-vi="An toàn">Safe</span></div><p data-vi="Dữ liệu build mà Xcode tự tạo lại. Bạn chỉ mất chút thời gian: lần build sau chậm hơn.">Build output that Xcode recreates. You only lose time: the next build is slower.</p><div class="cmd"><code>rm -rf ~/Library/Developer/Xcode/DerivedData/*</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:2"><span class="num">3</span><div class="sbody"><div class="shead"><h4 data-vi="Gỡ simulator hỏng">Remove broken simulators</h4><span class="badge safe" data-vi="An toàn">Safe</span></div><p data-vi="Chỉ xoá những simulator mà Xcode hiện tại không còn chạy được.">Deletes only simulators your installed Xcode can no longer run.</p><div class="cmd"><code>xcrun simctl delete unavailable</code><button type="button" class="copy" data-vi="Copy">Copy</button></div></div></li><li class="step" style="--i:3"><span class="num">4</span><div class="sbody"><div class="shead"><h4 data-vi="Xem lại Archives bằng tay">Review Archives by hand</h4><span class="badge careful" data-vi="Cẩn thận">Careful</span></div><p data-vi="Giữ archive của các bản đã phát hành: chúng chứa symbol để đọc crash report. Mở Xcode › Window › Organizer để xem.">Keep the archives of versions you shipped: they hold the symbols for crash reports. Open Xcode › Window › Organizer to review.</p></div></li></ol><p class="warn"><i class="ph ph-warning" aria-hidden="true"></i><span data-vi="Đừng xoá ~/Library/Developer/Xcode/UserData: đó là phím tắt, snippet và theme của bạn.">Never delete ~/Library/Developer/Xcode/UserData: it holds your key bindings, snippets and themes.</span></p><a class="guide" href="guides/clear-xcode-deriveddata.html"><span data-vi="Đọc hướng dẫn đầy đủ">Read the full guide</span> <span aria-hidden="true">→</span></a></div></div>
+  <footer class="tips-foot">
+    <span data-vi="Calmdeck tìm và dọn những thứ này, luôn hỏi trước khi xoá.">Calmdeck finds all of this and asks before deleting anything.</span>
+    <a class="btn sm" data-cta="download" href="#" data-vi="Tải miễn phí">Download free</a>
+  </footer>
+  <p class="sr-only" id="tipsLive" aria-live="polite"></p>
+</section>
+<!-- tips:end -->
 
 <script>
 const CONFIG = {
@@ -349,7 +429,7 @@ const CONFIG = {
 };
 
 /* ---------- CTA wiring ---------- */
-(function(){
+function wire(){
   const isPlaceholder = u => !u || u.charAt(0) === "#";
   // Giá founder: link mua tự gắn mã giảm giá (Lemon Squeezy: checkout[discount_code]) cho đến hạn.
   const founder = CONFIG.founderCode && Date.now() < Date.parse(CONFIG.founderUntil);
@@ -361,12 +441,8 @@ const CONFIG = {
     if (k === "contact") { a.href = u; return; }
     if (k === "tip") { if (u) a.href = u; else a.hidden = true; return; }
     if (isPlaceholder(u)) {
-      a.href = "#pricing";
-      a.addEventListener("click", e => {
-        e.preventDefault();
-        document.getElementById("pricing").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion:reduce)").matches ? "auto" : "smooth"});
-        document.querySelectorAll(".soon").forEach(s => s.classList.add("on"));
-      });
+      a.href = "#pricing";   // the router shows the Pricing view; explain that Pro is free during the preview
+      a.addEventListener("click", () => document.querySelectorAll(".soon").forEach(s => s.classList.add("on")));
     } else { a.href = u; a.rel = "noopener"; }
   });
   const live = !isPlaceholder(CONFIG.buyURL);
@@ -377,15 +453,16 @@ const CONFIG = {
   document.getElementById("after").hidden = !live && !CONFIG.vnCheckout;
   document.getElementById("contact").href = "mailto:" + CONFIG.contactEmail;
   if (CONFIG.tipURL) { const t = document.getElementById("tip"); t.href = CONFIG.tipURL; t.hidden = false; }
-  document.getElementById("betaInvite").href = "mailto:" + CONFIG.contactEmail + "?subject=Calmdeck%20beta";
+}
+// config.json is the single source for the founder date (same file the app and Tools/ls.py read); CONFIG is the fallback.
+fetch("config.json", {cache: "no-cache"}).then(r => r.json()).then(c => { if (c && c.founderUntil) CONFIG.founderUntil = c.founderUntil; }).catch(() => {}).then(wire);
 
-})();
-
-/* ---------- Tour tabs ---------- */
-(function(){
-  const tabs = [...document.querySelectorAll('.tabs [role=tab]')];
-  const panels = [...document.querySelectorAll('.panel')];
-  function select(i, focus){
+/* ---------- Tabs (features list) ---------- */
+document.querySelectorAll("[role=tablist]").forEach(list => {
+  const tabs = [...list.querySelectorAll("[role=tab]")];
+  const panels = tabs.map(t => document.getElementById(t.getAttribute("aria-controls")));
+  const vertical = list.getAttribute("aria-orientation") === "vertical";
+  function select(i, focus) {
     tabs.forEach((t, n) => { t.setAttribute("aria-selected", n === i); t.tabIndex = n === i ? 0 : -1; });
     panels.forEach((p, n) => p.classList.toggle("on", n === i));
     if (focus) tabs[i].focus();
@@ -393,13 +470,77 @@ const CONFIG = {
   tabs.forEach((t, i) => {
     t.addEventListener("click", () => select(i));
     t.addEventListener("keydown", e => {
-      const k = e.key, n = tabs.length;
-      const j = k === "ArrowRight" ? (i + 1) % n : k === "ArrowLeft" ? (i - 1 + n) % n : k === "Home" ? 0 : k === "End" ? n - 1 : -1;
+      const n = tabs.length, next = vertical ? "ArrowDown" : "ArrowRight", prev = vertical ? "ArrowUp" : "ArrowLeft";
+      const j = e.key === next ? (i + 1) % n : e.key === prev ? (i - 1 + n) % n : e.key === "Home" ? 0 : e.key === "End" ? n - 1 : -1;
       if (j < 0) return;
       e.preventDefault(); select(j, true);
     });
   });
+});
+
+/* ---------- Views: one tab at a time, with an entrance animation instead of a long scroll ---------- */
+(function(){
+  const views = [...document.querySelectorAll(".view")];
+  const names = views.map(v => v.dataset.view);
+  const alias = {top: "home", tour: "features", beta: "pricing"};
+  function show(hash, focus) {
+    let name = alias[hash] || hash;
+    if (!names.includes(name)) name = "home";
+    document.querySelectorAll(".links [data-nav]").forEach(a => a.dataset.nav === name ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current"));
+    const next = views[names.indexOf(name)];
+    if (next.classList.contains("on") && !focus) return;
+    views.forEach(v => v.classList.toggle("on", v === next));
+    window.scrollTo(0, 0);
+    if (focus) next.querySelector("h1, h2").focus({preventScroll: true});
+  }
+  addEventListener("hashchange", () => show(location.hash.slice(1), true));
+  show(location.hash.slice(1), false);
 })();
+
+/* tips:js:start */
+(function(){
+  const fab = document.getElementById("tipsFab"), panel = document.getElementById("tipsPanel"), scrim = document.getElementById("tipsScrim");
+  const live = document.getElementById("tipsLive");
+  try { if (localStorage.getItem("mc-tips-seen")) fab.classList.add("seen"); } catch(e){}
+  function open(){
+    panel.hidden = scrim.hidden = false; panel.classList.remove("closing");
+    fab.setAttribute("aria-expanded", "true"); fab.classList.add("seen");
+    try { localStorage.setItem("mc-tips-seen", "1"); } catch(e){}
+    panel.querySelector('.tips-tabs [aria-selected=true]').focus();
+  }
+  function close(){
+    if (panel.hidden) return;
+    let finished = false;
+    const done = () => { if (finished) return; finished = true; panel.hidden = scrim.hidden = true; panel.classList.remove("closing"); };
+    fab.setAttribute("aria-expanded", "false");
+    if (matchMedia("(prefers-reduced-motion:reduce)").matches) done();
+    else { panel.classList.add("closing"); panel.addEventListener("animationend", done, {once: true}); setTimeout(done, 400); }
+    fab.focus();
+  }
+  fab.addEventListener("click", open);
+  document.getElementById("tipsClose").addEventListener("click", close);
+  scrim.addEventListener("click", close);
+  document.addEventListener("keydown", e => {
+    if (panel.hidden) return;
+    if (e.key === "Escape") { e.preventDefault(); close(); }
+    if (e.key === "Tab") {   // keep focus inside the dialog
+      const f = [...panel.querySelectorAll("button, a[href], [tabindex='0']")].filter(x => x.offsetParent !== null);
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  panel.querySelectorAll(".copy").forEach(b => b.addEventListener("click", async () => {
+    const text = b.previousElementSibling.textContent;
+    try { await navigator.clipboard.writeText(text); }
+    catch(e) { const r = document.createRange(); r.selectNodeContents(b.previousElementSibling); const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy"); }
+    const vi = document.documentElement.lang === "vi";
+    b.textContent = vi ? "Đã copy ✓" : "Copied ✓"; b.classList.add("done");
+    live.textContent = vi ? "Đã copy lệnh" : "Command copied";
+    setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1800);
+  }));
+})();
+/* tips:js:end */
 
 /* ---------- i18n ---------- */
 (function(){
